@@ -98,6 +98,10 @@ export const services: Service[] = [
       "أعمال خرسانية المدينة المنورة",
       "صب أسقف المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/concrete-works-craft.webp",
+      alt: "أعمال حديد التسليح والخرسانة — مقاول عظم في المدينة المنورة",
+    },
   },
   {
     slug: "masonry",
@@ -121,6 +125,10 @@ export const services: Service[] = [
       "بناء بلوك المدينة المنورة",
       "مقاول مباني المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/masonry-craft.webp",
+      alt: "أعمال البناء بالطوب والبلوك في المدينة المنورة",
+    },
   },
   {
     slug: "waterproofing",
@@ -144,6 +152,10 @@ export const services: Service[] = [
       "عزل أسطح المدينة المنورة",
       "عزل حراري المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/waterproofing-craft.webp",
+      alt: "تنفيذ العزل المائي للأسطح في المدينة المنورة",
+    },
   },
   {
     slug: "stairs-tanks",
@@ -166,6 +178,10 @@ export const services: Service[] = [
       "خزانات مياه المدينة المنورة",
       "منحدرات سيارات المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/stairs-tanks-craft.webp",
+      alt: "سلالم خرسانية قيد التنفيذ في المدينة المنورة",
+    },
   },
 
   // ───────────────────────────── التشطيبات ─────────────────────────────
@@ -190,6 +206,10 @@ export const services: Service[] = [
       "بياض جدران المدينة المنورة",
       "معالجة شروخ المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/plastering-craft.webp",
+      alt: "أعمال اللياسة والبياض على الجدران في المدينة المنورة",
+    },
   },
   {
     slug: "flooring",
@@ -239,6 +259,10 @@ export const services: Service[] = [
       "ديكور وتشطيبات المدينة المنورة",
       "بديل الرخام المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/painting-craft.webp",
+      alt: "أعمال الدهانات على الجدران في المدينة المنورة",
+    },
   },
   {
     slug: "ceilings",
@@ -283,6 +307,10 @@ export const services: Service[] = [
       "أبواب خشبية المدينة المنورة",
       "دواليب وحلول تخزين المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/carpentry-craft.webp",
+      alt: "أعمال النجارة وتشكيل الخشب في المدينة المنورة",
+    },
   },
   {
     slug: "aluminum-glass",
@@ -404,6 +432,10 @@ export const services: Service[] = [
       "مظلات سيارات المدينة المنورة",
       "أسوار وبوابات المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/site-finishes-craft.webp",
+      alt: "بلاط الأرصفة والإنترلوك في المدينة المنورة",
+    },
   },
 ];
 

@@ -32,6 +32,13 @@ export const imageManifest: ImageSlot[] = [
     note: "Shaghmoom's own work photos, watermark/text cropped out. Referenced from the `image` field in content/services.ts. Originals backed up in /public/images/services/originals/. electrical.jpg was FLAGGED (text overlapped the worker — kept as placeholder; best-effort crop in /public/images/services/_flagged/).",
   },
   {
+    path: "/images/services/{slug}-craft.webp",
+    location: "Service page banner (sourced craft imagery: 8 slots)",
+    recommended: "1600×400 (4:1)",
+    aspect: "4 / 1 (banner)",
+    note: "Licensed (Unsplash) craft/material close-ups, maroon-duotone treated. Referenced from the `image` field in content/services.ts. Full provenance (URL + author + license) per slot in IMAGES.md. ceilings, aluminum-glass, site-preparation kept as placeholders (see IMAGES.md).",
+  },
+  {
     path: "/images/about-structure.webp",
     location: "About page atmospheric banner",
     recommended: "1600×620",
