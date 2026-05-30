@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
+/*
+  Shaghmoom — Design System
+  ─────────────────────────
+  Deep maroon / oxblood on warm bone. Quiet, formal, architectural.
+  Color defaults below are sampled from the brief (§4); replace with the
+  exact hex values from /public/brand once the official logo arrives.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --brand: #6e3b3d; /* maroon — accents, key headings, CTA */
+  --brand-deep: #532b2d; /* darker maroon — depth, headers, footer */
+  --brand-tint: #f0e6e2; /* faint maroon wash for fills */
+
+  /* Ink & canvas */
+  --ink: #241e1e; /* primary text — warm near-black */
+  --bg: #f6f2eb; /* canvas — warm bone */
+  --bg-alt: #efe9df; /* alternate sections */
+  --surface: #fbf8f2; /* cards / raised surfaces */
+
+  /* Secondary */
+  --muted: #6b5f57; /* secondary text — AA on --bg */
+  --faint: #8a7e76; /* decorative taupe — hairlines / captions, not body */
+  --line: color-mix(in srgb, var(--ink) 12%, transparent); /* architectural hairlines */
+  --line-strong: color-mix(in srgb, var(--ink) 22%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors → utilities: bg-brand, text-ink, border-line … */
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-tint: var(--brand-tint);
+  --color-ink: var(--ink);
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  /* Type families (wired to next/font CSS variables in layout) */
+  --font-sans: var(--font-body), var(--font-latin), system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), serif;
+
+  /* A deliberate, slightly-expanded type scale (1.25 minor-third feel) */
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 2.875rem;
+  --text-5xl: 3.75rem;
+  --text-6xl: 4.75rem;
+
+  /* Easings — calm, precise, never bouncy */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.85; /* generous for Arabic readability */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Display type: Reem Kufi — tight, confident, architectural */
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+
+  /* Latin / numeric runs inside Arabic: keep them LTR for correct bidi */
+  .ltr {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
+  }
+
+  /* Tabular, comfortable phone numbers */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--bg);
+  }
+
+  /* Visible, on-brand focus for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Honor reduced-motion globally as a safety net */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /*
+    Blueprint grid motif — a faint architectural texture.
+    Quiet, precise, never noisy. Applied via .blueprint.
+  */
+  .blueprint {
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: center;
+  }
+
+  /* A single hairline rule used to anchor sections architecturally */
+  .hairline {
+    height: 1px;
+    background: var(--line-strong);
+  }
 }
