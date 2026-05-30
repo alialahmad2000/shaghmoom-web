@@ -13,6 +13,7 @@ import { ctaLabel } from "@/content/site";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { MediaFrame } from "@/components/ui/MediaFrame";
 import { Button, ArrowEnd } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { ClosingCta } from "@/components/sections/ClosingCta";
@@ -83,6 +84,29 @@ export default async function ServiceDetailPage({
       />
 
       <Section tone="bg">
+        {service.image && (
+          <Reveal className="mb-12 block">
+            <figure className="relative overflow-hidden rounded-2xl ring-1 ring-brand/15">
+              <MediaFrame
+                src={service.image.src}
+                alt={service.image.alt}
+                ready
+                aspect="4 / 1"
+                priority
+                sizes="(min-width: 1024px) 1000px, 100vw"
+                rounded="rounded-2xl"
+              />
+              {/* subtle maroon edge so the real photo reads native, not pasted */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-deep/20 to-transparent"
+              />
+              <figcaption className="absolute bottom-3 start-4 text-xs text-bg/85">
+                من أعمال شغموم
+              </figcaption>
+            </figure>
+          </Reveal>
+        )}
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Main */}
           <div className="lg:col-span-7">

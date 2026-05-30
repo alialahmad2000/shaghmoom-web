@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { buildMetadata, SITE_URL, absUrl } from "@/lib/seo";
 import { type Locale } from "@/lib/i18n";
-import { aboutContent, company } from "@/content/site";
+import { aboutContent, aboutImage, company } from "@/content/site";
+import { Container } from "@/components/ui/Container";
+import { MediaFrame } from "@/components/ui/MediaFrame";
 import { values } from "@/content/values";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
@@ -48,6 +50,25 @@ export default async function AboutPage({
         intro={aboutContent.intro}
         crumbs={[{ label: "من نحن" }]}
       />
+
+      {/* Atmospheric structural banner (sourced + maroon-treated; see content/site.ts) */}
+      <div className="bg-bg-alt pb-4 pt-0">
+        <Container size="wide">
+          <Reveal className="-mt-10 block">
+            <figure className="overflow-hidden rounded-2xl ring-1 ring-brand/15 shadow-sm">
+              <MediaFrame
+                src={aboutImage.src}
+                alt={aboutImage.alt}
+                ready
+                aspect="2.58 / 1"
+                priority
+                sizes="(min-width: 1024px) 1100px, 100vw"
+                rounded="rounded-2xl"
+              />
+            </figure>
+          </Reveal>
+        </Container>
+      </div>
 
       {/* The name story */}
       <Section tone="bg" grid>

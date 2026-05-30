@@ -112,6 +112,17 @@ export const projectTypes = [
   "أبراج",
 ] as const;
 
+/**
+ * Atmospheric banner on the About page — a maroon-duotone of a concrete
+ * structural shell (عظم). Sourced & licensed (Unsplash License, free for
+ * commercial use): photo by Tolu Olubode — https://unsplash.com/photos/PlBsJ5MybGc
+ * To swap: drop a new file at this path, or change/remove this one line.
+ */
+export const aboutImage = {
+  src: "/images/about-structure.webp",
+  alt: "هيكل خرساني قيد التنفيذ — أعمال العظم والبناء",
+} as const;
+
 export const aboutContent = {
   intro:
     "شغموم للمقاولات العامة تقدّم حلول بناءٍ وتشطيبٍ باحترافيةٍ عالية واهتمامٍ دقيق بالتفاصيل وجودة التنفيذ. نوحّد جميع مراحل المشروع تحت إدارةٍ واحدة وتنفيذٍ منظم.",

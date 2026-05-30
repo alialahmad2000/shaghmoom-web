@@ -28,6 +28,12 @@ export type Service = {
   why: string;
   /** Local Arabic keywords woven into the page. */
   keywords: string[];
+  /**
+   * Optional real photo of Shaghmoom's own work, shown as a banner on the
+   * service page. To swap: drop a new file and change this one line (or remove
+   * the field to fall back to the page's design without a photo).
+   */
+  image?: { src: string; alt: string };
 };
 
 export const categories: Record<
@@ -207,6 +213,10 @@ export const services: Service[] = [
       "أرضيات رخام المدينة المنورة",
       "أرضيات إيبوكسي المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/finishing-clean.webp",
+      alt: "تركيب أرضيات وتشطيبات من أعمال شغموم في المدينة المنورة",
+    },
   },
   {
     slug: "painting",
@@ -341,6 +351,10 @@ export const services: Service[] = [
       "تمديدات صحية المدينة المنورة",
       "صرف أمطار المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/plumbing-clean.webp",
+      alt: "أعمال السباكة وقص المواسير من أعمال شغموم في المدينة المنورة",
+    },
   },
   {
     slug: "hvac",
@@ -363,6 +377,10 @@ export const services: Service[] = [
       "تمديدات تكييف المدينة المنورة",
       "تهوية ومراوح شفط المدينة المنورة",
     ],
+    image: {
+      src: "/images/services/hvac-clean.webp",
+      alt: "تمديدات دكت التكييف من أعمال شغموم في المدينة المنورة",
+    },
   },
   {
     slug: "site-finishes",

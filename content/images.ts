@@ -25,6 +25,20 @@ export type ImageSlot = {
 
 export const imageManifest: ImageSlot[] = [
   {
+    path: "/images/services/{slug}-clean.webp",
+    location: "Service page banner (real photos: plumbing, hvac, flooring)",
+    recommended: "≥1200px wide",
+    aspect: "4 / 1 (banner)",
+    note: "Shaghmoom's own work photos, watermark/text cropped out. Referenced from the `image` field in content/services.ts. Originals backed up in /public/images/services/originals/. electrical.jpg was FLAGGED (text overlapped the worker — kept as placeholder; best-effort crop in /public/images/services/_flagged/).",
+  },
+  {
+    path: "/images/about-structure.webp",
+    location: "About page atmospheric banner",
+    recommended: "1600×620",
+    aspect: "2.58 / 1",
+    note: "SOURCED + maroon-treated. Unsplash License (free, commercial) — photo by Tolu Olubode, https://unsplash.com/photos/PlBsJ5MybGc. Referenced via `aboutImage` in content/site.ts. Swap or remove that one line to change.",
+  },
+  {
     path: "/brand/logo.svg",
     location: "Header + Footer logo",
     recommended: "SVG (vector)",
