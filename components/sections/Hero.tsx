@@ -26,7 +26,9 @@ export function Hero({ locale }: { locale: Locale }) {
       <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-12 py-24 sm:py-28 lg:grid-cols-12 lg:gap-8 lg:py-36">
           <div className="lg:col-span-7">
-            <Reveal>
+            {/* Above the fold: render immediately (no opacity:0) so the H1 — the
+                LCP element — paints at FCP rather than after a client animation. */}
+            <Reveal immediate>
               <span className="flex items-center gap-3 text-sm font-medium tracking-wide text-brand">
                 <span
                   aria-hidden="true"
@@ -36,19 +38,19 @@ export function Hero({ locale }: { locale: Locale }) {
               </span>
             </Reveal>
 
-            <Reveal index={1}>
+            <Reveal immediate>
               <h1 className="mt-6 text-balance text-5xl leading-[1.08] sm:text-6xl lg:text-[4.5rem]">
                 {hero.title}
               </h1>
             </Reveal>
 
-            <Reveal index={2}>
+            <Reveal immediate>
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
                 {hero.subhead}
               </p>
             </Reveal>
 
-            <Reveal index={3}>
+            <Reveal immediate>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button
                   href={localePath(locale, "/contact")}
@@ -64,7 +66,7 @@ export function Hero({ locale }: { locale: Locale }) {
 
           {/* Coordinate / blueprint plate — the "10%" hidden-detail motif */}
           <div className="lg:col-span-5">
-            <Reveal index={2} className="relative">
+            <Reveal immediate className="relative">
               <div className="relative mx-auto aspect-square w-full max-w-md rounded-3xl border border-line bg-surface/60 p-8 backdrop-blur-sm">
                 <div className="blueprint absolute inset-0 rounded-3xl opacity-60" />
                 <CoordinatePlate />

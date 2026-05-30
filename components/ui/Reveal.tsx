@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { createElement, type ReactNode } from "react";
 
 /**
  * The signature reveal (§5): details surface to the attentive.
@@ -18,6 +18,12 @@ type RevealProps = {
   className?: string;
   as?: "div" | "li" | "section" | "article" | "header";
   once?: boolean;
+  /**
+   * Render visible immediately, with no opacity:0 entrance. Use for
+   * above-the-fold / LCP content so the largest paint isn't gated behind a
+   * client-side animation (a scroll-reveal on the LCP element delays LCP).
+   */
+  immediate?: boolean;
 };
 
 export function Reveal({
@@ -28,8 +34,15 @@ export function Reveal({
   className,
   as = "div",
   once = true,
+  immediate = false,
 }: RevealProps) {
   const reduce = useReducedMotion();
+
+  // Paint immediately (no opacity:0) — keeps LCP fast for hero content.
+  if (immediate) {
+    return createElement(as, className ? { className } : null, children);
+  }
+
   const MotionTag = motion[as];
 
   const variants: Variants = {

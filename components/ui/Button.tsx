@@ -1,20 +1,31 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "whatsapp" | "ghost";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "whatsapp"
+  | "ghost"
+  | "inverse"
+  | "outlineInverse";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2.5 rounded-full font-medium transition-[transform,background-color,border-color,color] duration-200 ease-[var(--ease-out-soft)] focus-visible:outline-2 focus-visible:outline-offset-3 active:translate-y-px disabled:opacity-60 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-medium transition-[transform,background-color,border-color,color] duration-200 ease-[var(--ease-out-soft)] focus-visible:outline-2 focus-visible:outline-offset-3 active:translate-y-px disabled:opacity-60 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary:
-    "bg-brand text-bg hover:bg-brand-deep focus-visible:outline-brand",
+  // On light backgrounds.
+  primary: "bg-brand text-bg hover:bg-brand-deep focus-visible:outline-brand",
   secondary:
     "border border-line-strong text-ink hover:border-brand hover:text-brand focus-visible:outline-brand",
   whatsapp:
     "bg-[#1f7a52] text-white hover:bg-[#196244] focus-visible:outline-[#1f7a52]",
   ghost: "text-ink hover:text-brand",
+  // On dark / maroon backgrounds — deterministic, no className overrides needed.
+  inverse:
+    "bg-bg text-brand hover:bg-surface focus-visible:outline-bg", // solid cream fill, maroon text
+  outlineInverse:
+    "border border-bg/60 text-bg hover:bg-bg/10 hover:border-bg focus-visible:outline-bg",
 };
 
 const sizes: Record<Size, string> = {

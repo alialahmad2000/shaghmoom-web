@@ -32,7 +32,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
           {/* Nav */}
           <nav aria-label="روابط الموقع" className="md:col-span-3">
-            <h2 className="text-sm font-medium text-bg/50">الموقع</h2>
+            <h2 className="text-sm font-medium text-bg/70">الموقع</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               {nav.map((item) => (
                 <li key={item.path}>
@@ -49,7 +49,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
           {/* Services */}
           <nav aria-label="الخدمات" className="md:col-span-2">
-            <h2 className="text-sm font-medium text-bg/50">خدماتنا</h2>
+            <h2 className="text-sm font-medium text-bg/70">خدماتنا</h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               {topServices.map((s) => (
                 <li key={s.slug}>
@@ -66,7 +66,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
           {/* Contact */}
           <div className="md:col-span-3">
-            <h2 className="text-sm font-medium text-bg/50">تواصل</h2>
+            <h2 className="text-sm font-medium text-bg/70">تواصل</h2>
             <ul className="mt-4 space-y-3.5 text-sm">
               <li>
                 <a
@@ -102,7 +102,7 @@ export function Footer({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-bg/15 pt-7 text-xs text-bg/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-bg/15 pt-7 text-xs text-bg/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <span className="tnum">2025</span> {company.legalName}. جميع الحقوق
             محفوظة.

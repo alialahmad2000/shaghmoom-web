@@ -31,16 +31,12 @@ export function ClosingCta({
           <Button
             href={localePath(locale, "/contact")}
             size="lg"
+            variant="inverse"
             icon={<ArrowEnd />}
-            className="bg-bg text-brand hover:bg-surface"
           >
             {ctaLabel}
           </Button>
-          <WhatsAppButton
-            size="lg"
-            variant="secondary"
-            className="border-bg/40 text-bg hover:border-bg hover:text-bg"
-          />
+          <WhatsAppButton size="lg" variant="outlineInverse" />
         </div>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-bg/80">

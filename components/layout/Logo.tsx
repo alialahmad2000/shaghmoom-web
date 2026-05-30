@@ -21,12 +21,15 @@ export function Logo({
     <Link
       href={localePath(locale, "")}
       className="group inline-flex flex-col leading-none focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-4"
-      aria-label={`${company.publicName} — الصفحة الرئيسية`}
+      aria-label={`${company.shortName} — الصفحة الرئيسية`}
     >
       <span className={`font-display text-2xl tracking-tight ${main}`}>
         {company.shortName}
       </span>
+      {/* Decorative romanization — hidden from the a11y tree so the link's
+          accessible name matches its visible label (WCAG 2.5.3 Label in Name). */}
       <span
+        aria-hidden="true"
         className={`ltr mt-0.5 text-[0.6rem] font-medium uppercase tracking-[0.28em] ${accent}`}
       >
         {company.latin}

@@ -26,9 +26,8 @@ export function MethodologyTeaser({ locale }: { locale: Locale }) {
             <div className="mt-8">
               <Button
                 href={localePath(locale, "/methodology")}
-                variant="secondary"
+                variant="outlineInverse"
                 icon={<ArrowEnd />}
-                className="border-bg/30 text-bg hover:border-bg hover:text-bg"
               >
                 كيف نعمل
               </Button>

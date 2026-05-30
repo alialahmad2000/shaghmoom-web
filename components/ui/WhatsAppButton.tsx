@@ -14,7 +14,7 @@ export function WhatsAppButton({
   label?: string;
   message?: string;
   size?: "md" | "lg";
-  variant?: "whatsapp" | "secondary" | "ghost";
+  variant?: "whatsapp" | "secondary" | "ghost" | "outlineInverse";
   className?: string;
 }) {
   return (
