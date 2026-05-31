@@ -1,34 +1,37 @@
 @import "tailwindcss";
 
 /*
-  Shaghmoom — Design System
-  ─────────────────────────
-  Deep maroon / oxblood on warm bone. Quiet, formal, architectural.
-  Color defaults below are sampled from the brief (§4); replace with the
-  exact hex values from /public/brand once the official logo arrives.
+  SHOGHMOUM — Design System (real bydall.sa identity)
+  ───────────────────────────────────────────────────
+  Deep aubergine on blush, with cream/white surfaces, stone gray-green
+  neutrals, and bronze for small accents. Palette is exact from the brand book;
+  mapped by role. Everything is token-driven so the skin stays reversible.
 */
 
 :root {
-  /* Brand */
-  --brand: #6e3b3d; /* maroon — accents, key headings, CTA */
-  --brand-deep: #532b2d; /* darker maroon — depth, headers, footer */
-  --brand-tint: #f0e6e2; /* faint maroon wash for fills */
+  /* Brand — deep aubergine, dominant */
+  --brand: #390027; /* aubergine — primary: buttons, key elements, dark sections */
+  --brand-deep: #2a001c; /* darker aubergine — footer, hover depth */
+  --brand-tint: #f6cdd6; /* deeper blush — soft accent fills / icon circles on blush */
 
   /* Ink & canvas */
-  --ink: #241e1e; /* primary text — warm near-black */
-  --bg: #f6f2eb; /* canvas — warm bone */
-  --bg-alt: #efe9df; /* alternate sections */
-  --surface: #fbf8f2; /* cards / raised surfaces */
+  --ink: #390027; /* primary text — aubergine (high contrast on blush/cream/white) */
+  --bg: #fddde1; /* canvas — signature blush */
+  --bg-alt: #e1e1c8; /* alternate sections — cream */
+  --surface: #ffffff; /* cards / raised surfaces — white */
 
   /* Secondary */
-  --muted: #6b5f57; /* secondary text — AA on --bg */
-  --faint: #8a7e76; /* decorative taupe — hairlines / captions, not body */
-  --line: color-mix(in srgb, var(--ink) 12%, transparent); /* architectural hairlines */
-  --line-strong: color-mix(in srgb, var(--ink) 22%, transparent);
+  --muted: #54595b; /* secondary text — dark stone gray-green, AA on blush + cream */
+  --faint: #858c8c; /* stone gray-green — decorative / captions / hairlines, not body */
+  --line: color-mix(in srgb, var(--faint) 42%, transparent); /* hairlines / dividers */
+  --line-strong: color-mix(in srgb, var(--faint) 66%, transparent);
+
+  /* Accent — bronze, used sparingly */
+  --accent: #a97b4a; /* bronze — hairline ticks, eyebrow rules, hover, the "١٪" detail */
 }
 
 @theme inline {
-  /* Colors → utilities: bg-brand, text-ink, border-line … */
+  /* Colors → utilities: bg-brand, text-ink, border-line, text-accent … */
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
   --color-brand-tint: var(--brand-tint);
@@ -40,6 +43,7 @@
   --color-faint: var(--faint);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
 
   /* Type families (wired to next/font CSS variables in layout) */
   --font-sans: var(--font-body), var(--font-latin), system-ui, sans-serif;
@@ -77,11 +81,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Display type: Reem Kufi — tight, confident, architectural */
+  /* Display type: Markazi Text — modern elegant Naskh. No negative tracking
+     on Arabic (it would break letter joins); generous line-height for Naskh. */
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    line-height: 1.2;
-    letter-spacing: -0.005em;
+    line-height: 1.3;
     font-weight: 600;
   }
 
@@ -143,4 +147,33 @@
     height: 1px;
     background: var(--line-strong);
   }
+
+  /* Brand dot-grid motif — a quiet, premium texture from the identity book.
+     Used as a very-low-contrast background accent. */
+  .dotgrid {
+    background-image: radial-gradient(var(--line-strong) 1.1px, transparent 1.2px);
+    background-size: 22px 22px;
+    background-position: center;
+  }
+}
+
+/*
+  Logo build on first load — echoes the Keynote's motion language: the symbol
+  "assembles" (scales + fades from the center), then the wordmark rises in.
+  Runs once (the Header persists across client navigations). Reduced-motion is
+  honored by the global override above.
+*/
+@keyframes shg-symbol-in {
+  from { opacity: 0; transform: scale(0.68); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shg-word-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.logo-anim-symbol {
+  animation: shg-symbol-in 0.6s var(--ease-out-soft) both;
+}
+.logo-anim-word {
+  animation: shg-word-in 0.5s var(--ease-out-soft) 0.22s both;
 }

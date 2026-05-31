@@ -6,13 +6,13 @@ import { ImageResponse } from "next/og";
  * Latin-only text to render with the bundled default font; the client can drop
  * a designed /brand/og-default.png and reference it later if preferred.
  */
-export const alt = "Shaghmoom — General Contracting, Al-Madinah";
+export const alt = "SHOGHMOUM — General Contracting, Al-Madinah";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  const maroon = "#532b2d";
-  const bone = "#f6f2eb";
+  const maroon = "#390027"; // aubergine (brand primary)
+  const bone = "#fddde1"; // blush
 
   return new ImageResponse(
     (
@@ -37,7 +37,7 @@ export default async function OpengraphImage() {
             inset: 0,
             display: "flex",
             backgroundImage:
-              "linear-gradient(to right, rgba(246,242,235,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(246,242,235,0.06) 1px, transparent 1px)",
+              "linear-gradient(to right, rgba(253,221,225,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(253,221,225,0.08) 1px, transparent 1px)",
             backgroundSize: "64px 64px",
           }}
         />
@@ -48,7 +48,7 @@ export default async function OpengraphImage() {
               fontSize: 26,
               letterSpacing: 8,
               textTransform: "uppercase",
-              color: "rgba(246,242,235,0.7)",
+              color: "rgba(253,221,225,0.72)",
             }}
           >
             A Nation Built
@@ -56,8 +56,8 @@ export default async function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 132, fontWeight: 700, lineHeight: 1 }}>
-            Shaghmoom
+          <div style={{ fontSize: 124, fontWeight: 700, lineHeight: 1, letterSpacing: 2 }}>
+            SHOGHMOUM
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default async function OpengraphImage() {
             justifyContent: "space-between",
             alignItems: "flex-end",
             fontSize: 30,
-            color: "rgba(246,242,235,0.85)",
+            color: "rgba(253,221,225,0.85)",
           }}
         >
           <span>General Contracting</span>

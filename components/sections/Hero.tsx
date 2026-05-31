@@ -32,7 +32,7 @@ export function Hero({ locale }: { locale: Locale }) {
               <span className="flex items-center gap-3 text-sm font-medium tracking-wide text-brand">
                 <span
                   aria-hidden="true"
-                  className="inline-block h-px w-10 bg-brand/60"
+                  className="inline-block h-px w-10 bg-accent"
                 />
                 {hero.eyebrow}
               </span>
@@ -96,7 +96,7 @@ function CoordinatePlate() {
       </div>
 
       <div className="relative flex items-baseline gap-2">
-        <span className="font-display text-7xl leading-none text-brand tabular-nums">
+        <span className="font-display text-7xl leading-none text-accent tabular-nums">
           ١٠٪
         </span>
       </div>

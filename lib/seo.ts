@@ -10,7 +10,7 @@ export const SITE_URL = (
 ).replace(/\/$/, "");
 
 export const SITE_NAME_AR = "شركة شغموم للمقاولات العامة";
-export const SITE_NAME_LATIN = "Shaghmoom";
+export const SITE_NAME_LATIN = "SHOGHMOUM";
 export const BRAND_LINE = "وطن يُبنى";
 
 /** Build an absolute URL from a locale-relative path (e.g. "/about"). */

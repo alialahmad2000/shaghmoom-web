@@ -8,7 +8,7 @@ export const company = {
   legalName: "شركة خالد رافد صياف العمري للمقاولات العامة",
   publicName: "شركة شغموم للمقاولات العامة",
   shortName: "شغموم",
-  latin: "Shaghmoom",
+  latin: "SHOGHMOUM",
   handle: "@shoughmoum",
   brandLine: "وطن يُبنى",
   brandLineLatin: "A Nation Built",

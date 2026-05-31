@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button, ArrowEnd } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { PinIcon, PhoneIcon } from "@/components/ui/icons";
+import { SymbolMark } from "@/components/ui/SymbolMark";
 
 /** Closing CTA (§7). */
 export function ClosingCta({
@@ -18,7 +19,9 @@ export function ClosingCta({
 }) {
   return (
     <Section tone="brand" grid containerSize="narrow">
-      <Reveal className="flex flex-col items-center text-center">
+      {/* faint brand-symbol watermark — the "window/center" mark behind the CTA */}
+      <SymbolMark className="pointer-events-none absolute -top-10 end-0 h-64 w-64 text-bg opacity-[0.06]" />
+      <Reveal className="relative flex flex-col items-center text-center">
         <span className="font-display text-sm tracking-wide text-bg/70">
           {company.brandLine}
         </span>

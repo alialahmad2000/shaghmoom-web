@@ -54,7 +54,7 @@ export function Header({ locale }: { locale: Locale }) {
       }`}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4 sm:px-8 lg:px-12">
-        <Logo locale={locale} />
+        <Logo locale={locale} animate />
 
         {/* Desktop nav */}
         <nav

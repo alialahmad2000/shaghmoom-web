@@ -26,6 +26,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local Vercel build artifacts (gitignored) — not source to lint.
+    ".vercel/**",
   ]),
 ]);
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Reem_Kufi, IBM_Plex_Sans_Arabic, IBM_Plex_Sans } from "next/font/google";
+import { Markazi_Text, Tajawal, Hanken_Grotesk } from "next/font/google";
 import "../globals.css";
 import {
   LOCALES,
@@ -15,31 +15,33 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
-// Display — Reem Kufi: geometric, architectural (variable).
-const reemKufi = Reem_Kufi({
+// Display headings — Markazi Text: modern elegant Naskh, closest free (OFL)
+// match to the brand wordmark's HT Moshreq Pro feel.
+const display = Markazi_Text({
   subsets: ["arabic", "latin"],
   variable: "--font-heading",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
+
+// Body / UI — Tajawal: clean modern Gulf sans, highly readable Arabic.
+const body = Tajawal({
+  subsets: ["arabic", "latin"],
+  variable: "--font-body",
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
+
+// Latin runs (phone numbers, SHOGHMOUM wordmark, English) — Hanken Grotesk:
+// clean neutral grotesque, closest free match to the brand's Systemia.
+const latin = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-latin",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
-// Body / UI — IBM Plex Sans Arabic: clean, highly readable.
-const plexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic", "latin"],
-  variable: "--font-body",
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-// Latin runs (phone numbers, brand Latin name, English).
-const plexLatin = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-latin",
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-const fontVars = `${reemKufi.variable} ${plexArabic.variable} ${plexLatin.variable}`;
+const fontVars = `${display.variable} ${body.variable} ${latin.variable}`;
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));

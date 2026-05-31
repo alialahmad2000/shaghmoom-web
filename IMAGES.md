@@ -6,7 +6,7 @@ image was risky or off-brand, the slot keeps its **designed placeholder** and is
 flagged for you to decide.
 
 Summary: **3 real photos** placed (cropped from the client's Haraj banners) ·
-**1 sourced image** (licensed, maroon-treated) · **1 real photo flagged** (kept as
+**1 sourced image** (licensed, aubergine-treated) · **1 real photo flagged** (kept as
 placeholder) · hero + project covers **intentionally left as designed placeholders**
 (reasoning below).
 
@@ -19,11 +19,11 @@ Originals are backed up untouched in `public/images/services/originals/`.
 | # | Page / section | Image | Local path | Notes |
 |---|---|---|---|---|
 | 1 | السباكة — `/ar/services/plumbing` | plumbing (action: grinder + sparks + pipes) | `/public/images/services/plumbing-clean.webp` | **Cleanest result.** Cropped lower band; text + حراج watermark removed. |
-| 2 | التكييف — `/ar/services/hvac` | hvac (ceiling ductwork) | `/public/images/services/hvac-clean.webp` | Atmospheric duct/lights band; text removed. Original already had a maroon wash → reads native. |
+| 2 | التكييف — `/ar/services/hvac` | hvac (ceiling ductwork) | `/public/images/services/hvac-clean.webp` | Atmospheric duct/lights band; text removed. Original already had a aubergine wash → reads native. |
 | 3 | الأرضيات — `/ar/services/flooring` | finishing (floor tiling) | `/public/images/services/finishing-clean.webp` | The client's `finishing.jpg` (التشطيبات banner) is a **tiling** shot → placed on **flooring** (الأرضيات), the exact subject within التشطيبات. Text removed. |
 
 Referenced from the `image` field on each service in **`content/services.ts`**.
-Each banner gets a subtle maroon gradient + ring + a "من أعمال شغموم" caption so it reads native, not like a pasted ad.
+Each banner gets a subtle aubergine gradient + ring + a "من أعمال شغموم" caption so it reads native, not like a pasted ad.
 
 ## ⚑ Flagged real photo (kept as placeholder — your call)
 
@@ -31,18 +31,18 @@ Each banner gets a subtle maroon gradient + ring + a "من أعمال شغموم
 |---|---|---|
 | الكهرباء — `/ar/services/electrical` | electrical (worker on block wall) | **FLAGGED, not shipped.** The burned-in text "أعمال الكهرباء" sat directly over the worker; the only fully text-free crop loses his face and is mostly wall — weaker than the designed placeholder. Kept the placeholder. Best-effort crop saved for your review at `public/images/services/_flagged/electrical-bestcrop.webp`. If you approve it, see "How to swap." |
 
-## ✅ Sourced image (licensed, maroon-treated)
+## ✅ Sourced image (licensed, aubergine-treated)
 
 | Page / section | Image | Local path | Source + license |
 |---|---|---|---|
-| من نحن — `/ar/about` (atmospheric banner) | concrete structural shell (عظم), maroon duotone | `/public/images/about-structure.webp` | **Unsplash License — free for commercial use, no permission/attribution required.** Photo by **Tolu Olubode** (@toluobde) — https://unsplash.com/photos/PlBsJ5MybGc. Treated to a maroon duotone so it reads as brand texture, not stock. |
+| من نحن — `/ar/about` (atmospheric banner) | concrete structural shell (عظم), aubergine duotone | `/public/images/about-structure.webp` | **Unsplash License — free for commercial use, no permission/attribution required.** Photo by **Tolu Olubode** (@toluobde) — https://unsplash.com/photos/PlBsJ5MybGc. Treated to a aubergine duotone so it reads as brand texture, not stock. |
 
 Referenced via `aboutImage` in **`content/site.ts`** (with source + license in a comment there too).
 
-## ✅ Service-type craft imagery (sourced + maroon-duotone treated)
+## ✅ Service-type craft imagery (sourced + aubergine-duotone treated)
 
 Each illustrates the **craft/material** (not an identifiable building or a "completed
-project"), maroon-duotone treated to match `about-structure.webp` so it reads as brand
+project"), aubergine-duotone treated to match `about-structure.webp` so it reads as brand
 texture. **All Unsplash License — free for commercial use, no permission/attribution
 required.** Referenced from the `image` field on each service in `content/services.ts`.
 
@@ -89,7 +89,7 @@ required.** Referenced from the `image` field on each service in `content/servic
 - **Project photos** → add files to `public/images/projects/<slug>-N.jpg` and set
   `ready: true` in `content/projects.ts` (already documented in `content/images.ts`).
 - **Revert any photo to the designed placeholder** → remove the reference / set
-  `ready:false`; the `MediaFrame` component renders the maroon architectural-grid
+  `ready:false`; the `MediaFrame` component renders the aubergine architectural-grid
   placeholder automatically. Nothing is hard-baked.
 
 Full slot inventory lives in `content/images.ts`.

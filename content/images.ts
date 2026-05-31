@@ -2,7 +2,7 @@
  * Image manifest (§12). Every image slot on the site, with its location,
  * recommended dimensions / aspect ratio, and a note on what photo belongs there.
  *
- * Until a real photo arrives, the UI renders a refined placeholder (maroon/bone
+ * Until a real photo arrives, the UI renders a refined placeholder (aubergine/bone
  * block with the architectural grid motif + an Arabic caption) — never a broken
  * image or generic stock. To swap in a real photo: drop the file at the listed
  * `path` and the component will use it automatically.
@@ -36,28 +36,28 @@ export const imageManifest: ImageSlot[] = [
     location: "Service page banner (sourced craft imagery: 8 slots)",
     recommended: "1600×400 (4:1)",
     aspect: "4 / 1 (banner)",
-    note: "Licensed (Unsplash) craft/material close-ups, maroon-duotone treated. Referenced from the `image` field in content/services.ts. Full provenance (URL + author + license) per slot in IMAGES.md. ceilings, aluminum-glass, site-preparation kept as placeholders (see IMAGES.md).",
+    note: "Licensed (Unsplash) craft/material close-ups, aubergine-duotone treated. Referenced from the `image` field in content/services.ts. Full provenance (URL + author + license) per slot in IMAGES.md. ceilings, aluminum-glass, site-preparation kept as placeholders (see IMAGES.md).",
   },
   {
     path: "/images/about-structure.webp",
     location: "About page atmospheric banner",
     recommended: "1600×620",
     aspect: "2.58 / 1",
-    note: "SOURCED + maroon-treated. Unsplash License (free, commercial) — photo by Tolu Olubode, https://unsplash.com/photos/PlBsJ5MybGc. Referenced via `aboutImage` in content/site.ts. Swap or remove that one line to change.",
+    note: "SOURCED + aubergine-treated. Unsplash License (free, commercial) — photo by Tolu Olubode, https://unsplash.com/photos/PlBsJ5MybGc. Referenced via `aboutImage` in content/site.ts. Swap or remove that one line to change.",
   },
   {
     path: "/brand/logo.svg",
     location: "Header + Footer logo",
     recommended: "SVG (vector)",
     aspect: "auto",
-    note: "Official Shaghmoom logo. Sample the exact maroon hex from this file and update the color tokens in app/globals.css.",
+    note: "Official Shaghmoom logo. Sample the exact aubergine hex from this file and update the color tokens in app/globals.css.",
   },
   {
     path: "/brand/og-default.png",
     location: "Default Open Graph / social share image",
     recommended: "1200×630",
     aspect: "1.91 / 1",
-    note: "Brand share card: maroon, the brand line 'وطن يُبنى', logo. Used when a page has no specific OG image.",
+    note: "Brand share card: aubergine, the brand line 'وطن يُبنى', logo. Used when a page has no specific OG image.",
   },
   {
     path: "/images/hero.jpg",
