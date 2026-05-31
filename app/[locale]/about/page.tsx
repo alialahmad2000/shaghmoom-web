@@ -9,7 +9,6 @@ import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ValueCard } from "@/components/ui/ValueCard";
-import { CredibilityBand } from "@/components/sections/CredibilityBand";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -122,7 +121,6 @@ export default async function AboutPage({
         </div>
       </Section>
 
-      <CredibilityBand />
       <ClosingCta locale={loc} />
     </>
   );

@@ -17,7 +17,7 @@
   /* Ink & canvas */
   --ink: #390027; /* primary text — aubergine (high contrast on blush/cream/white) */
   --bg: #fddde1; /* canvas — signature blush */
-  --bg-alt: #e1e1c8; /* alternate sections — cream */
+  --bg-alt: #f4f0e9; /* alternate sections — true warm cream (no green cast) */
   --surface: #ffffff; /* cards / raised surfaces — white */
 
   /* Secondary */

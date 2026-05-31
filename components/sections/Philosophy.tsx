@@ -1,6 +1,7 @@
 import { philosophy } from "@/content/site";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { SymbolMark } from "@/components/ui/SymbolMark";
 
 /**
  * "ما لا يُرى... هو ما يصنع الفرق" — the philosophy; the soul of the page (§5).
@@ -41,67 +42,47 @@ export function Philosophy() {
 }
 
 /**
- * A plan fragment where the attentive eye catches what others miss: on close
- * inspection (hover/focus) a flaw marker and a development arrow surface.
- * CSS-driven so it's accessible and respects reduced motion.
+ * A balanced brand plate built on the identity itself: the window/cube symbol
+ * (perception / "the window") with its central point — "نقطة واحدة تصنع الفرق" —
+ * picked out in bronze. On close inspection (hover/focus) the center point
+ * surfaces: a ring expands around it. CSS-driven; respects reduced motion.
  */
 function InspectionPlate() {
   return (
     <div
       tabIndex={0}
       role="img"
-      aria-label="مخطط تتقاطع فيه الخطوط، تظهر فيه تفصيلة خفية عند التدقيق"
+      aria-label="رمز شغموم: النقطة المركزية التي تصنع الفرق"
       className="group relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-line bg-surface focus-visible:outline-2 focus-visible:outline-brand"
     >
-      <div className="blueprint absolute inset-0 opacity-80" />
+      <div className="dotgrid absolute inset-0 opacity-40" />
 
-      {/* diagonal plan lines */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 400 500"
-        className="absolute inset-0 h-full w-full"
-        fill="none"
-      >
-        <path d="M40 120 H360" stroke="var(--line-strong)" strokeWidth="1" />
-        <path d="M40 260 H360" stroke="var(--line-strong)" strokeWidth="1" />
-        <path d="M150 40 V460" stroke="var(--line-strong)" strokeWidth="1" />
-        <path d="M40 120 L360 460" stroke="var(--line)" strokeWidth="1" />
+      {/* measurement-style corner ticks frame the composition */}
+      <div aria-hidden="true" className="absolute inset-6">
+        <span className="absolute start-0 top-0 h-5 w-5 border-s border-t border-accent/45" />
+        <span className="absolute end-0 top-0 h-5 w-5 border-e border-t border-accent/45" />
+        <span className="absolute bottom-0 start-0 h-5 w-5 border-b border-s border-accent/45" />
+        <span className="absolute bottom-0 end-0 h-5 w-5 border-b border-e border-accent/45" />
+      </div>
 
-        {/* the hidden flaw — surfaces on inspection */}
-        <circle
-          cx="150"
-          cy="260"
-          r="7"
-          className="fill-brand opacity-0 transition-opacity duration-500 ease-[var(--ease-out-soft)] group-hover:opacity-100 group-focus-visible:opacity-100"
-        />
-        <circle
-          cx="150"
-          cy="260"
-          r="18"
-          className="stroke-brand/50 opacity-0 transition-opacity duration-700 group-hover:opacity-100 group-focus-visible:opacity-100"
-          strokeWidth="1.5"
-          fill="none"
-        />
-
-        {/* development arrow — the quiet "سهم التطوير" nod */}
-        <g className="opacity-0 transition-opacity duration-700 ease-[var(--ease-out-soft)] group-hover:opacity-100 group-focus-visible:opacity-100">
-          <path
-            d="M150 260 L250 180"
-            stroke="var(--brand)"
-            strokeWidth="1.5"
-            strokeDasharray="4 4"
+      {/* focal brand symbol + its center point */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative grid place-items-center">
+          <SymbolMark className="h-44 w-44 text-brand opacity-[0.16] transition-opacity duration-500 ease-[var(--ease-out-soft)] group-hover:opacity-25 group-focus-visible:opacity-25" />
+          {/* the center point — bronze, the "نقطة واحدة" */}
+          <span
+            aria-hidden="true"
+            className="absolute h-2.5 w-2.5 rounded-full bg-accent"
           />
-          <path
-            d="M250 180 l-14 2 m14 -2 l-2 14"
-            stroke="var(--brand)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
+          <span
+            aria-hidden="true"
+            className="absolute h-2.5 w-2.5 rounded-full border border-accent/60 opacity-0 transition-all duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[5] group-hover:opacity-100 group-focus-visible:scale-[5] group-focus-visible:opacity-100"
           />
-        </g>
-      </svg>
+        </div>
+      </div>
 
-      <span className="absolute bottom-5 start-5 text-xs text-faint opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
-        دقّق النظر — هنا ما يصنع الفرق
+      <span className="absolute inset-x-6 bottom-5 text-center text-xs text-muted">
+        النقطة التي تصنع الفرق
       </span>
     </div>
   );

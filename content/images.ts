@@ -67,27 +67,6 @@ export const imageManifest: ImageSlot[] = [
     note: "A composed, high-quality project photo (finished villa/interior). Must not look like generic stock. Optional — the hero works without it.",
   },
   {
-    path: "/brand/mark-muqawil.svg",
-    location: "Credibility bar",
-    recommended: "SVG, height ~40px",
-    aspect: "auto",
-    note: "Official منصة مقاول mark.",
-  },
-  {
-    path: "/brand/mark-sca.svg",
-    location: "Credibility bar",
-    recommended: "SVG, height ~40px",
-    aspect: "auto",
-    note: "Saudi Contractors Authority (SCA) mark.",
-  },
-  {
-    path: "/brand/mark-vision2030.svg",
-    location: "Credibility bar",
-    recommended: "SVG, height ~40px",
-    aspect: "auto",
-    note: "Vision 2030 mark.",
-  },
-  {
     path: "/images/projects/{slug}-1.jpg",
     location: "Project card cover (one per project in content/projects.ts)",
     recommended: "1600×1200",

@@ -6,7 +6,6 @@ import { Philosophy } from "@/components/sections/Philosophy";
 import { ServicesSnapshot } from "@/components/sections/ServicesSnapshot";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { MethodologyTeaser } from "@/components/sections/MethodologyTeaser";
-import { CredibilityBand } from "@/components/sections/CredibilityBand";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -43,7 +42,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <ServicesSnapshot locale={loc} />
       <FeaturedProjects locale={loc} />
       <MethodologyTeaser locale={loc} />
-      <CredibilityBand />
       <ReviewsSection />
       <ClosingCta locale={loc} />
     </>

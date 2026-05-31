@@ -103,8 +103,7 @@ function CoordinatePlate() {
 
       <div className="relative">
         <p className="text-sm leading-relaxed text-muted">
-          من تفاصيل المشروع لا تُرى في المخطط — لكنها هي ما نلحظه قبل أن يُوضع
-          أول حجر.
+          تفاصيل لا تظهر في المخطط، لكنها ما يجب أن يُلحَظ قبل أن يُوضع أول حجر.
         </p>
       </div>
     </div>

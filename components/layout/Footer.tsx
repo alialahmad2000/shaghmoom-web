@@ -13,6 +13,7 @@ import { WhatsAppIcon, PhoneIcon, PinIcon, ClockIcon } from "@/components/ui/ico
 
 export function Footer({ locale }: { locale: Locale }) {
   const topServices = services.slice(0, 6);
+  const year = new Date().getFullYear();
 
   return (
     <footer className="bg-brand-deep text-bg">
@@ -104,12 +105,11 @@ export function Footer({ locale }: { locale: Locale }) {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-bg/15 pt-7 text-xs text-bg/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © <span className="tnum">2025</span> {company.legalName}. جميع الحقوق
-            محفوظة.
+            © <span className="tnum">{year}</span> {company.legalName}. جميع
+            الحقوق محفوظة.
           </p>
-          <p className="tnum">
-            معتمد لدى منصة مقاول — عضوية 1180118003 · عضو الهيئة السعودية
-            للمقاولين
+          <p>
+            {company.city} — {company.district}
           </p>
         </div>
       </div>

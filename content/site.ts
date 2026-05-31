@@ -81,24 +81,13 @@ export const closingCta = {
   body: "تواصل معنا اليوم لمناقشة مشروعك في المدينة المنورة — بناءً كان أو تشطيبًا.",
 } as const;
 
-/** Credibility signals — trust band (§7-Credibility). Logos in /public/brand. */
-export const credibility = [
-  {
-    label: "معتمد لدى منصة مقاول",
-    detail: "رقم العضوية 1180118003",
-    mark: "/brand/mark-muqawil.svg",
-  },
-  {
-    label: "عضو الهيئة السعودية للمقاولين",
-    detail: "SCA",
-    mark: "/brand/mark-sca.svg",
-  },
-  {
-    label: "متوافق مع رؤية السعودية 2030",
-    detail: "Vision 2030",
-    mark: "/brand/mark-vision2030.svg",
-  },
-] as const;
+/*
+ * Credibility / accreditation signals were REMOVED in the polish pass:
+ * the منصة مقاول membership number (1180118003) and "عضو الهيئة السعودية للمقاولين"
+ * traced only to the build-brief spec — no certificate or contract backs them.
+ * Do not display unverifiable accreditation/membership/CR on a live site.
+ * Re-add here (with the real certificate on file) if/when verified.
+ */
 
 /** Project types served — signals scale (§7-Services). */
 export const projectTypes = [
