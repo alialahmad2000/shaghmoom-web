@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Shoghmoum · شغموم — brand tokens for the web  (v 2026-10-09)
+   Approved values come from the identity file and the owner's decisions.
+   Lines marked PROPOSED are web adaptations that still need owner sign-off.
+   ========================================================================== */
+
+/* Font — IBM Plex Sans Arabic (SIL OFL). Either load from Google Fonts:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+   …or self-host with 04_typography/fonts/ibm-plex-sans-arabic.css            */
+
+:root {
+  /* ---- Core palette (approved) ---- */
+  --sh-maroon: #441420;      /* العنابي — primary */
+  --sh-sand: #E9EAD9;        /* الرملي — secondary */
+  --sh-terracotta: #814B41;  /* الطوبي — accent, LIGHT grounds only */
+  --sh-gold: #AA8302;        /* الذهبي — the single highlight; never with opacity */
+  --sh-gold-light: #D6B44E;  /* illustration highlights only */
+
+  /* ---- Reserved: do not use on the site until approved ---- */
+  --sh-black: #0E0E0E;       /* highlight-cover ground only */
+  --sh-periwinkle: #A7B5DC;
+  --sh-aqua: #9CC7C9;
+
+  /* ---- Illustration (original Midjourney engraving colours) ---- */
+  --sh-ill-ink: #0B0C0A; --sh-ill-tan: #BA8953; --sh-ill-tan-light: #D4AE7D;
+  --sh-ill-cream: #FEEDC1; --sh-ill-red: #93412F; --sh-ill-red-light: #BE6748;
+
+  /* ---- Typography ---- */
+  --sh-font: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sh-w-regular: 400; --sh-w-medium: 500; --sh-w-semibold: 600; --sh-w-bold: 700;
+  /* PROPOSED web scale (derived from the approved 1080px social scale) */
+  --sh-fs-eyebrow: clamp(13px, 1.1vw, 16px);
+  --sh-fs-h1: clamp(38px, 6vw, 76px);
+  --sh-fs-h2: clamp(28px, 3.6vw, 48px);
+  --sh-fs-h3: clamp(20px, 2vw, 26px);
+  --sh-fs-body: clamp(16px, 1.15vw, 19px);
+  --sh-fs-callout: clamp(18px, 1.4vw, 22px);
+  --sh-lh-title: 1.24; --sh-lh-body: 1.8;
+
+  /* ---- Layout ---- */
+  --sh-indent: clamp(24px, 7vw, 78px);   /* edge · indent · edge rhythm */
+  --sh-radius: 2px;                      /* PROPOSED: architectural, near-square */
+  --sh-gutter: clamp(16px, 5vw, 96px);
+
+  /* ---- Measuring grid (شبكة القياس) ---- */
+  --sh-grid-step: 24px;                  /* 30px ≥ 1024px wide */
+  --sh-grid-major: calc(var(--sh-grid-step) * 5);
+
+  /* ---- Dashed guide lines ---- */
+  --sh-dash: 14px; --sh-dash-gap: 12px; --sh-dash-stroke: 3px;
+}
+@media (min-width: 1024px) { :root { --sh-grid-step: 30px; } }
+
+html { direction: rtl; }
+body { font-family: var(--sh-font); font-size: var(--sh-fs-body); line-height: var(--sh-lh-body); }
+
+/* ---- Two grounds. Sections alternate: maroon, sand, maroon… ---- */
+.sh-ground-maroon { --ground: var(--sh-maroon); --ink: var(--sh-sand); --accent: var(--sh-sand); --label: var(--sh-gold);
+  background: var(--sh-maroon); color: var(--sh-sand); }
+.sh-ground-sand { --ground: var(--sh-sand); --ink: var(--sh-maroon); --accent: var(--sh-terracotta); --label: var(--sh-terracotta);
+  background: var(--sh-sand); color: var(--sh-maroon); }
+
+/* ---- Type roles ---- */
+.sh-eyebrow { font-size: var(--sh-fs-eyebrow); font-weight: 600; letter-spacing: .04em; color: var(--label); }
+.sh-h1 { font-size: var(--sh-fs-h1); font-weight: 600; line-height: var(--sh-lh-title); letter-spacing: -.01em; margin: 0; }
+.sh-h2 { font-size: var(--sh-fs-h2); font-weight: 600; line-height: 1.3; margin: 0; }
+.sh-rule { width: 104px; height: 5px; background: currentColor; opacity: .85; margin-inline-start: var(--sh-indent); border: 0; }
+.sh-body { margin-inline-start: var(--sh-indent); max-width: 62ch; }
+/* the callout — «السكة»: the felt consequence; stands out more than body */
+.sh-callout { display: flex; gap: 20px; font-size: var(--sh-fs-callout); font-weight: 600; line-height: 1.6; }
+.sh-callout::before { content: ""; flex: none; width: 6px; border-radius: 3px; background: var(--sh-gold); }
+
+/* ---- The gold brush highlight — use ONCE per view, predicate only ---- */
+.sh-brush { position: relative; z-index: 0; padding-inline: .45em; white-space: nowrap; }
+.sh-brush::before { content: ""; position: absolute; z-index: -1; inset: -.12em -.55em -.16em -.55em;
+  background: url("../05_graphics/brush/brush-gold-1.svg") center / 100% 100% no-repeat; }
+.sh-ground-sand .sh-brush { color: var(--sh-maroon); }
+.sh-ground-maroon .sh-brush { color: var(--sh-maroon); }   /* maroon text on gold = 4.36:1 → large text only (≥ 24px) */
+
+/* ---- Measuring grid behind an illustration (never behind text) ---- */
+.sh-measure-grid { position: relative; isolation: isolate; }
+.sh-measure-grid::before {
+  content: ""; position: absolute; inset: -12% -18%; z-index: -1; pointer-events: none; color: var(--ink);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, currentColor var(--sh-grid-major-a, 24%), transparent) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, color-mix(in srgb, currentColor var(--sh-grid-major-a, 24%), transparent) 1.5px, transparent 1.5px),
+    linear-gradient(to right, color-mix(in srgb, currentColor var(--sh-grid-minor-a, 11%), transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, currentColor var(--sh-grid-minor-a, 11%), transparent) 1px, transparent 1px);
+  background-size: var(--sh-grid-major) var(--sh-grid-major), var(--sh-grid-major) var(--sh-grid-major),
+                   var(--sh-grid-step) var(--sh-grid-step), var(--sh-grid-step) var(--sh-grid-step);
+  background-position: center;
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.7) 50%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.7) 50%, transparent 100%);
+}
+.sh-ground-sand .sh-measure-grid::before { --sh-grid-major-a: 17%; --sh-grid-minor-a: 7.5%; }
+
+/* ---- Pattern texture (7%) — sections in the middle of a page, never under text blocks ---- */
+.sh-pattern-star { position: relative; isolation: isolate; }
+.sh-pattern-star::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .07;
+  background: url("../03_pattern/tiles/pattern-star-tile-sand.svg") 0 0 / 120px auto repeat; }
+.sh-ground-sand.sh-pattern-star::after { background-image: url("../03_pattern/tiles/pattern-star-tile-maroon.svg"); }
+
+/* ---- Dashed guide line ---- */
+.sh-dashed { border: 0; height: var(--sh-dash-stroke); opacity: .75;
+  background: repeating-linear-gradient(to left, var(--sh-gold) 0 var(--sh-dash), transparent var(--sh-dash) calc(var(--sh-dash) + var(--sh-dash-gap))); }
+
+/* ---- Buttons (PROPOSED) ---- */
+.sh-btn { font: 600 16px/1 var(--sh-font); padding: 16px 28px; border-radius: var(--sh-radius); border: 2px solid currentColor;
+  background: var(--ink); color: var(--ground); text-decoration: none; display: inline-flex; gap: 10px; align-items: center; }
+.sh-btn--ghost { background: transparent; color: var(--ink); }
+.sh-btn:focus-visible { outline: 3px solid var(--sh-gold); outline-offset: 3px; }

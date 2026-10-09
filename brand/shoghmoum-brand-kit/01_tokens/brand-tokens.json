@@ -1,0 +1,452 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "brand": "شغموم · Shoghmoum",
+    "division": "شغموم للمقاولات العامة — General Contracting",
+    "city": "المدينة المنورة · Madinah",
+    "version": "2026-10-09",
+    "source": "Shoghmoum Main Logo + Main Identity Mat (Illustrator 30.3, 2026-07-25) + approved decisions Aug–Oct 2026",
+    "status_legend": {
+      "approved": "decided by the owner",
+      "proposed": "recommendation for the website, needs owner confirmation"
+    }
+  },
+  "color": {
+    "maroon": {
+      "$type": "color",
+      "$value": "#441420",
+      "name_ar": "العنابي",
+      "status": "approved-core",
+      "usage": "Primary. Dark ground, text on light grounds, logo ink, illustration ink."
+    },
+    "sand": {
+      "$type": "color",
+      "$value": "#E9EAD9",
+      "name_ar": "الرملي",
+      "status": "approved-core",
+      "usage": "Secondary. Light ground, text on maroon, logo on maroon."
+    },
+    "terracotta": {
+      "$type": "color",
+      "$value": "#814B41",
+      "name_ar": "الطوبي",
+      "status": "approved-accent",
+      "usage": "Accent on LIGHT grounds only (eyebrow labels, series names on sand, secondary emphasis). Never text on maroon (2.21:1)."
+    },
+    "gold": {
+      "$type": "color",
+      "$value": "#AA8302",
+      "name_ar": "الذهبي",
+      "status": "approved-highlight",
+      "usage": "The single highlight: one brush swipe per view, callout bar, dashed guide lines/arrows on maroon, series name on maroon. Must render as pure #AA8302 (never with opacity)."
+    },
+    "gold-light": {
+      "$type": "color",
+      "$value": "#D6B44E",
+      "name_ar": "الذهبي الفاتح",
+      "status": "illustration-only",
+      "usage": "Highlights inside engraved illustrations only. Never text or UI."
+    },
+    "black": {
+      "$type": "color",
+      "$value": "#0E0E0E",
+      "name_ar": "الأسود",
+      "status": "limited",
+      "usage": "Approved only as one of the four alternating grounds of the Instagram highlight covers. Not a website colour unless approved."
+    },
+    "periwinkle": {
+      "$type": "color",
+      "$value": "#A7B5DC",
+      "name_ar": "الأزرق البنفسجي",
+      "status": "reserved",
+      "usage": "In the Sept-2026 palette but deliberately unused so far. Do not use without approval."
+    },
+    "aqua": {
+      "$type": "color",
+      "$value": "#9CC7C9",
+      "name_ar": "الأكوا",
+      "status": "reserved",
+      "usage": "In the Sept-2026 palette but deliberately unused so far. Do not use without approval."
+    }
+  },
+  "color-illustration": {
+    "ink": {
+      "$type": "color",
+      "$value": "#0B0C0A",
+      "status": "illustration-only"
+    },
+    "tan": {
+      "$type": "color",
+      "$value": "#BA8953",
+      "status": "illustration-only"
+    },
+    "tan-light": {
+      "$type": "color",
+      "$value": "#D4AE7D",
+      "status": "illustration-only"
+    },
+    "cream": {
+      "$type": "color",
+      "$value": "#FEEDC1",
+      "status": "illustration-only"
+    },
+    "red": {
+      "$type": "color",
+      "$value": "#93412F",
+      "status": "illustration-only"
+    },
+    "red-light": {
+      "$type": "color",
+      "$value": "#BE6748",
+      "status": "illustration-only"
+    }
+  },
+  "color-rejected": {
+    "#E6E7E2": "Appears on the logo artboards of the source file — an export error/near-duplicate of sand. Never use; use #E9EAD9."
+  },
+  "color-pairs-approved": [
+    {
+      "ground": "maroon",
+      "text": "sand",
+      "accent": "sand",
+      "highlight": "gold",
+      "note": "dark section"
+    },
+    {
+      "ground": "sand",
+      "text": "maroon",
+      "accent": "terracotta",
+      "highlight": "gold",
+      "note": "light section"
+    }
+  ],
+  "color-usage-ratio (proposed for web)": [
+    {
+      "color": "maroon",
+      "share": "40–50%",
+      "why": "Grounds of alternating sections + all body text on sand."
+    },
+    {
+      "color": "sand",
+      "share": "40–50%",
+      "why": "Grounds of alternating sections + text on maroon. Together maroon + sand ≈ 85–90% of every screen."
+    },
+    {
+      "color": "terracotta",
+      "share": "≤ 5%",
+      "why": "Eyebrows / labels / secondary emphasis on sand only."
+    },
+    {
+      "color": "gold",
+      "share": "≤ 2–3%",
+      "why": "ONE highlight per screen view + callout bars + dashed guides. If it appears everywhere it stops being a highlight."
+    },
+    {
+      "color": "illustration palette",
+      "share": "as drawn",
+      "why": "Only inside engraved illustrations."
+    },
+    {
+      "color": "periwinkle / aqua / black",
+      "share": "0%",
+      "why": "Reserved — not on the website until approved."
+    }
+  ],
+  "contrast": [
+    {
+      "fg": "maroon",
+      "fg_hex": "#441420",
+      "bg": "sand",
+      "bg_hex": "#E9EAD9",
+      "ratio": 12.61,
+      "verdict": "AAA body text"
+    },
+    {
+      "fg": "sand",
+      "fg_hex": "#E9EAD9",
+      "bg": "maroon",
+      "bg_hex": "#441420",
+      "ratio": 12.61,
+      "verdict": "AAA body text"
+    },
+    {
+      "fg": "terracotta",
+      "fg_hex": "#814B41",
+      "bg": "sand",
+      "bg_hex": "#E9EAD9",
+      "ratio": 5.71,
+      "verdict": "AA body text"
+    },
+    {
+      "fg": "terracotta",
+      "fg_hex": "#814B41",
+      "bg": "maroon",
+      "bg_hex": "#441420",
+      "ratio": 2.21,
+      "verdict": "FAIL — decorative only"
+    },
+    {
+      "fg": "gold",
+      "fg_hex": "#AA8302",
+      "bg": "maroon",
+      "bg_hex": "#441420",
+      "ratio": 4.36,
+      "verdict": "Large text / UI only (≥24px or ≥18.66px bold)"
+    },
+    {
+      "fg": "gold",
+      "fg_hex": "#AA8302",
+      "bg": "sand",
+      "bg_hex": "#E9EAD9",
+      "ratio": 2.89,
+      "verdict": "FAIL — decorative only"
+    },
+    {
+      "fg": "maroon",
+      "fg_hex": "#441420",
+      "bg": "gold",
+      "bg_hex": "#AA8302",
+      "ratio": 4.36,
+      "verdict": "Large text / UI only (≥24px or ≥18.66px bold)"
+    },
+    {
+      "fg": "sand",
+      "fg_hex": "#E9EAD9",
+      "bg": "gold",
+      "bg_hex": "#AA8302",
+      "ratio": 2.89,
+      "verdict": "FAIL — decorative only"
+    },
+    {
+      "fg": "sand",
+      "fg_hex": "#E9EAD9",
+      "bg": "black",
+      "bg_hex": "#0E0E0E",
+      "ratio": 15.84,
+      "verdict": "AAA body text"
+    },
+    {
+      "fg": "gold",
+      "fg_hex": "#AA8302",
+      "bg": "black",
+      "bg_hex": "#0E0E0E",
+      "ratio": 5.48,
+      "verdict": "AA body text"
+    },
+    {
+      "fg": "maroon",
+      "fg_hex": "#441420",
+      "bg": "white",
+      "bg_hex": "#FFFFFF",
+      "ratio": 15.37,
+      "verdict": "AAA body text"
+    }
+  ],
+  "font": {
+    "family-arabic": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Sans Arabic",
+        "system-ui",
+        "sans-serif"
+      ],
+      "status": "approved (Aug 31 2026)"
+    },
+    "family-latin": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Sans Arabic",
+        "IBM Plex Sans",
+        "system-ui",
+        "sans-serif"
+      ],
+      "status": "proposed: IBM Plex Sans Arabic carries Latin glyphs; IBM Plex Sans is its sibling for long English pages"
+    },
+    "logo-font": "Greta Arabic (Typotheque, commercial) — used ONLY inside the outlined logo. Never set new text in it.",
+    "rejected": [
+      "Noto Kufi Arabic + Readex Pro pairing (tried and rejected)"
+    ],
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "numerals": "Arabic-Indic digits (١٢٣) inside Arabic copy; Latin digits only in Latin copy, codes, phone numbers in links."
+  },
+  "type-scale-social (approved, px on a 1080-wide canvas)": {
+    "label/eyebrow": {
+      "size": 36,
+      "weight": 600,
+      "tracking": "0.04–0.06em",
+      "color": "terracotta on sand / sand or gold on maroon"
+    },
+    "title": {
+      "size": 96,
+      "weight": 600,
+      "line_height": 1.24,
+      "tracking": "-0.01em",
+      "lines": "exactly 2"
+    },
+    "title (dense slides)": {
+      "size": 72,
+      "weight": 600
+    },
+    "body": {
+      "size": 44,
+      "weight": 400,
+      "line_height": 1.7,
+      "indent": "78px from the title edge"
+    },
+    "body (dense)": {
+      "size": 34,
+      "weight": 400,
+      "line_height": 1.7
+    },
+    "callout (\"السكة\")": {
+      "size": 40,
+      "weight": 500,
+      "note": "or 36/600 on dense slides; 8px gold bar on its inline-start edge; must stand out more than body"
+    },
+    "margins": "96px each edge (8.9% of width)"
+  },
+  "type-scale-web (proposed)": {
+    "eyebrow": {
+      "size": "clamp(13px, 1.1vw, 16px)",
+      "weight": 600,
+      "tracking": "0.04em"
+    },
+    "h1": {
+      "size": "clamp(38px, 6vw, 76px)",
+      "weight": 600,
+      "line_height": 1.24,
+      "tracking": "-0.01em"
+    },
+    "h2": {
+      "size": "clamp(28px, 3.6vw, 48px)",
+      "weight": 600,
+      "line_height": 1.3
+    },
+    "h3": {
+      "size": "clamp(20px, 2vw, 26px)",
+      "weight": 600,
+      "line_height": 1.4
+    },
+    "body": {
+      "size": "clamp(16px, 1.15vw, 19px)",
+      "weight": 400,
+      "line_height": 1.8
+    },
+    "callout": {
+      "size": "clamp(18px, 1.4vw, 22px)",
+      "weight": 600,
+      "line_height": 1.6
+    },
+    "small": {
+      "size": "14px",
+      "weight": 500,
+      "line_height": 1.6
+    },
+    "measure": "body lines 55–70 Arabic characters max"
+  },
+  "layout": {
+    "direction": "rtl (lang=\"ar\")",
+    "rhythm": "edge · indent · edge — headline flush to the text edge, divider rule and body indented (~8–9% of the column), callout back to the edge",
+    "block-placement": "text blocks optically centred, not pinned to the bottom edge; on repeated layouts lock the heading to the same height",
+    "section-ground": "alternate maroon / sand; two consecutive sections on the same ground is a mistake (rule from the carousels)",
+    "radius": "0–4px (brand is architectural and sharp; avoid pill buttons except small chips)",
+    "divider": {
+      "width": "104px on 1080 (≈ 10% of column)",
+      "height": "5px",
+      "color": "text colour at 85%"
+    }
+  },
+  "measuring-grid": {
+    "what": "شبكة القياس — a faded draughtsman grid behind drawings. Owner calls it one of the most beautiful elements of the identity.",
+    "step": "30px on a 1080 canvas (2.78% of width); web: 24px mobile / 30px desktop",
+    "major-line": "every 5th line (150px)",
+    "stroke": "1px minor, 1.5–1.6px major",
+    "color": "the INK of the ground (sand lines on maroon, maroon lines on sand)",
+    "opacity-on-maroon": {
+      "minor": 0.11,
+      "major": 0.24
+    },
+    "opacity-on-sand": {
+      "minor": 0.075,
+      "major": 0.17
+    },
+    "opacity-small-circle (highlight covers)": {
+      "on_dark": "0.17 / 0.38",
+      "on_light": "0.13 / 0.30"
+    },
+    "mask": "radial fade: 100% at centre → 70% at half radius → 0 at edge. Strongest under the drawing it supports, gone before it reaches text.",
+    "rules": [
+      "never under text",
+      "never a uniform texture over a whole page",
+      "it is the base a drawing stands on, not wallpaper"
+    ]
+  },
+  "pattern": {
+    "motifs": [
+      "star (primary, derived from the icon)",
+      "slash 45°",
+      "dot (calmest)"
+    ],
+    "grid": "493.9 × 373.0 units (ratio 1.324), one motif per cell, centred",
+    "opacity": "7% as all-over texture · ~9% for the large cropped icon watermark",
+    "colour": "ink of the ground (sand on maroon, maroon on sand)",
+    "sequence": "first view: big cropped icon watermark in a top corner (~9%) · middle sections: light all-over texture (7%) · final section/sign-off: no pattern",
+    "never": [
+      "under text",
+      "as a separate decorative band/strip (tried and rejected)",
+      "at high opacity",
+      "as a highlight cover"
+    ]
+  },
+  "highlight-brush": {
+    "colour": "#AA8302",
+    "shape": "irregular marker swipe, tapered ends, wavy non-parallel edges — never a rectangle or rounded pill",
+    "frequency": "ONCE per view/carousel — repetition kills it",
+    "subject-rule": "the subject stays OUTSIDE the swipe; only the predicate is swiped (شغموم | عند/وقت اللزوم يجملك). A short standalone term may be swiped whole."
+  },
+  "dashed-lines": {
+    "stroke": "3px",
+    "dash": "14 12",
+    "opacity": "0.6–0.85",
+    "colour": "gold on maroon, maroon (or gold) on sand",
+    "use": "ground lines under illustrations, guide lines that tie a drawing to the layout, simple dashed arrows pointing at an object",
+    "reserved": "the half-ellipse \"cradle\" arc under a word is reserved for عليك / عليه (it represents a scale)"
+  },
+  "logo": {
+    "lockup": {
+      "ratio": "2.613:1",
+      "file": "02_logo/svg/shoghmoum-lockup-*.svg",
+      "note": "Arabic «شغموم» over Latin SHOGHMOUM"
+    },
+    "wordmark-ar": {
+      "ratio": "3.812:1",
+      "note": "used in carousel header rows and tight spaces"
+    },
+    "wordmark-en": {
+      "ratio": "11.714:1",
+      "note": "Latin line alone — only for Latin-only contexts"
+    },
+    "icon": {
+      "ratio": "1.046:1",
+      "note": "four-point star with an S; avatar, favicon, watermark"
+    },
+    "clear-space (proposed)": "lockup/wordmark: X = height of the SHOGHMOUM line (≈22% of lockup height) on every side · icon: ½ icon height",
+    "min-size (proposed)": "lockup 140px wide · Arabic wordmark 96px · icon 24px (favicon 16px uses the dedicated favicon file)",
+    "colours": [
+      "maroon on sand",
+      "sand on maroon",
+      "maroon on gold / sand on black (highlight covers only)",
+      "black or white only where brand colours are technically impossible"
+    ]
+  },
+  "contact": {
+    "phone_whatsapp": "0553346250",
+    "phone_e164": "+966553346250",
+    "domain": "shoghmoum.com"
+  }
+}
