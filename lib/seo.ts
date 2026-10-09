@@ -12,6 +12,14 @@ export const SITE_URL = (
 export const SITE_NAME_AR = "شغموم للمقاولات العامة";
 export const SITE_NAME_LATIN = "SHOGHMOUM";
 
+/** Kit share image (06_web-assets/social/og-image-1200x630.png). */
+export const OG_IMAGE = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "شغموم — SHOGHMOUM",
+} as const;
+
 /** Build an absolute URL from a locale-relative path (e.g. "/about"). */
 export function absUrl(locale: Locale, path = ""): string {
   const clean = path === "/" ? "" : path.replace(/^\//, "");
@@ -44,8 +52,6 @@ export function buildMetadata({
 }: PageMetaInput): Metadata {
   const canonical = absUrl(locale, path);
 
-  // The OG/Twitter image is supplied by the file-based `opengraph-image`
-  // convention (app/[locale]/opengraph-image.tsx), so it isn't set here.
   return {
     title: fullTitle ? { absolute: title } : title,
     description,
@@ -65,11 +71,13 @@ export function buildMetadata({
       url: canonical,
       title,
       description,
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [OG_IMAGE.url],
     },
   };
 }
