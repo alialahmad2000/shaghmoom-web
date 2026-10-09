@@ -1,111 +1,39 @@
 import { localePath, type Locale } from "@/lib/i18n";
 import { hero, ctaLabel } from "@/content/site";
-import { Container } from "@/components/ui/Container";
 import { Button, ArrowEnd } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { Reveal } from "@/components/ui/Reveal";
+import { IconWatermark } from "@/components/brand/IconWatermark";
 
 /**
- * Hero — composed with restraint (§7). Brand line eyebrow, a large confident
- * display H1, generous breathing room, and a quiet architectural backdrop with
- * measurement-style coordinate marks. Not a generic centered stock hero.
+ * Home hero — maroon (brand §11, sheet p.7). The large cropped icon watermark
+ * at 9% in the top corner away from the copy; a two-line headline; the one
+ * gold element on this screen is the eyebrow, set at 24px because gold text
+ * on maroon passes contrast only at large sizes. Rendered without entrance
+ * animation so the headline (LCP) paints immediately.
  */
 export function Hero({ locale }: { locale: Locale }) {
   return (
-    <section className="relative isolate overflow-hidden bg-bg">
-      {/* architectural grid + soft maroon wash */}
-      <div
-        aria-hidden="true"
-        className="blueprint pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_120%_90%_at_80%_-10%,black,transparent_70%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-1/3 end-[-10%] -z-10 h-[60rem] w-[60rem] rounded-full bg-brand-tint/50 blur-3xl"
-      />
-
-      <Container className="relative">
-        <div className="grid grid-cols-1 items-center gap-12 py-24 sm:py-28 lg:grid-cols-12 lg:gap-8 lg:py-36">
-          <div className="lg:col-span-7">
-            {/* Above the fold: render immediately (no opacity:0) so the H1 — the
-                LCP element — paints at FCP rather than after a client animation. */}
-            <Reveal immediate>
-              <span className="flex items-center gap-3 text-sm font-medium tracking-wide text-brand">
-                <span
-                  aria-hidden="true"
-                  className="inline-block h-px w-10 bg-accent"
-                />
-                {hero.eyebrow}
-              </span>
-            </Reveal>
-
-            <Reveal immediate>
-              <h1 className="mt-6 text-balance text-5xl leading-[1.08] sm:text-6xl lg:text-[4.5rem]">
-                {hero.title}
-              </h1>
-            </Reveal>
-
-            <Reveal immediate>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-                {hero.subhead}
-              </p>
-            </Reveal>
-
-            <Reveal immediate>
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button
-                  href={localePath(locale, "/contact")}
-                  size="lg"
-                  icon={<ArrowEnd />}
-                >
-                  {ctaLabel}
-                </Button>
-                <WhatsAppButton size="lg" variant="secondary" />
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Coordinate / blueprint plate — the "10%" hidden-detail motif */}
-          <div className="lg:col-span-5">
-            <Reveal immediate className="relative">
-              <div className="relative mx-auto aspect-square w-full max-w-md rounded-3xl border border-line bg-surface/60 p-8 backdrop-blur-sm">
-                <div className="blueprint absolute inset-0 rounded-3xl opacity-60" />
-                <CoordinatePlate />
-              </div>
-            </Reveal>
-          </div>
+    <section
+      data-ground="maroon"
+      aria-labelledby="hero-title"
+      className="ground-maroon relative isolate overflow-hidden"
+    >
+      <IconWatermark className="-top-16 -end-24 w-[52vw] max-w-[620px] sm:-top-24 sm:-end-20 lg:-top-32 lg:end-[-4%] lg:w-[44vw]" />
+      <div className="sh-wrap relative pb-24 pt-20 sm:pb-28 sm:pt-28 lg:pb-36 lg:pt-36">
+        <p className="text-[24px] font-semibold leading-snug text-gold">{hero.eyebrow}</p>
+        <h1 id="hero-title" className="mt-5 text-h1">
+          <span className="block">{hero.titleLines[0]}</span>
+          <span className="block">{hero.titleLines[1]}</span>
+        </h1>
+        <span aria-hidden="true" className="sh-rule mt-8" />
+        <p className="sh-indent sh-measure mt-7 text-body text-ink/85">{hero.lead}</p>
+        <div className="mt-11 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Button href={localePath(locale, "/contact")} size="lg" icon={<ArrowEnd />}>
+            {ctaLabel}
+          </Button>
+          <WhatsAppButton size="lg" />
         </div>
-      </Container>
+      </div>
     </section>
-  );
-}
-
-/** A quiet plate that visualizes the brand idea: the small 10% that decides. */
-function CoordinatePlate() {
-  return (
-    <div className="relative flex h-full flex-col justify-between">
-      {/* corner ticks */}
-      <div aria-hidden="true" className="absolute inset-0">
-        <span className="absolute start-0 top-0 h-6 w-6 border-s-2 border-t-2 border-brand/40" />
-        <span className="absolute end-0 top-0 h-6 w-6 border-e-2 border-t-2 border-brand/40" />
-        <span className="absolute bottom-0 start-0 h-6 w-6 border-b-2 border-s-2 border-brand/40" />
-        <span className="absolute bottom-0 end-0 h-6 w-6 border-b-2 border-e-2 border-brand/40" />
-      </div>
-
-      <div className="relative">
-        <span className="font-display text-sm text-faint">النسبة التي تصنع الفرق</span>
-      </div>
-
-      <div className="relative flex items-baseline gap-2">
-        <span className="font-display text-7xl leading-none text-accent tabular-nums">
-          ١٠٪
-        </span>
-      </div>
-
-      <div className="relative">
-        <p className="text-sm leading-relaxed text-muted">
-          تفاصيل لا تظهر في المخطط، لكنها ما يجب أن يُلحَظ قبل أن يُوضع أول حجر.
-        </p>
-      </div>
-    </div>
   );
 }

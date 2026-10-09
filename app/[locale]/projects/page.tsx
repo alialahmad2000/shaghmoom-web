@@ -4,7 +4,8 @@ import { type Locale } from "@/lib/i18n";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { ProjectsGallery } from "@/components/sections/ProjectsGallery";
-import { ClosingCta } from "@/components/sections/ClosingCta";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -17,7 +18,7 @@ export async function generateMetadata({
     path: "/projects",
     title: "أعمالنا — مشاريع البناء والتشطيب في المدينة المنورة",
     description:
-      "مختاراتٌ من أعمال شغموم في المدينة المنورة: فلل وعمائر ومشاريع تجارية — عظمٌ وتشطيب. كل مشروعٍ ووراءه تفصيلةٌ لا تُرى صنعت الفرق.",
+      "أنواع المشاريع التي تنفّذها شغموم في المدينة المنورة: فلل وعمائر ومشاريع تجارية، عظم وتشطيب، ومع كل مشروع ما لاحظناه مما غاب عن الورق.",
   });
 }
 
@@ -36,19 +37,21 @@ export default async function ProjectsPage({
         ])}
       />
 
+      {/* Grounds: maroon header · sand (gallery) · maroon CTA · footer sand */}
       <PageHeader
         locale={loc}
         eyebrow="أعمالنا"
-        title="مشاريع نُفّذت بانتباهٍ لما لا يُرى"
-        intro="مختاراتٌ من مشاريعنا في المدينة المنورة. مرّر فوق كل عمل لترى التفصيلة الخفية التي رصدناها فيه."
+        title="أنواع المشاريع التي ننفّذها"
+        intro={<p>نماذج لما ننفّذه في المدينة المنورة، ومع كل نموذج مثال لما ننتبه له مما غاب عن الورق. صور المشاريع تُضاف تباعًا.</p>}
         crumbs={[{ label: "أعمالنا" }]}
       />
 
-      <Section tone="bg">
+      <Section ground="sand">
         <ProjectsGallery locale={loc} />
       </Section>
 
-      <ClosingCta locale={loc} />
+      <CtaBand locale={loc} ground="maroon" />
+      <SiteFooter locale={loc} ground="sand" />
     </>
   );
 }

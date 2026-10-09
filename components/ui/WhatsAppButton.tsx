@@ -1,20 +1,19 @@
 import { Button } from "./Button";
 import { WhatsAppIcon } from "./icons";
-import { whatsappHref } from "@/content/site";
-import { whatsappLabel } from "@/content/site";
+import { whatsappHref, whatsappLabel } from "@/content/site";
 
-/** WhatsApp click-to-chat button with a pre-filled Arabic message (§9). */
+/** WhatsApp click-to-chat with a pre-filled Arabic message, in brand button styles. */
 export function WhatsAppButton({
   label = whatsappLabel,
   message,
   size = "md",
-  variant = "whatsapp",
+  variant = "ghost",
   className = "",
 }: {
   label?: string;
   message?: string;
   size?: "md" | "lg";
-  variant?: "whatsapp" | "secondary" | "ghost" | "outlineInverse";
+  variant?: "solid" | "ghost";
   className?: string;
 }) {
   return (

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { buildMetadata, SITE_URL, absUrl } from "@/lib/seo";
-import { type Locale } from "@/lib/i18n";
-import {
-  categories,
-  servicesByCategory,
-  type ServiceCategory,
-} from "@/content/services";
-import { projectTypes } from "@/content/site";
+import { localePath, type Locale } from "@/lib/i18n";
+import { categories, servicesByCategory, type ServiceCategory } from "@/content/services";
+import { projectTypes, servicesTrio } from "@/content/site";
+import { inspectionReports } from "@/content/methodology";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { Section } from "@/components/ui/Section";
+import { Section, type Ground } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { ClosingCta } from "@/components/sections/ClosingCta";
+import { Button, ArrowEnd } from "@/components/ui/Button";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -24,11 +25,14 @@ export async function generateMetadata({
     path: "/services",
     title: "خدماتنا — مقاول عظم وتشطيب في المدينة المنورة",
     description:
-      "خدمات شغموم في المدينة المنورة: أعمال البناء والهيكل الإنشائي (عظم) والتشطيبات الكاملة — من الخرسانة والعزل إلى الكهرباء والسباكة والدهانات والأرضيات.",
+      "خدمات شغموم في المدينة المنورة: عظم (الهيكل الخرساني والبناء والعزل)، وتشطيبات كاملة (اللياسة والأرضيات والدهانات والكهرباء والسباكة والتكييف)، وإشراف وتقارير فنية قبل اللياسة.",
   });
 }
 
-const order: ServiceCategory[] = ["construction", "finishing"];
+const groups: { cat: ServiceCategory; id: string; title: string; body: string; ground: Ground }[] = [
+  { cat: "construction", id: "structure", title: servicesTrio.cards.structure.title, body: servicesTrio.cards.structure.body, ground: "sand" },
+  { cat: "finishing", id: "finishes", title: servicesTrio.cards.finishes.title, body: servicesTrio.cards.finishes.body, ground: "maroon" },
+];
 
 export default async function ServicesPage({
   params,
@@ -45,64 +49,71 @@ export default async function ServicesPage({
         ])}
       />
 
+      {/* Grounds: maroon header · sand (عظم) · maroon (تشطيبات) · sand (إشراف) · maroon CTA · footer sand */}
       <PageHeader
         locale={loc}
         eyebrow="خدماتنا"
-        title="من العظم إلى التشطيب — تحت إدارةٍ واحدة"
-        intro="نوحّد جميع مراحل المشروع تحت إدارةٍ واحدة وتنفيذٍ منظم، في المدينة المنورة وما حولها. لكل خدمة صفحةٌ تشرح ما تشمله ولماذا تختلف معنا."
+        title={servicesTrio.heading}
+        intro={
+          <p>
+            {servicesTrio.intro} نخدم: {projectTypes.join("، ")}.
+          </p>
+        }
         crumbs={[{ label: "خدماتنا" }]}
       />
 
-      {order.map((cat, ci) => {
-        const list = servicesByCategory(cat);
+      {groups.map((g) => {
+        const list = servicesByCategory(g.cat);
         return (
-          <Section key={cat} tone={ci % 2 === 0 ? "bg" : "alt"}>
-            <Reveal>
-              <div className="flex items-baseline gap-4">
-                <span className="font-display text-sm text-faint tabular-nums">
-                  {String(ci + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h2 className="text-2xl text-ink sm:text-3xl">
-                    {categories[cat].title}
-                  </h2>
-                  <p className="mt-2 max-w-2xl text-muted">
-                    {categories[cat].tagline}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-
-            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {list.map((service, i) => (
-                <Reveal key={service.slug} index={i} step={0.05}>
-                  <ServiceCard service={service} locale={loc} index={i} />
-                </Reveal>
-              ))}
+          <Section key={g.cat} ground={g.ground} id={g.id} labelledBy={`${g.id}-title`}>
+            <SectionHeading
+              id={`${g.id}-title`}
+              eyebrow={categories[g.cat].title}
+              title={g.title}
+              intro={<p>{g.body}</p>}
+            />
+            <div className="relative mt-14">
+              {g.ground === "maroon" && (
+                <div aria-hidden="true" className="sh-star-field absolute -inset-y-20 inset-x-[calc(50%-50vw)]" />
+              )}
+              <ol className="relative grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((service, i) => (
+                  <Reveal as="li" key={service.slug} index={i} step={0.05}>
+                    <ServiceCard service={service} locale={loc} index={i} />
+                  </Reveal>
+                ))}
+              </ol>
             </div>
           </Section>
         );
       })}
 
-      {/* Project types served */}
-      <Section tone="bg" className="!py-16">
-        <Reveal>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-            <span className="text-sm text-faint">أنواع المشاريع:</span>
-            {projectTypes.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-line px-4 py-1.5 text-sm text-muted"
-              >
-                {t}
-              </span>
-            ))}
-            <span className="text-sm text-muted">— سكني وتجاري.</span>
+      <Section ground="sand" id="supervision" labelledBy="supervision-title">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <SectionHeading
+              id="supervision-title"
+              eyebrow={inspectionReports.heading}
+              title={servicesTrio.cards.supervision.title}
+              intro={<p>{inspectionReports.body}</p>}
+            />
           </div>
-        </Reveal>
+          <Reveal className="flex flex-col gap-3 lg:col-span-4 lg:col-start-9 lg:self-end">
+            <Button href={localePath(loc, "/methodology")} variant="ghost" icon={<ArrowEnd />}>
+              منهجيتنا والتقارير الفنية
+            </Button>
+            <Link
+              href={localePath(loc, "/plastering-form")}
+              className="inline-flex items-center gap-2 py-2 font-semibold underline decoration-ink/30 decoration-2 underline-offset-8 hover:decoration-ink"
+            >
+              استمارة اللياسة <ArrowEnd />
+            </Link>
+          </Reveal>
+        </div>
       </Section>
 
-      <ClosingCta locale={loc} />
+      <CtaBand locale={loc} ground="maroon" />
+      <SiteFooter locale={loc} ground="sand" />
     </>
   );
 }

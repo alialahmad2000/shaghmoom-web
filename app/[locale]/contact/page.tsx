@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { buildMetadata, SITE_URL, absUrl } from "@/lib/seo";
 import { type Locale } from "@/lib/i18n";
-import { company, contact, telHref } from "@/content/site";
+import { company, contact, social, telHref } from "@/content/site";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { PhoneIcon, PinIcon, ClockIcon } from "@/components/ui/icons";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -20,12 +21,12 @@ export async function generateMetadata({
     path: "/contact",
     title: "تواصل معنا — شغموم للمقاولات في المدينة المنورة",
     description:
-      "تواصل مع شركة شغموم للمقاولات العامة في المدينة المنورة — حي النعيم. اطلب عرض سعر، أو راسلنا عبر واتساب. أوقات العمل 09:00 – 18:00.",
+      "تواصل مع شغموم للمقاولات العامة في المدينة المنورة، حي النعيم. اطلب عرض سعر لأعمال العظم والتشطيب، أو اسألنا عبر واتساب. أوقات العمل من ٩ صباحًا إلى ٦ مساءً.",
   });
 }
 
 const mapsQuery = encodeURIComponent(
-  `${company.publicName} ${company.city} ${company.district}`
+  `شغموم للمقاولات العامة ${company.city} ${company.district}`
 );
 const mapsHref = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
 
@@ -44,22 +45,22 @@ export default async function ContactPage({
         ])}
       />
 
+      {/* Grounds: maroon header · sand (form) · footer maroon */}
       <PageHeader
         locale={loc}
         eyebrow="تواصل معنا"
-        title="لنبدأ مشروعك"
-        intro="أرسل تفاصيل مشروعك وسنعود إليك بعرضٍ واضح. أو تواصل معنا مباشرةً عبر واتساب — أيًّا كان الأسرع لك."
+        title="حدّثنا عن مشروعك"
+        intro={<p>أرسل تفاصيل مشروعك ونعود إليك بعرض سعر. وإن كان سؤالك قصيرًا، فواتساب أسرع.</p>}
         crumbs={[{ label: "تواصل معنا" }]}
       />
 
-      <Section tone="bg">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Form */}
+      <Section ground="sand" labelledBy="form-title">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <h2 className="text-2xl text-ink">اطلب عرض سعر</h2>
-              <p className="mt-2 text-muted">
-                الحقول المعلّمة بـ <span className="text-brand">*</span> مطلوبة.
+              <h2 id="form-title" className="text-h3">اطلب عرض سعر</h2>
+              <p className="mt-2 text-ink/80">
+                الحقول المعلّمة بـ <span className="text-accent">*</span> مطلوبة.
               </p>
             </Reveal>
             <Reveal index={1} className="mt-8 block">
@@ -67,100 +68,73 @@ export default async function ContactPage({
             </Reveal>
           </div>
 
-          {/* Contact details */}
-          <aside className="lg:col-span-5">
+          <aside className="lg:col-span-4 lg:col-start-9">
             <Reveal index={1}>
-              <div className="rounded-2xl border border-line bg-surface p-7">
-                <h2 className="text-xl text-ink">تواصل مباشر</h2>
-                <p className="mt-2 text-sm text-muted">
-                  للأسئلة السريعة، واتساب هو الأسرع.
-                </p>
+              <div className="border-[1.5px] border-ink p-7">
+                <h2 className="text-[21px] font-semibold leading-snug">تواصل مباشر</h2>
+                <p className="mt-2 text-[15px] text-ink/80">للأسئلة السريعة، واتساب هو الأسرع.</p>
                 <div className="mt-5">
-                  <WhatsAppButton size="lg" className="w-full" />
+                  <WhatsAppButton size="lg" variant="solid" className="w-full" />
                 </div>
 
-                <ul className="mt-7 space-y-5 text-sm">
+                <ul className="mt-7 divide-y divide-ink/20 border-t border-ink/20 text-[15px]">
                   <li>
-                    <a
-                      href={telHref(contact.primaryPhone)}
-                      className="group flex items-center gap-3 text-ink/85 transition-colors hover:text-brand"
-                    >
-                      <Icon>
-                        <PhoneIcon className="h-5 w-5" />
-                      </Icon>
+                    <a href={telHref(contact.primaryPhone)} className="flex items-center gap-3 py-4 hover:underline">
+                      <PhoneIcon className="h-5 w-5 shrink-0" />
                       <span className="flex flex-col">
-                        <span className="text-xs text-faint">جوال</span>
-                        <span className="tnum text-base">{contact.primaryPhone}</span>
+                        <span className="text-sm text-ink/75">جوال وواتساب</span>
+                        <span className="tnum text-base font-semibold">{contact.primaryPhone}</span>
                       </span>
                     </a>
                   </li>
                   <li>
-                    <a
-                      href={telHref(contact.secondaryPhone)}
-                      className="group flex items-center gap-3 text-ink/85 transition-colors hover:text-brand"
-                    >
-                      <Icon>
-                        <PhoneIcon className="h-5 w-5" />
-                      </Icon>
+                    <a href={telHref(contact.secondaryPhone)} className="flex items-center gap-3 py-4 hover:underline">
+                      <PhoneIcon className="h-5 w-5 shrink-0" />
                       <span className="flex flex-col">
-                        <span className="text-xs text-faint">جوال إضافي</span>
-                        <span className="tnum text-base">{contact.secondaryPhone}</span>
+                        <span className="text-sm text-ink/75">جوال إضافي</span>
+                        <span className="tnum text-base font-semibold">{contact.secondaryPhone}</span>
                       </span>
                     </a>
                   </li>
-                  <li className="flex items-center gap-3 text-ink/85">
-                    <Icon>
-                      <ClockIcon className="h-5 w-5" />
-                    </Icon>
+                  <li className="flex items-center gap-3 py-4">
+                    <ClockIcon className="h-5 w-5 shrink-0" />
                     <span className="flex flex-col">
-                      <span className="text-xs text-faint">أوقات العمل</span>
-                      <span className="tnum text-base">{company.hours}</span>
+                      <span className="text-sm text-ink/75">أوقات العمل</span>
+                      <span className="text-base font-semibold">{company.hours}</span>
+                    </span>
+                  </li>
+                  <li>
+                    <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 py-4 hover:underline">
+                      <PinIcon className="h-5 w-5 shrink-0" />
+                      <span className="flex flex-col">
+                        <span className="text-sm text-ink/75">الموقع — افتح في الخرائط</span>
+                        <span className="text-base font-semibold">
+                          {company.city} — {company.district}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
+                  <li className="py-4">
+                    <span className="text-sm text-ink/75">إنستقرام وتيك توك</span>
+                    <span className="mt-1 flex gap-4">
+                      <a href={social.instagram} target="_blank" rel="noopener noreferrer" className="ltr font-semibold hover:underline">
+                        instagram.com/shoghmoum
+                      </a>
+                    </span>
+                    <span className="mt-1 flex gap-4">
+                      <a href={social.tiktok} target="_blank" rel="noopener noreferrer" className="ltr font-semibold hover:underline">
+                        tiktok.com/@shoghmoum
+                      </a>
                     </span>
                   </li>
                 </ul>
               </div>
             </Reveal>
-
-            {/* Location / map */}
-            <Reveal index={2}>
-              <a
-                href={mapsHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group mt-6 block overflow-hidden rounded-2xl border border-line"
-              >
-                <div className="relative aspect-[16/10] bg-bg-alt">
-                  <div aria-hidden="true" className="blueprint absolute inset-0 opacity-70" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-bg shadow-lg transition-transform duration-300 group-hover:scale-110">
-                      <PinIcon className="h-6 w-6" />
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between gap-3 bg-surface px-5 py-4">
-                  <span className="flex flex-col">
-                    <span className="text-xs text-faint">الموقع</span>
-                    <span className="text-ink">
-                      {company.city} — {company.district}
-                    </span>
-                  </span>
-                  <span className="text-sm font-medium text-brand">
-                    افتح في الخرائط
-                  </span>
-                </div>
-              </a>
-            </Reveal>
           </aside>
         </div>
       </Section>
-    </>
-  );
-}
 
-function Icon({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand">
-      {children}
-    </span>
+      <SiteFooter locale={loc} ground="maroon" />
+    </>
   );
 }

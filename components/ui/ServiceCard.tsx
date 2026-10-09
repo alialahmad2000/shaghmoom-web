@@ -2,11 +2,12 @@ import Link from "next/link";
 import { localePath, type Locale } from "@/lib/i18n";
 import { ArrowEnd } from "./Button";
 import type { Service } from "@/content/services";
+import { Ring } from "@/components/brand/Ring";
 
 /**
- * Service card. Shows the service and its first "included" lines; on close
- * inspection (hover/focus) a hairline draws and the arrow advances — detail
- * surfaces to the attentive (§5). The full list lives on the service page.
+ * Service card on a locked grid: ring and title start at the same height in
+ * every card; only the end of the body varies. Opaque on its ground so a
+ * texture behind the grid never sits under text.
  */
 export function ServiceCard({
   service,
@@ -20,33 +21,16 @@ export function ServiceCard({
   return (
     <Link
       href={localePath(locale, `/services/${service.slug}`)}
-      className="group relative flex h-full flex-col rounded-2xl border border-line bg-surface p-7 transition-colors duration-300 ease-[var(--ease-out-soft)] hover:border-brand/40 focus-visible:outline-2 focus-visible:outline-brand"
+      className="group flex h-full flex-col border-[1.5px] border-ink/30 bg-ground p-7 transition-colors duration-300 hover:border-ink"
     >
-      <span className="font-display text-sm text-faint tabular-nums">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <h3 className="mt-3 text-xl text-ink transition-colors group-hover:text-brand">
-        {service.title}
-      </h3>
-
-      {/* surfacing hairline */}
-      <span
-        aria-hidden="true"
-        className="mt-4 block h-px w-10 origin-[inline-start] bg-brand/50 transition-all duration-300 ease-[var(--ease-out-soft)] group-hover:w-16"
-      />
-
-      <ul className="mt-4 flex-1 space-y-1.5 text-sm leading-relaxed text-muted">
-        {service.included.slice(0, 3).map((item) => (
-          <li key={item} className="flex gap-2">
-            <span aria-hidden="true" className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-faint" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-
-      <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand">
-        تعرّف أكثر
-        <ArrowEnd className="transition-transform duration-300 group-hover:translate-x-[-3px] rtl:group-hover:translate-x-[3px]" />
+      <div className="flex items-center gap-4">
+        <Ring n={index + 1} size="sm" />
+        <h3 className="text-[21px] font-semibold leading-snug">{service.title}</h3>
+      </div>
+      <p className="mt-5 flex-1 text-base leading-relaxed text-ink/80">{service.included.slice(0, 3).join("، ")}.</p>
+      <span className="mt-6 inline-flex items-center gap-2 text-[15px] font-semibold">
+        التفاصيل
+        <ArrowEnd className="transition-transform duration-300 group-hover:-translate-x-1" />
       </span>
     </Link>
   );

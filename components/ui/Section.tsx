@@ -1,55 +1,51 @@
 import type { ReactNode } from "react";
-import { Container } from "./Container";
+
+export type Ground = "maroon" | "sand";
+
+export function opposite(ground: Ground): Ground {
+  return ground === "maroon" ? "sand" : "maroon";
+}
 
 /**
- * Section with consistent vertical rhythm and an optional blueprint grid motif.
- * Generous negative space is the luxury (§4) — sections breathe.
+ * A page block on one of the two brand grounds. Grounds alternate maroon /
+ * sand down every page — two consecutive blocks on the same ground is an
+ * error (brand §9). `data-ground` lets the verification script walk the order.
+ * Grounds are flat exact hex: no gradients, grain or overlays.
  */
 export function Section({
   children,
+  ground,
   id,
-  tone = "bg",
-  grid = false,
+  pattern = false,
   className = "",
-  containerSize = "default",
-  bare = false,
+  wrap = "default",
+  labelledBy,
 }: {
   children: ReactNode;
+  ground: Ground;
   id?: string;
-  tone?: "bg" | "alt" | "deep" | "brand";
-  /** Render the faint architectural grid texture behind the content. */
-  grid?: boolean;
+  /** Star texture at 7% — middle sections only (brand §5). */
+  pattern?: boolean;
   className?: string;
-  containerSize?: "default" | "narrow" | "wide";
-  /** Skip the inner Container (caller manages its own layout). */
-  bare?: boolean;
+  /** Content rail width, or "none" when the caller lays out its own rail. */
+  wrap?: "default" | "narrow" | "none";
+  labelledBy?: string;
 }) {
-  const toneClass =
-    tone === "alt"
-      ? "bg-bg-alt text-ink"
-      : tone === "deep"
-        ? "bg-brand-deep text-bg"
-        : tone === "brand"
-          ? "bg-brand text-bg"
-          : "bg-bg text-ink";
-
   return (
     <section
       id={id}
-      className={`relative isolate overflow-hidden py-20 sm:py-28 lg:py-32 ${toneClass} ${className}`}
+      data-ground={ground}
+      aria-labelledby={labelledBy}
+      className={`relative isolate overflow-hidden py-20 sm:py-28 lg:py-32 ground-${ground} ${
+        pattern ? "sh-pattern-star" : ""
+      } ${className}`}
     >
-      {grid && (
-        <div
-          aria-hidden="true"
-          className="blueprint pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"
-        />
-      )}
-      {bare ? (
+      {wrap === "none" ? (
         children
       ) : (
-        <Container size={containerSize} className="relative">
+        <div className={`sh-wrap relative ${wrap === "narrow" ? "sh-wrap--narrow" : ""}`}>
           {children}
-        </Container>
+        </div>
       )}
     </section>
   );

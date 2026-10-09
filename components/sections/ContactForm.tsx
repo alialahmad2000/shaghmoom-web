@@ -12,7 +12,7 @@ type Errors = Partial<
 type Status = "idle" | "submitting" | "success" | "error";
 
 const fieldBase =
-  "w-full rounded-xl border bg-bg px-4 py-3 text-ink placeholder:text-faint transition-colors focus:border-brand focus:outline-none focus-visible:outline-2 focus-visible:outline-brand";
+  "w-full rounded-brand border-[1.5px] bg-ground px-4 py-3 text-base text-ink placeholder:text-ink/60 transition-colors focus:border-ink focus:outline-none focus-visible:outline-3 focus-visible:outline-gold";
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -77,12 +77,12 @@ export function ContactForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: reduce ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
         role="status"
-        className="rounded-2xl border border-line bg-surface p-10 text-center"
+        className="border-[1.5px] border-ink p-10 text-center"
       >
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-tint">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink">
           <svg
             viewBox="0 0 24 24"
-            className="h-7 w-7 text-brand"
+            className="h-7 w-7 text-ink"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -93,12 +93,12 @@ export function ContactForm() {
             <path d="M20 6 9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mt-5 text-2xl text-ink">وصلنا طلبك</h3>
-        <p className="mt-3 text-muted">
-          شكرًا لتواصلك. سنراجع تفاصيل مشروعك ونعود إليك في أقرب وقت.
+        <h3 className="mt-5 text-h3">وصلنا طلبك</h3>
+        <p className="mt-3 text-ink/80">
+          شكرًا لتواصلك. نراجع تفاصيل مشروعك ونعود إليك في أقرب وقت.
         </p>
         <div className="mt-6">
-          <Button variant="secondary" onClick={() => setStatus("idle")}>
+          <Button variant="ghost" onClick={() => setStatus("idle")}>
             إرسال طلبٍ آخر
           </Button>
         </div>
@@ -126,7 +126,7 @@ export function ContactForm() {
             required
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? "name-error" : undefined}
-            className={`${fieldBase} ${errors.name ? "border-brand" : "border-line"}`}
+            className={`${fieldBase} ${errors.name ? "border-terracotta" : "border-ink/35"}`}
             placeholder="الاسم الكامل"
           />
         </Field>
@@ -142,7 +142,7 @@ export function ContactForm() {
             required
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? "phone-error" : undefined}
-            className={`${fieldBase} text-start ${errors.phone ? "border-brand" : "border-line"}`}
+            className={`${fieldBase} text-start ${errors.phone ? "border-terracotta" : "border-ink/35"}`}
             placeholder="05XXXXXXXX"
           />
         </Field>
@@ -152,7 +152,7 @@ export function ContactForm() {
             id="project_type"
             name="project_type"
             defaultValue=""
-            className={`${fieldBase} border-line`}
+            className={`${fieldBase} border-ink/35`}
           >
             <option value="" disabled>
               اختر نوع المشروع
@@ -172,7 +172,7 @@ export function ContactForm() {
             type="text"
             defaultValue="المدينة المنورة"
             autoComplete="address-level2"
-            className={`${fieldBase} border-line`}
+            className={`${fieldBase} border-ink/35`}
           />
         </Field>
       </div>
@@ -184,7 +184,7 @@ export function ContactForm() {
           rows={5}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className={`${fieldBase} resize-y ${errors.message ? "border-brand" : "border-line"}`}
+          className={`${fieldBase} resize-y ${errors.message ? "border-terracotta" : "border-ink/35"}`}
           placeholder="صف مشروعك باختصار: الموقع، المساحة التقريبية، ونطاق العمل المطلوب."
         />
       </Field>
@@ -194,13 +194,13 @@ export function ContactForm() {
           id="budget"
           name="budget"
           type="text"
-          className={`${fieldBase} border-line`}
+          className={`${fieldBase} border-ink/35`}
           placeholder="اختياري"
         />
       </Field>
 
       {status === "error" && serverError && (
-        <p role="alert" className="rounded-xl bg-brand-tint px-4 py-3 text-sm text-brand-deep">
+        <p role="alert" className="border-[1.5px] border-terracotta px-4 py-3 text-[15px] text-ink">
           {serverError}
         </p>
       )}
@@ -209,7 +209,7 @@ export function ContactForm() {
         <Button type="submit" size="lg" disabled={status === "submitting"} icon={<ArrowEnd />}>
           {status === "submitting" ? "جارٍ الإرسال…" : "إرسال الطلب"}
         </Button>
-        <p className="text-xs text-faint">لن نشارك بياناتك مع أي طرف ثالث.</p>
+        <p className="text-sm text-ink/75">لا نشارك بياناتك مع أي طرف آخر.</p>
       </div>
     </form>
   );
@@ -232,14 +232,14 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-ink">
+      <label htmlFor={htmlFor} className="text-[15px] font-medium text-ink">
         {label}
-        {required && <span className="text-brand"> *</span>}
-        {optional && <span className="text-faint"> (اختياري)</span>}
+        {required && <span className="text-accent"> *</span>}
+        {optional && <span className="text-ink/75"> (اختياري)</span>}
       </label>
       {children}
       {error && (
-        <p id={`${htmlFor}-error`} className="text-sm text-brand">
+        <p id={`${htmlFor}-error`} className="text-sm font-semibold text-accent">
           {error}
         </p>
       )}

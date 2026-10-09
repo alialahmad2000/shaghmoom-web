@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { buildMetadata, SITE_URL, absUrl } from "@/lib/seo";
 import { type Locale } from "@/lib/i18n";
-import { aboutContent, aboutImage, company } from "@/content/site";
-import { Container } from "@/components/ui/Container";
-import { MediaFrame } from "@/components/ui/MediaFrame";
+import { aboutContent, lines } from "@/content/site";
 import { values } from "@/content/values";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ValueCard } from "@/components/ui/ValueCard";
-import { ClosingCta } from "@/components/sections/ClosingCta";
 import { Reveal } from "@/components/ui/Reveal";
+import { TenthDiagram } from "@/components/brand/TenthDiagram";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({
     path: "/about",
     title: "من نحن — شركة مقاولات في المدينة المنورة",
     description:
-      "تعرّف على شغموم للمقاولات العامة في المدينة المنورة: معنى الاسم، رؤيتنا ورسالتنا وقيمنا. نوحّد مراحل المشروع تحت إدارةٍ واحدة وتنفيذٍ منظم.",
+      "شغموم للمقاولات العامة في المدينة المنورة: معنى الاسم، وقصة العُشر الذي لا يحتويه أي مخطط، وطريقتنا في العمل. عظم وتشطيبات وإشراف تحت إدارة واحدة.",
   });
 }
 
@@ -42,86 +42,53 @@ export default async function AboutPage({
         ])}
       />
 
+      {/* Grounds: header+page header maroon · sand · maroon · sand · footer maroon */}
       <PageHeader
         locale={loc}
         eyebrow="من نحن"
-        title="نبني الثقة قبل الجدران"
-        intro={aboutContent.intro}
+        title={aboutContent.title}
+        intro={<p>{aboutContent.intro}</p>}
         crumbs={[{ label: "من نحن" }]}
       />
 
-      {/* Atmospheric structural banner (sourced + maroon-treated; see content/site.ts) */}
-      <div className="bg-bg-alt pb-4 pt-0">
-        <Container size="wide">
-          <Reveal className="-mt-10 block">
-            <figure className="overflow-hidden rounded-2xl ring-1 ring-brand/15 shadow-sm">
-              <MediaFrame
-                src={aboutImage.src}
-                alt={aboutImage.alt}
-                ready
-                aspect="2.58 / 1"
-                priority
-                sizes="(min-width: 1024px) 1100px, 100vw"
-                rounded="rounded-2xl"
+      <Section ground="sand" labelledBy="name-title">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-6">
+            <SectionHeading
+              id="name-title"
+              title={aboutContent.nameStory.heading}
+              intro={<p>{aboutContent.nameStory.body}</p>}
+            />
+            <div className="mt-16">
+              <SectionHeading
+                title={aboutContent.founding.heading}
+                intro={<p>{aboutContent.founding.body}</p>}
+                callout={lines.positioning}
               />
-            </figure>
+            </div>
+          </div>
+          <Reveal className="self-center lg:col-span-5 lg:col-start-8">
+            <TenthDiagram />
           </Reveal>
-        </Container>
-      </div>
-
-      {/* The name story */}
-      <Section tone="bg" grid>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Reveal>
-              <span className="font-display text-sm tracking-wide text-brand">
-                {company.essence}
-              </span>
-              <h2 className="mt-4 text-3xl sm:text-4xl">
-                {aboutContent.nameStory.heading}
-              </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-8">
-            <Reveal index={1}>
-              <p className="text-xl leading-loose text-ink/85">
-                {aboutContent.nameStory.body}
-              </p>
-            </Reveal>
-          </div>
         </div>
       </Section>
 
-      {/* Vision + Mission */}
-      <Section tone="alt">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {[aboutContent.vision, aboutContent.mission].map((block, i) => (
-            <Reveal key={block.heading} index={i}>
-              <div className="h-full rounded-2xl border border-line bg-surface p-9">
-                <h2 className="text-2xl text-brand">{block.heading}</h2>
-                <span aria-hidden="true" className="mt-4 block h-px w-12 bg-brand/40" />
-                <p className="mt-5 text-lg leading-relaxed text-ink/80">
-                  {block.body}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+      <Section ground="maroon" labelledBy="values-title">
+        <SectionHeading id="values-title" eyebrow="قيمنا" title="طريقتنا في كل مشروع" />
+        <div className="relative mt-14">
+          <div aria-hidden="true" className="sh-star-field absolute -inset-y-20 inset-x-[calc(50%-50vw)]" />
+          <ol className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {values.map((value, i) => (
+              <Reveal as="li" key={value.title} index={i} step={0.05}>
+                <ValueCard value={value} index={i} />
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </Section>
 
-      {/* Values */}
-      <Section tone="bg">
-        <SectionHeading eyebrow="قيمنا" title="ما نقيس به أنفسنا" />
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {values.map((value, i) => (
-            <Reveal key={value.title} index={i} step={0.05}>
-              <ValueCard value={value} index={i} />
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <ClosingCta locale={loc} />
+      <CtaBand locale={loc} ground="sand" />
+      <SiteFooter locale={loc} ground="maroon" />
     </>
   );
 }

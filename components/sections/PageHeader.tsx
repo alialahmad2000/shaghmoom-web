@@ -1,12 +1,16 @@
 import type { ReactNode } from "react";
-import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
-import { localePath, type Locale } from "@/lib/i18n";
 import Link from "next/link";
+import { localePath, type Locale } from "@/lib/i18n";
+import { IconWatermark } from "@/components/brand/IconWatermark";
 
 type Crumb = { label: string; path?: string };
 
-/** Consistent inner-page header — eyebrow, display H1, intro, breadcrumb. */
+/**
+ * Inner-page first screen — maroon, joined to the maroon header as one block.
+ * Breadcrumb, eyebrow, heading on the edge; rule and intro indented; the large
+ * cropped icon watermark in the top corner away from the copy. Rendered
+ * without entrance animation so the heading (LCP) paints immediately.
+ */
 export function PageHeader({
   locale,
   eyebrow,
@@ -21,67 +25,45 @@ export function PageHeader({
   crumbs?: Crumb[];
 }) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-line bg-bg-alt">
-      <div
-        aria-hidden="true"
-        className="blueprint pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
-      />
-      <Container className="relative py-16 sm:py-20 lg:py-24">
+    <section
+      data-ground="maroon"
+      aria-labelledby="page-title"
+      className="ground-maroon relative isolate overflow-hidden"
+    >
+      <IconWatermark className="-top-16 -end-24 w-[46vw] max-w-[520px] sm:-top-24 lg:-top-28 lg:end-[-3%] lg:w-[36vw]" />
+      <div className="sh-wrap relative pb-20 pt-12 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
         {crumbs.length > 0 && (
-          <Reveal>
-            <nav aria-label="مسار التنقل" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
-                <li>
-                  <Link
-                    href={localePath(locale, "")}
-                    className="transition-colors hover:text-brand"
-                  >
-                    الرئيسية
-                  </Link>
-                </li>
-                {crumbs.map((c) => (
-                  <li key={c.label} className="flex items-center gap-2">
-                    <span aria-hidden="true" className="text-faint">
-                      /
+          <nav aria-label="مسار التنقل" className="mb-10">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink/80">
+              <li>
+                <Link href={localePath(locale, "")} className="underline-offset-4 hover:underline">
+                  الرئيسية
+                </Link>
+              </li>
+              {crumbs.map((c) => (
+                <li key={c.label} className="flex items-center gap-2">
+                  <span aria-hidden="true">/</span>
+                  {c.path ? (
+                    <Link href={localePath(locale, c.path)} className="underline-offset-4 hover:underline">
+                      {c.label}
+                    </Link>
+                  ) : (
+                    <span aria-current="page" className="text-ink">
+                      {c.label}
                     </span>
-                    {c.path ? (
-                      <Link
-                        href={localePath(locale, c.path)}
-                        className="transition-colors hover:text-brand"
-                      >
-                        {c.label}
-                      </Link>
-                    ) : (
-                      <span className="text-ink">{c.label}</span>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            </nav>
-          </Reveal>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
         )}
-
-        {eyebrow && (
-          <Reveal>
-            <span className="flex items-center gap-3 text-sm font-medium tracking-wide text-brand">
-              <span aria-hidden="true" className="inline-block h-px w-10 bg-brand/60" />
-              {eyebrow}
-            </span>
-          </Reveal>
-        )}
-        <Reveal index={1}>
-          <h1 className="mt-5 text-balance text-4xl leading-tight sm:text-5xl lg:text-6xl">
-            {title}
-          </h1>
-        </Reveal>
-        {intro && (
-          <Reveal index={2}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-              {intro}
-            </p>
-          </Reveal>
-        )}
-      </Container>
+        {eyebrow && <p className="sh-eyebrow mb-3">{eyebrow}</p>}
+        <h1 id="page-title" className="sh-measure text-h1">
+          {title}
+        </h1>
+        <span aria-hidden="true" className="sh-rule mt-8" />
+        {intro && <div className="sh-indent sh-measure mt-7 text-body text-ink/85">{intro}</div>}
+      </div>
     </section>
   );
 }

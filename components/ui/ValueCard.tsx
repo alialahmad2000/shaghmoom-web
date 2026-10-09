@@ -1,13 +1,14 @@
 import type { Value } from "@/content/values";
+import { Ring } from "@/components/brand/Ring";
 
 export function ValueCard({ value, index }: { value: Value; index: number }) {
   return (
-    <div className="group relative h-full rounded-2xl border border-line bg-surface p-7 transition-colors duration-300 hover:border-brand/40">
-      <span className="font-display text-2xl text-brand/30 tabular-nums transition-colors group-hover:text-brand/60">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <h3 className="mt-3 text-lg text-ink">{value.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted">{value.line}</p>
+    <div className="flex h-full flex-col border-[1.5px] border-ink/30 bg-ground p-7">
+      <div className="flex items-center gap-4">
+        <Ring n={index + 1} size="sm" />
+        <h3 className="text-[21px] font-semibold leading-snug">{value.title}</h3>
+      </div>
+      <p className="mt-4 text-base leading-relaxed text-ink/80">{value.line}</p>
     </div>
   );
 }

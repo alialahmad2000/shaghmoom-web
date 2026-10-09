@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { type Locale } from "@/lib/i18n";
 import { Hero } from "@/components/sections/Hero";
-import { Philosophy } from "@/components/sections/Philosophy";
-import { ServicesSnapshot } from "@/components/sections/ServicesSnapshot";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { MethodologyTeaser } from "@/components/sections/MethodologyTeaser";
-import { ReviewsSection } from "@/components/sections/ReviewsSection";
-import { ClosingCta } from "@/components/sections/ClosingCta";
+import { Meaning } from "@/components/sections/Meaning";
+import { ServicesTrio } from "@/components/sections/ServicesTrio";
+import { MethodPath } from "@/components/sections/MethodPath";
+import { PlasteringTeaser } from "@/components/sections/PlasteringTeaser";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -37,13 +37,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           { name: "الرئيسية", url: `${SITE_URL}/${loc}` },
         ])}
       />
+      {/* Grounds: header+hero maroon · sand · maroon · sand · maroon · sand · footer maroon */}
       <Hero locale={loc} />
-      <Philosophy />
-      <ServicesSnapshot locale={loc} />
-      <FeaturedProjects locale={loc} />
-      <MethodologyTeaser locale={loc} />
-      <ReviewsSection />
-      <ClosingCta locale={loc} />
+      <Meaning locale={loc} />
+      <ServicesTrio locale={loc} ground="maroon" />
+      <MethodPath locale={loc} ground="sand" />
+      <PlasteringTeaser locale={loc} ground="maroon" />
+      <CtaBand locale={loc} ground="sand" />
+      <SiteFooter locale={loc} ground="maroon" />
     </>
   );
 }

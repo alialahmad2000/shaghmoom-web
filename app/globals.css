@@ -29,12 +29,6 @@
   --color-gold: #AA8302; /* الذهبي — the one highlight per view, always pure */
   /* Reserved, 0% on the site: periwinkle #A7B5DC, aqua #9CC7C9. Black #0E0E0E is not a site colour. */
 
-  /* Role colours that follow the section ground */
-  --color-ground: var(--ground);
-  --color-ink: var(--ink);
-  --color-label: var(--label);
-  --color-accent: var(--accent);
-
   --font-sans: var(--font-plex-ar), var(--font-plex-latin), "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* PROPOSED: architectural, near-square corners */
@@ -63,6 +57,15 @@
   --text-callout--font-weight: 600;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Role colours that follow the section ground. `inline` so each utility reads
+   the variable where it is used (the section), not where it was declared. */
+@theme inline {
+  --color-ground: var(--ground);
+  --color-ink: var(--ink);
+  --color-label: var(--label);
+  --color-accent: var(--accent);
 }
 
 :root {
@@ -278,6 +281,17 @@
     background-image: url("/brand/pattern-star-tile-maroon.svg");
   }
 
+  /* A star field behind a block of opaque cards: the texture shows around the
+     cards, never under text. Placed as an absolutely-positioned layer. */
+  .sh-star-field {
+    pointer-events: none;
+    opacity: 0.07;
+    background: url("/brand/pattern-star-tile-sand.svg") center top / 124px auto repeat;
+  }
+  .ground-sand .sh-star-field {
+    background-image: url("/brand/pattern-star-tile-maroon.svg");
+  }
+
   /* ---- Dashed guide line: 3px, dash 14 / gap 12 ---- */
   .sh-dash-x {
     height: var(--sh-dash-stroke);
@@ -294,6 +308,17 @@
       currentColor 0 var(--sh-dash),
       transparent var(--sh-dash) calc(var(--sh-dash) + var(--sh-dash-gap))
     );
+  }
+
+  /* a dashed outline with the brand dash (3px, 14 / 12) */
+  .sh-dash-box {
+    --d: repeating-linear-gradient(to right, currentColor 0 var(--sh-dash), transparent var(--sh-dash) calc(var(--sh-dash) + var(--sh-dash-gap)));
+    --dv: repeating-linear-gradient(to bottom, currentColor 0 var(--sh-dash), transparent var(--sh-dash) calc(var(--sh-dash) + var(--sh-dash-gap)));
+    background:
+      var(--d) top / 100% var(--sh-dash-stroke) no-repeat,
+      var(--d) bottom / 100% var(--sh-dash-stroke) no-repeat,
+      var(--dv) left / var(--sh-dash-stroke) 100% no-repeat,
+      var(--dv) right / var(--sh-dash-stroke) 100% no-repeat;
   }
 
   /* ---- Content rail ---- */

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { buildMetadata, SITE_URL, absUrl } from "@/lib/seo";
 import { LOCALES, localePath, type Locale } from "@/lib/i18n";
+import { arDigits } from "@/lib/digits";
 import {
   services,
   getService,
@@ -12,11 +13,14 @@ import {
 import { ctaLabel } from "@/content/site";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 import { Button, ArrowEnd } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { ClosingCta } from "@/components/sections/ClosingCta";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { PlasteringTeaser } from "@/components/sections/PlasteringTeaser";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
@@ -72,89 +76,62 @@ export default async function ServiceDetailPage({
         ])}
       />
 
+      {/* Grounds: maroon header · sand (what it covers) · maroon (why) · [sand form] · CTA · footer */}
       <PageHeader
         locale={loc}
         eyebrow={cat.title}
         title={service.seoTitle}
-        intro={service.intro}
+        intro={<p>{service.intro}</p>}
         crumbs={[
           { label: "خدماتنا", path: "/services" },
           { label: service.title },
         ]}
       />
 
-      <Section tone="bg">
+      <Section ground="sand" labelledBy="included-title">
         {service.image && (
-          <Reveal className="mb-12 block">
-            <figure className="relative overflow-hidden rounded-2xl ring-1 ring-brand/15">
+          <Reveal className="mb-16 block">
+            <figure>
               <MediaFrame
                 src={service.image.src}
                 alt={service.image.alt}
                 ready
-                aspect="4 / 1"
-                priority
-                sizes="(min-width: 1024px) 1000px, 100vw"
-                rounded="rounded-2xl"
+                aspect="3 / 1"
+                preload
+                sizes="(min-width: 1280px) 1088px, 100vw"
               />
-              {/* subtle maroon edge so the real photo reads native, not pasted */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-deep/20 to-transparent"
-              />
-              <figcaption className="absolute bottom-3 start-4 text-xs text-bg/85">
-                من أعمال شغموم
-              </figcaption>
+              <figcaption className="mt-3 text-sm text-ink/75">من أعمال شغموم</figcaption>
             </figure>
           </Reveal>
         )}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Main */}
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            <Reveal>
-              <h2 className="text-2xl text-ink">ما يشمله</h2>
-              <span aria-hidden="true" className="mt-4 block h-px w-12 bg-brand/40" />
-            </Reveal>
-            <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <SectionHeading id="included-title" title="ما يشمله" />
+            <ol className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {service.included.map((item, i) => (
-                <Reveal as="li" key={item} index={i} step={0.05}>
-                  <div className="flex h-full items-start gap-3 rounded-xl border border-line bg-surface p-4">
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
-                    />
-                    <span className="text-ink/85">{item}</span>
+                <Reveal as="li" key={item} index={i} step={0.05} className="flex">
+                  <div className="flex w-full items-start gap-4 border-[1.5px] border-ink/30 p-5">
+                    <span aria-hidden="true" className="mt-0.5 font-semibold text-accent">
+                      {arDigits(i + 1)}
+                    </span>
+                    <span>{item}</span>
                   </div>
                 </Reveal>
               ))}
-            </ul>
-
-            <Reveal>
-              <div className="mt-12 rounded-2xl bg-brand-tint/60 p-8">
-                <h2 className="text-2xl text-brand">لماذا شغموم</h2>
-                <p className="mt-4 text-lg leading-loose text-ink/85">
-                  {service.why}
-                </p>
-              </div>
-            </Reveal>
+            </ol>
           </div>
 
-          {/* Aside: CTA + related */}
-          <aside className="lg:col-span-5">
+          <aside className="lg:col-span-4 lg:col-start-9">
             <Reveal index={1}>
-              <div className="rounded-2xl border border-line bg-surface p-7">
-                <h2 className="text-xl text-ink">
-                  مهتمٌ بـ{service.title} في المدينة المنورة؟
+              <div className="border-[1.5px] border-ink p-7">
+                <h2 className="text-[21px] font-semibold leading-snug">
+                  {service.title} في المدينة المنورة
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted">
-                  أرسل تفاصيل مشروعك واحصل على عرض سعرٍ واضح، أو تواصل معنا مباشرةً
-                  عبر واتساب.
+                <p className="mt-3 text-base leading-relaxed text-ink/80">
+                  أرسل تفاصيل مشروعك ونعود إليك بعرض سعر، أو اسألنا مباشرةً عبر واتساب.
                 </p>
                 <div className="mt-6 flex flex-col gap-3">
-                  <Button
-                    href={localePath(loc, "/contact")}
-                    icon={<ArrowEnd />}
-                    className="w-full"
-                  >
+                  <Button href={localePath(loc, "/contact")} icon={<ArrowEnd />} className="w-full">
                     {ctaLabel}
                   </Button>
                   <WhatsAppButton
@@ -164,34 +141,50 @@ export default async function ServiceDetailPage({
                 </div>
               </div>
             </Reveal>
-
-            {related.length > 0 && (
-              <Reveal index={2}>
-                <div className="mt-6 rounded-2xl border border-line bg-bg p-7">
-                  <h2 className="text-sm font-medium text-faint">
-                    خدمات ذات صلة
-                  </h2>
-                  <ul className="mt-4 space-y-1">
-                    {related.map((r) => (
-                      <li key={r.slug}>
-                        <Link
-                          href={localePath(loc, `/services/${r.slug}`)}
-                          className="group flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-ink/85 transition-colors hover:bg-bg-alt hover:text-brand"
-                        >
-                          <span>{r.title}</span>
-                          <ArrowEnd className="opacity-0 transition-opacity group-hover:opacity-100" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            )}
           </aside>
         </div>
       </Section>
 
-      <ClosingCta locale={loc} />
+      <Section ground="maroon" labelledBy="why-title">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
+            <SectionHeading id="why-title" eyebrow="عين على ما غاب عن الورق" title="ما ننتبه له" intro={<p>{service.why}</p>} />
+          </div>
+          {related.length > 0 && (
+            <Reveal index={1} className="lg:col-span-4 lg:col-start-9">
+              <nav aria-labelledby="related-title">
+                <h2 id="related-title" className="sh-eyebrow">خدمات ذات صلة</h2>
+                <ul className="mt-4 border-t border-ink/20">
+                  {related.map((r) => (
+                    <li key={r.slug} className="border-b border-ink/20">
+                      <Link
+                        href={localePath(loc, `/services/${r.slug}`)}
+                        className="group flex items-center justify-between gap-3 py-3.5 text-ink/85 transition-colors hover:text-ink"
+                      >
+                        <span>{r.title}</span>
+                        <ArrowEnd className="opacity-60 transition-opacity group-hover:opacity-100" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </Reveal>
+          )}
+        </div>
+      </Section>
+
+      {service.slug === "plastering" ? (
+        <>
+          <PlasteringTeaser locale={loc} ground="sand" />
+          <CtaBand locale={loc} ground="maroon" />
+          <SiteFooter locale={loc} ground="sand" />
+        </>
+      ) : (
+        <>
+          <CtaBand locale={loc} ground="sand" />
+          <SiteFooter locale={loc} ground="maroon" />
+        </>
+      )}
     </>
   );
 }

@@ -40,10 +40,10 @@ export function ProjectsGallery({ locale }: { locale: Locale }) {
               role="tab"
               aria-selected={active}
               onClick={() => setFilter(f.value)}
-              className={`rounded-full border px-5 py-2 text-sm transition-colors duration-200 ${
+              className={`min-h-11 rounded-brand border-[1.5px] px-5 py-2 text-[15px] font-medium transition-colors duration-200 ${
                 active
-                  ? "border-brand bg-brand text-bg"
-                  : "border-line text-muted hover:border-brand/40 hover:text-brand"
+                  ? "border-ink bg-ink text-ground"
+                  : "border-ink/35 text-ink hover:border-ink"
               }`}
             >
               {f.label}
@@ -68,14 +68,14 @@ export function ProjectsGallery({ locale }: { locale: Locale }) {
                 delay: reduce ? 0 : (i % 3) * 0.05,
               }}
             >
-              <ProjectCard project={project} locale={locale} priority={i < 3} />
+              <ProjectCard project={project} locale={locale} preload={i === 0} />
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
 
       {filtered.length === 0 && (
-        <p className="mt-10 text-center text-muted">لا توجد أعمال في هذا التصنيف بعد.</p>
+        <p className="mt-10 text-center text-ink/80">لا توجد أعمال في هذا التصنيف بعد.</p>
       )}
     </div>
   );

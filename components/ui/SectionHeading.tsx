@@ -2,50 +2,40 @@ import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
 
 /**
- * Display heading with an optional eyebrow and a hairline tick — echoes
- * architectural drawing labels. The hairline is a measurement-style mark.
+ * The brand heading block — rhythm edge · indent · edge (brand §9):
+ * eyebrow and heading flush to the column edge; the divider rule and the body
+ * indented; an optional callout back on the edge with its gold bar.
  */
 export function SectionHeading({
   eyebrow,
   title,
   intro,
-  align = "start",
+  callout,
   as: As = "h2",
-  tone = "ink",
+  id,
+  size = "h2",
+  rule = true,
 }: {
   eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
-  align?: "start" | "center";
+  callout?: ReactNode;
   as?: "h1" | "h2" | "h3";
-  tone?: "ink" | "bg";
+  id?: string;
+  size?: "h1" | "h2";
+  rule?: boolean;
 }) {
-  const alignment =
-    align === "center" ? "items-center text-center" : "items-start text-start";
-  const eyebrowColor = tone === "bg" ? "text-bg/70" : "text-brand";
-  const introColor = tone === "bg" ? "text-bg/80" : "text-muted";
-
   return (
-    <Reveal className={`flex flex-col ${alignment}`}>
-      {eyebrow && (
-        <span
-          className={`mb-4 flex items-center gap-3 text-sm font-medium tracking-wide ${eyebrowColor}`}
-        >
-          <span
-            aria-hidden="true"
-            className="inline-block h-px w-8 bg-current opacity-60"
-          />
-          {eyebrow}
-        </span>
-      )}
-      <As className="text-balance text-3xl leading-tight sm:text-4xl lg:text-5xl">
+    <Reveal className="flex flex-col items-start">
+      {eyebrow && <p className="sh-eyebrow mb-3">{eyebrow}</p>}
+      <As id={id} className={size === "h1" ? "text-h1" : "text-h2"}>
         {title}
       </As>
+      {rule && <span aria-hidden="true" className="sh-rule mt-6" />}
       {intro && (
-        <p className={`mt-6 max-w-2xl text-lg leading-relaxed ${introColor}`}>
-          {intro}
-        </p>
+        <div className="sh-indent sh-measure mt-6 text-body text-ink/80">{intro}</div>
       )}
+      {callout && <p className="sh-callout sh-measure mt-8">{callout}</p>}
     </Reveal>
   );
 }

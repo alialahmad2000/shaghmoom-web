@@ -3,7 +3,7 @@
  * (we have no verified rating count). Rendered via a <script type="application/ld+json">.
  */
 import { SITE_URL, SITE_NAME_AR } from "./seo";
-import { company, contact, social } from "@/content/site";
+import { company, contact, lines, social } from "@/content/site";
 import { services } from "@/content/services";
 import type { Locale } from "./i18n";
 
@@ -24,11 +24,11 @@ export function organizationSchema() {
     alternateName: company.latin,
     legalName: company.legalName,
     url: SITE_URL,
-    image: `${SITE_URL}/brand/og-default.png`,
-    logo: `${SITE_URL}/brand/logo.svg`,
-    slogan: company.brandLine,
+    image: `${SITE_URL}/icon-512.png`,
+    logo: `${SITE_URL}/icon-512.png`,
+    slogan: lines.tagline,
     description:
-      "شركة شغموم للمقاولات العامة — مقاول عظم وتشطيب في المدينة المنورة، يقوم تنفيذه على الدقة والانتباه لما لا يُرى.",
+      "شغموم للمقاولات العامة — عظم وتشطيبات وإشراف في المدينة المنورة. عين على ما غاب عن الورق.",
     telephone: PHONE_INTL,
     address: {
       "@type": "PostalAddress",
@@ -54,8 +54,8 @@ export function organizationSchema() {
       opens: "09:00",
       closes: "18:00",
     },
-    sameAs: [social.instagram].filter(Boolean),
-    knowsAbout: ["مقاولات عامة", "أعمال عظم", "تشطيبات", "تسليم مفتاح"],
+    sameAs: [social.instagram, social.tiktok].filter(Boolean),
+    knowsAbout: ["مقاولات عامة", "أعمال عظم", "تشطيبات", "إشراف", "لياسة", "تسليم مفتاح"],
     makesOffer: services.map((s) => ({
       "@type": "Offer",
       itemOffered: {

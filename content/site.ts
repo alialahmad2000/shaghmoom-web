@@ -1,32 +1,53 @@
 /**
- * Central site content — real, on-brand Arabic copy (§7).
- * Keep copy here, out of components, so it is easy to edit and to translate.
- * Voice: formal MSA, calm, precise. Never the loud classified-ad voice.
+ * Central site content — Arabic copy in the brand voice (brand §1): an expert
+ * contractor speaking politely to an owner; clean modern Arabic; a defect
+ * explained by what the owner will feel; no absolute promises, no "we are the
+ * best", no clichés, no AI-sounding constructions. Keep copy here, out of
+ * components.
+ *
+ * Approved lines are quoted verbatim from the brand file and must not be
+ * reworded. «وطن يُبنى» is internal only — it must never appear on the site.
  */
+
+/**
+ * [OPEN] Closing-line spelling — the owner has not chosen yet. One-line change:
+ * "وقت" → «شغموم وقت اللزوم يجملك» (most-used, Oct 2026) · "عند" → «شغموم عند اللزوم يجملك».
+ * The plastering form keeps «عند» as authored.
+ */
+export const CLOSING_WORD: "وقت" | "عند" = "وقت";
+
+/** Approved lines (brand §1), verbatim. */
+export const lines = {
+  /** Defines the name (most-used). */
+  meaning: "عين على ما غاب عن الورق",
+  /** Tagline, paired with the closing line. */
+  tagline: "نبني الثقة قبل الجدران",
+  /** Closing line: the subject stays outside the brush, the predicate is swiped. */
+  closingSubject: "شغموم",
+  closingPredicate: `${CLOSING_WORD} اللزوم يجملك`,
+  /** Positioning / bio core. */
+  positioning: "يوم التسليم كل التشطيبات متشابهة. بعد سنتين تفترق.",
+} as const;
 
 export const company = {
   legalName: "شركة خالد رافد صياف العمري للمقاولات العامة",
-  publicName: "شركة شغموم للمقاولات العامة",
+  publicName: "شغموم للمقاولات العامة",
   shortName: "شغموم",
   latin: "SHOGHMOUM",
-  handle: "@shoughmoum",
-  brandLine: "وطن يُبنى",
-  brandLineLatin: "A Nation Built",
-  essence: "المقاول الذي يلحظ ما يغيب عن غيره",
+  handle: "@shoghmoum",
   city: "المدينة المنورة",
   district: "حي النعيم",
   region: "منطقة المدينة المنورة",
   country: "المملكة العربية السعودية",
-  hours: "09:00 – 18:00",
+  hours: "٩:٠٠ – ١٨:٠٠",
 } as const;
 
 export const contact = {
   primaryPhone: "0553346250",
+  /** Kept as on the live site; the new brand file lists only the primary number (flagged in the report). */
   secondaryPhone: "0556332889",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "966553346250",
-  // Pre-filled, on-brand WhatsApp opener.
-  whatsappMessage:
-    "السلام عليكم، أرغب في الاستفسار عن خدمات شركة شغموم للمقاولات العامة.",
+  whatsappMessage: "السلام عليكم، أرغب في الاستفسار عن خدمات شغموم للمقاولات العامة.",
   email: "",
 } as const;
 
@@ -36,60 +57,104 @@ export function whatsappHref(message: string = contact.whatsappMessage): string 
 
 export function telHref(phone: string): string {
   // Saudi local 05x → +9665x for tel: links.
-  const intl = phone.replace(/^0/, "+966");
-  return `tel:${intl}`;
+  return `tel:${phone.replace(/^0/, "+966")}`;
 }
 
 export const social = {
-  // Replace with live profile URLs as they go online (used in JSON-LD sameAs).
-  instagram: "https://instagram.com/shoughmoum",
+  instagram: "https://www.instagram.com/shoghmoum",
+  tiktok: "https://www.tiktok.com/@shoghmoum",
 } as const;
 
-/** Primary navigation — order matters. CTA handled separately. */
+/** Header navigation — order matters. The logo links home; CTA is separate. */
 export const nav = [
+  { label: "من نحن", path: "/about" },
+  { label: "خدماتنا", path: "/services" },
+  { label: "منهجيتنا", path: "/methodology" },
+  { label: "استمارة اللياسة", path: "/plastering-form" },
+  { label: "أعمالنا", path: "/projects" },
+  { label: "تواصل معنا", path: "/contact" },
+] as const;
+
+/** Every page, for the mobile menu and the footer. */
+export const siteLinks = [
   { label: "الرئيسية", path: "" },
   { label: "من نحن", path: "/about" },
   { label: "خدماتنا", path: "/services" },
-  { label: "أعمالنا", path: "/projects" },
   { label: "منهجيتنا", path: "/methodology" },
+  { label: "استمارة اللياسة", path: "/plastering-form" },
+  { label: "أعمالنا", path: "/projects" },
   { label: "آراء العملاء", path: "/reviews" },
   { label: "تواصل معنا", path: "/contact" },
 ] as const;
 
 export const ctaLabel = "اطلب عرض سعر";
-export const whatsappLabel = "تواصل عبر واتساب";
+export const whatsappLabel = "اسأل شغموم";
 
-/** Hero (home). */
+/** Home — hero (maroon). Two-line headline from brand sheet p.7. */
 export const hero = {
-  eyebrow: company.brandLine,
-  title: "نبني الثقة قبل الجدران",
-  subhead:
-    "شركة شغموم للمقاولات العامة — عظمٌ، وتشطيبٌ، وتنفيذٌ يقوم على الدقة والانتباه لما لا يُرى. في المدينة المنورة وما حولها.",
+  eyebrow: lines.meaning,
+  titleLines: ["نرى العُشر الذي", "لم يُرسم في المخطط"],
+  lead: "مقاول عظم وتشطيبات وإشراف في المدينة المنورة. نقرأ المخطط قبل التنفيذ، ونلفت نظرك إلى ما لم يُكتب فيه قبل أن يصير تكلفة عليك.",
 } as const;
 
-/** "ما لا يُرى" — the philosophy; the soul of the page (§5). */
-export const philosophy = {
-  heading: "ما لا يُرى... هو ما يصنع الفرق",
-  body: "في كل مشروع تتقاطع آلاف التفاصيل، وأدقُّ المخططات — مهما أشرف عليها من مهندسين — تظل عاجزةً عن احتواء كل تعقيدات الواقع. تبقى دائمًا نسبةٌ صغيرة، قد لا تتجاوز 10٪، لكنها هي الفرق بين مشروعٍ عادي وآخر استثنائي. شغموم هو المقاول الذي يلحظ تلك النسبة: يدرس المخطط قبل أن يُوضع أول حجر، ويرصد الخلل قبل أن يتحوّل إلى تكلفة.",
+/** Home — meaning / about (sand). Body from brand sheet p.2. */
+export const meaning = {
+  eyebrow: "من نحن",
+  heading: "عين إضافية للمالك",
+  body: "الشغموم هو النبيه الفطن: لا يقف عند تنفيذ المكتوب، بل يرى ما لم يُكتب. أدق المخططات تترك نحو عُشر من واقع الموقع لم يره أحد: مشكلة لم تُحسب، أو فرصة تحسين لم تُلحظ. هناك يظهر الشغموم — عين إضافية للمالك، لا منفّذ فقط.",
+  callout: lines.positioning,
+  link: "معنى الاسم وقصة شغموم",
+  diagram: {
+    drawn: "ما في المخطط",
+    undrawn: "العُشر الذي لم يُرسم",
+  },
 } as const;
 
-export const methodologyTeaser =
-  "لا نكتفي بالمخططات. نرصد مناطق الخلل قبل أن تصبح تكلفة، ونبحث عن فرص التطوير في كل مشروع.";
+/** Home — services (maroon): عظم · تشطيبات · إشراف. */
+export const servicesTrio = {
+  eyebrow: "خدماتنا",
+  heading: "عظم · تشطيبات · إشراف",
+  intro: "ثلاثة أعمال في المدينة المنورة تحت إدارة واحدة. والتشطيب أكثر ما نعتني به، لأنه ما تعيش معه كل يوم.",
+  cards: {
+    structure: {
+      title: "عظم",
+      body: "الهيكل من تمهيد الأرض إلى السقف. نراجع المناسيب والتسليح قبل الصب، لأن ما يُدفن في العظم يصعب إصلاحه بعده.",
+    },
+    finishes: {
+      title: "تشطيبات",
+      body: "اللياسة والأرضيات والدهانات والتمديدات وما يكملها، بدرجة تنفيذ نتفق عليها معك كتابةً قبل البدء.",
+    },
+    supervision: {
+      title: "إشراف",
+      body: "مراجعة المخططات قبل التنفيذ، وتقارير فحص قبل اللياسة تصنّف كل ملاحظة بحسب أولويتها وخطورتها.",
+    },
+  },
+  more: "كل الخدمات",
+} as const;
 
-export const closingCta = {
-  heading: "جاهزون لمشروعك القادم.",
-  body: "تواصل معنا اليوم لمناقشة مشروعك في المدينة المنورة — بناءً كان أو تشطيبًا.",
+/** Home — plastering form teaser (copy taken from the form's own hero). */
+export const plasteringTeaser = {
+  eyebrow: "قبل ما تتفق",
+  heading: "استمارة اللياسة",
+  body: "ما يتفق عليه المالك والمليّس قبل أن يبدأ العمل: الدرجة، والنطاق، ومن يتحمّل ماذا.",
+  button: "افتح استمارة اللياسة",
+} as const;
+
+/** The CTA band that ends most pages. */
+export const ctaBand = {
+  heading: "حدّثنا عن مشروعك",
+  body: "أرسل تفاصيل مشروعك في المدينة المنورة ونعود إليك بعرض سعر. وللأسئلة القصيرة، واتساب أسرع.",
 } as const;
 
 /*
- * Credibility / accreditation signals were REMOVED in the polish pass:
- * the منصة مقاول membership number (1180118003) and "عضو الهيئة السعودية للمقاولين"
- * traced only to the build-brief spec — no certificate or contract backs them.
- * Do not display unverifiable accreditation/membership/CR on a live site.
- * Re-add here (with the real certificate on file) if/when verified.
+ * Credibility / accreditation: the live site shows none. The brand file says
+ * "Registered member of the Saudi Contractors Authority" and the plastering
+ * form's own footer shows the unified number 7052752610 and منصة مقاول
+ * membership 1180118003. Not added to the global footer until the owner
+ * confirms (open decision in REBRAND-REPORT.md).
  */
 
-/** Project types served — signals scale (§7-Services). */
+/** Project types served. */
 export const projectTypes = [
   "فلل",
   "عمائر",
@@ -101,30 +166,15 @@ export const projectTypes = [
   "أبراج",
 ] as const;
 
-/**
- * Atmospheric banner on the About page — a maroon-duotone of a concrete
- * structural shell (عظم). Sourced & licensed (Unsplash License, free for
- * commercial use): photo by Tolu Olubode — https://unsplash.com/photos/PlBsJ5MybGc
- * To swap: drop a new file at this path, or change/remove this one line.
- */
-export const aboutImage = {
-  src: "/images/about-structure.webp",
-  alt: "هيكل خرساني قيد التنفيذ — أعمال العظم والبناء",
-} as const;
-
 export const aboutContent = {
-  intro:
-    "شغموم للمقاولات العامة تقدّم حلول بناءٍ وتشطيبٍ باحترافيةٍ عالية واهتمامٍ دقيق بالتفاصيل وجودة التنفيذ. نوحّد جميع مراحل المشروع تحت إدارةٍ واحدة وتنفيذٍ منظم.",
+  title: "الشغموم هو النبيه الفطن",
+  intro: "شغموم للمقاولات العامة في المدينة المنورة: عظم وتشطيبات وإشراف، تحت إدارة واحدة.",
   nameStory: {
     heading: "معنى الاسم",
-    body: "الشغموم هو الشخص النبيه الفطن، الذي لا يكتفي بتنفيذ ما كُتب، بل يرى ما لم يُكتب؛ يرصد الفجوات، ويكتشف مبكرًا ما قد يتحوّل لاحقًا إلى مشكلة، ويقترح حلولًا تقلّل التكاليف وتحسّن النتيجة. اخترنا هذا الاسم لأننا نؤمن أن كل مشروع يستحق هذا القدر من الوعي والدقة والانتباه.",
+    body: "الشغموم هو النبيه الفطن: لا يكتفي بتنفيذ ما كُتب، بل يرى ما لم يُكتب. يلحظ الفجوات قبل أن تصير مشكلات، ويقترح حلولًا تقلّل التكلفة وتحسّن النتيجة.",
   },
-  vision: {
-    heading: "رؤيتنا",
-    body: "أن نكون الخيار الأول في قطاع المقاولات للمشاريع التي تبحث عن الابتكار والجودة والموثوقية — نبني الثقة قبل الجدران.",
-  },
-  mission: {
-    heading: "رسالتنا",
-    body: "تقديم حلول بناء وتشطيب تستند إلى أفضل التقنيات العالمية ونعيد توظيفها بما يتوافق مع بيئتنا المحلية، بدقةٍ واحترافية، ومن خلال فريق يدرس المخططات قبل التنفيذ. لا نسابق الزمن، بل نلتزم بجداول منطقية تحترم جودة التفاصيل.",
+  founding: {
+    heading: "قصة شغموم",
+    body: "حتى أدق المخططات لا تحتوي واقع الموقع كاملًا. يبقى نحو عُشر لم يره أحد: مشكلات لم تُحسب، أو فرص تحسين لم تُلحظ. هذا العُشر هو الفرق بين مشروع عادي ومشروع متميز، وفيه نعمل. لذلك نقدّم أنفسنا عينًا إضافية للمالك، لا منفّذًا فقط.",
   },
 } as const;

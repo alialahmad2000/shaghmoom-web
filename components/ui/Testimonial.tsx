@@ -1,20 +1,12 @@
 import type { Review } from "@/content/reviews";
 
-/** Elegant pull-quote — never a raw screenshot (§7-Reviews). */
+/** A client's words, shown as received — never a raw screenshot. */
 export function Testimonial({ review }: { review: Review }) {
   return (
-    <figure className="relative h-full rounded-2xl border border-line bg-surface p-8">
-      <span
-        aria-hidden="true"
-        className="font-display text-5xl leading-none text-brand/25"
-      >
-        ”
-      </span>
-      <blockquote className="mt-3 text-xl leading-relaxed text-ink text-balance">
-        {review.quote}
-      </blockquote>
-      <figcaption className="mt-6 flex items-center gap-3 text-sm text-muted">
-        <span aria-hidden="true" className="h-px w-6 bg-line-strong" />
+    <figure className="flex h-full flex-col border-[1.5px] border-ink/30 bg-ground p-8">
+      <blockquote className="text-h3">{review.quote}</blockquote>
+      <figcaption className="mt-6 flex items-center gap-3 text-[15px] text-ink/80">
+        <span aria-hidden="true" className="h-0.5 w-6 bg-ink/50" />
         {review.attribution}
       </figcaption>
     </figure>

@@ -1,51 +1,53 @@
-/** Methodology — the differentiator (§7). A precise, staged process. */
+/** Methodology — drawn as a path on the home page and on /methodology. */
 
 export type Stage = {
-  index: string;
   title: string;
   body: string;
 };
 
-export const methodologyHeading = "كيف نعمل";
+/** Home teaser block. */
+export const methodologyTeaser = {
+  eyebrow: "كيف نعمل",
+  heading: "من المخطط إلى الاستلام",
+  intro: "خمس محطات نمرّ بها في كل مشروع. أهمها ما يحدث قبل أن يبدأ العمل.",
+  link: "منهجيتنا بالتفصيل",
+} as const;
+
+export const methodologyHeading = "من المخطط إلى الاستلام";
 
 export const methodologyIntro =
-  "منهجيتنا ليست خطوات على ورق، بل طريقة نفكّر بها قبل أن نبني. نعيد قراءة المشروع بعمق، ونرصد ما لا يُرى، ثم ننفّذ بانضباطٍ يحترم جودة التفاصيل.";
+  "نقرأ المشروع قبل أن نبنيه، ونكتب ما غاب عن الورق، ثم ننفّذ ونستلم معك على مراحل. هكذا يبقى القرار عندك، مبنيًا على ما تراه.";
 
 export const stages: Stage[] = [
   {
-    index: "01",
-    title: "الدراسة قبل التنفيذ",
-    body: "نعيد دراسة المخططات بعمق قبل أن يُوضع أول حجر.",
+    title: "قراءة المخطط",
+    body: "نراجع المخططات قبل أن يبدأ العمل، ونكتب لك ما لم يُذكر فيها.",
   },
   {
-    index: "02",
-    title: "رصد ما لا يُرى",
-    body: "نرصد مناطق الخلل وفرص التطوير قبل أن تتحول إلى تكلفة.",
+    title: "ما غاب عن الورق",
+    body: "نحدّد مواضع الخلل المحتمل وفرص التحسين، ونعرضها عليك قبل أن تصير تكلفة.",
   },
   {
-    index: "03",
-    title: "التنفيذ المنظّم",
-    body: "جميع القطاعات تحت إدارةٍ واحدة وتنفيذٍ منضبط، بجداول منطقية تحترم جودة التفاصيل.",
+    title: "اتفاق مكتوب",
+    body: "الدرجة والنطاق ومن يتحمّل ماذا، مكتوبة قبل أن يبدأ التنفيذ.",
   },
   {
-    index: "04",
-    title: "التقارير والمراجعة الفنية",
-    body: "نوثّق ونراجع فنيًا، ونصنّف الملاحظات بحسب الأولوية والخطورة.",
+    title: "تنفيذ تحت إدارة واحدة",
+    body: "فرق العمل كلها تحت إدارة واحدة، بجدول يعطي كل مرحلة وقتها.",
   },
   {
-    index: "05",
-    title: "التسليم بثقة",
-    body: "نبني الثقة كما نبني المساحات.",
+    title: "استلام على مراحل",
+    body: "نستلم معك عند كل مرحلة تخفي ما قبلها، ونوثّق الملاحظات في تقرير.",
   },
 ];
 
 /**
- * Genuine differentiator: detailed technical inspection reports
- * (electrical / plumbing pre-plaster reviews, graded by severity).
- * A dedicated proof piece may be added later — this is the clean slot for it.
+ * Detailed technical inspection reports (electrical / plumbing pre-plaster
+ * reviews, graded by severity) — part of the إشراف pillar.
  */
 export const inspectionReports = {
+  eyebrow: "إشراف",
   heading: "تقارير المراجعة الفنية",
-  body: "نُصدر تقارير فحصٍ تفصيلية قبل التشطيب — مراجعة لأعمال الكهرباء والسباكة قبل اللياسة — نصنّف فيها كل ملاحظة بحسب الأولوية والخطورة. هذه القدرة ليست خدمة إضافية، بل جزءٌ من طريقة عملنا: نوثّق ما نراه، لتبقى القرارات مبنية على بيّنة.",
-  note: "نموذجٌ مفصّل من تقاريرنا الفنية يُضاف هنا قريبًا.",
+  body: "قبل اللياسة نراجع أعمال الكهرباء والسباكة، ونُصدر تقريرًا يصنّف كل ملاحظة بحسب أولويتها وخطورتها. ما يُغلق عليه الجدار اليوم يصعب الوصول إليه بعد ذلك، فنوثّقه وهو مكشوف، لتبني قراراتك على ما رأيته بنفسك.",
+  note: "نموذج من تقاريرنا الفنية يُضاف هنا قريبًا.",
 } as const;
