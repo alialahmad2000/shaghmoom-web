@@ -1,48 +1,75 @@
+import Image from "next/image";
 import Link from "next/link";
 import { localePath, type Locale } from "@/lib/i18n";
 import { company } from "@/content/site";
-import { SymbolMark } from "@/components/ui/SymbolMark";
 
 /**
- * Brand lockup — the extracted geometric symbol + شغموم (display Naskh) +
- * SHOGHMOUM (Latin grotesque). The symbol follows currentColor via SymbolMark.
+ * The logo — kit SVGs only (brand/shoghmoum-brand-kit/02_logo/svg), never
+ * re-typeset, recoloured, animated or rasterised. Approved pairings only:
+ * sand on maroon, maroon on sand.
+ *
+ * Ratios: lockup 2.613:1 · Arabic wordmark 3.812:1.
+ * PROPOSED minimum widths: lockup 140px, Arabic wordmark 96px.
+ * PROPOSED clear space: the height of the SHOGHMOUM line (~22% of the lockup
+ * height) on every side — callers keep that much room around it.
+ */
+type Ground = "maroon" | "sand";
+
+const files = {
+  lockup: { maroon: "/brand/shoghmoum-lockup-sand.svg", sand: "/brand/shoghmoum-lockup-maroon.svg" },
+  wordmark: { maroon: "/brand/shoghmoum-wordmark-ar-sand.svg", sand: "/brand/shoghmoum-wordmark-ar-maroon.svg" },
+} as const;
+
+const LOCKUP_RATIO = 2950.3 / 1129.24;
+const WORDMARK_RATIO = 2950.3 / 773.85;
+
+export function LogoMark({
+  mark,
+  ground,
+  width,
+  className = "",
+  preload = false,
+}: {
+  mark: "lockup" | "wordmark";
+  ground: Ground;
+  width: number;
+  className?: string;
+  preload?: boolean;
+}) {
+  const ratio = mark === "lockup" ? LOCKUP_RATIO : WORDMARK_RATIO;
+  return (
+    <Image
+      src={files[mark][ground]}
+      alt=""
+      width={width}
+      height={Math.round(width / ratio)}
+      unoptimized
+      preload={preload}
+      className={`block h-auto max-w-none ${className}`}
+      style={{ width }}
+    />
+  );
+}
+
+/**
+ * Header logo: Arabic wordmark on mobile, lockup on desktop (brand §11).
+ * Links home; the accessible name is the brand name.
  */
 export function Logo({
   locale,
-  tone = "ink",
-  animate = false,
+  ground = "maroon",
 }: {
   locale: Locale;
-  tone?: "ink" | "bg";
-  /** Play the one-time build-in animation (use on the header logo only). */
-  animate?: boolean;
+  ground?: Ground;
 }) {
-  const main = tone === "bg" ? "text-bg" : "text-ink";
-  const symbolColor = tone === "bg" ? "text-bg" : "text-brand";
-  const accent = tone === "bg" ? "text-bg/65" : "text-accent";
-
   return (
     <Link
       href={localePath(locale, "")}
-      className="group inline-flex items-center gap-2.5 leading-none focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-4"
       aria-label={`${company.shortName} — الصفحة الرئيسية`}
+      className="inline-flex shrink-0 items-center"
     >
-      <SymbolMark
-        className={`h-9 w-9 shrink-0 ${symbolColor} ${animate ? "logo-anim-symbol" : ""}`}
-      />
-      <span className={`flex flex-col leading-none ${animate ? "logo-anim-word" : ""}`}>
-        <span className={`font-display text-2xl leading-none ${main}`}>
-          {company.shortName}
-        </span>
-        {/* Decorative romanization — hidden from the a11y tree so the link's
-            accessible name matches its visible label (WCAG 2.5.3 Label in Name). */}
-        <span
-          aria-hidden="true"
-          className={`ltr mt-1 text-[0.58rem] font-semibold uppercase tracking-[0.3em] ${accent}`}
-        >
-          {company.latin}
-        </span>
-      </span>
+      <LogoMark mark="wordmark" ground={ground} width={112} className="lg:hidden" preload />
+      <LogoMark mark="lockup" ground={ground} width={148} className="hidden lg:block" />
     </Link>
   );
 }

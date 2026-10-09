@@ -21,7 +21,7 @@ export function Footer({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-4">
-            <Logo locale={locale} tone="bg" />
+            <Logo locale={locale} ground="maroon" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-bg/70">
               {company.publicName}. عظمٌ وتشطيبٌ وتنفيذٌ يقوم على الدقة في{" "}
               {company.city}.
