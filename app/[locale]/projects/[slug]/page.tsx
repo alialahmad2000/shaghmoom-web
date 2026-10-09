@@ -101,7 +101,7 @@ export default async function ProjectDetailPage({
           <aside className="lg:col-span-4 lg:col-start-9">
             <Reveal index={1}>
               <div className="border-[1.5px] border-ink p-7">
-                <p className="sh-eyebrow">ما غاب عن الورق</p>
+                <p className="sh-eyebrow">ما ننتبه له في مثل هذا المشروع</p>
                 <p className="mt-4 text-body text-ink/85">{project.unseen}</p>
                 <p className="mt-6 text-[15px] text-ink/75">{project.location}</p>
               </div>

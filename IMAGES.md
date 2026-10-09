@@ -1,3 +1,6 @@
+> **Superseded (2026-10 rebrand):** every image listed below was removed from the site — stock craft images carried the old aubergine duotone, and the Haraj banners carried the old maroon vignette. See `REBRAND-REPORT.md`. Kept for provenance only.
+
+
 # Shaghmoom — Images review sheet
 
 Review gate: **approve each image before it's final.** Every image is trivially

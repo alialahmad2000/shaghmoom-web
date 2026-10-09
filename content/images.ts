@@ -1,13 +1,10 @@
 /**
- * Image manifest (§12). Every image slot on the site, with its location,
+ * Image manifest. Every image slot on the site, with its location,
  * recommended dimensions / aspect ratio, and a note on what photo belongs there.
  *
- * Until a real photo arrives, the UI renders a refined placeholder (aubergine/bone
- * block with the architectural grid motif + an Arabic caption) — never a broken
- * image or generic stock. To swap in a real photo: drop the file at the listed
- * `path` and the component will use it automatically.
- *
- * Make finished-finishing ("تشطيب") imagery prominent — those photos sell.
+ * There are no approved project photos or illustrations yet (brand §10). Until
+ * a real photo arrives, the UI renders a flat placeholder with a dashed outline
+ * and an Arabic caption — never stock, never a broken image.
  */
 
 export type ImageSlot = {
@@ -25,59 +22,24 @@ export type ImageSlot = {
 
 export const imageManifest: ImageSlot[] = [
   {
-    path: "/images/services/{slug}-clean.webp",
-    location: "Service page banner (real photos: plumbing, hvac, flooring)",
-    recommended: "≥1200px wide",
-    aspect: "4 / 1 (banner)",
-    note: "Shaghmoom's own work photos, watermark/text cropped out. Referenced from the `image` field in content/services.ts. Originals backed up in /public/images/services/originals/. electrical.jpg was FLAGGED (text overlapped the worker — kept as placeholder; best-effort crop in /public/images/services/_flagged/).",
-  },
-  {
-    path: "/images/services/{slug}-craft.webp",
-    location: "Service page banner (sourced craft imagery: 8 slots)",
-    recommended: "1600×400 (4:1)",
-    aspect: "4 / 1 (banner)",
-    note: "Licensed (Unsplash) craft/material close-ups, aubergine-duotone treated. Referenced from the `image` field in content/services.ts. Full provenance (URL + author + license) per slot in IMAGES.md. ceilings, aluminum-glass, site-preparation kept as placeholders (see IMAGES.md).",
-  },
-  {
-    path: "/images/about-structure.webp",
-    location: "About page atmospheric banner",
-    recommended: "1600×620",
-    aspect: "2.58 / 1",
-    note: "SOURCED + aubergine-treated. Unsplash License (free, commercial) — photo by Tolu Olubode, https://unsplash.com/photos/PlBsJ5MybGc. Referenced via `aboutImage` in content/site.ts. Swap or remove that one line to change.",
-  },
-  {
-    path: "/brand/logo.svg",
-    location: "Header + Footer logo",
-    recommended: "SVG (vector)",
-    aspect: "auto",
-    note: "Official Shaghmoom logo. Sample the exact aubergine hex from this file and update the color tokens in app/globals.css.",
-  },
-  {
-    path: "/brand/og-default.png",
-    location: "Default Open Graph / social share image",
-    recommended: "1200×630",
-    aspect: "1.91 / 1",
-    note: "Brand share card: aubergine, the brand line 'وطن يُبنى', logo. Used when a page has no specific OG image.",
-  },
-  {
-    path: "/images/hero.jpg",
-    location: "Home hero background (optional)",
-    recommended: "2400×1350",
-    aspect: "16 / 9",
-    note: "A composed, high-quality project photo (finished villa/interior). Must not look like generic stock. Optional — the hero works without it.",
-  },
-  {
     path: "/images/projects/{slug}-1.jpg",
     location: "Project card cover (one per project in content/projects.ts)",
     recommended: "1600×1200",
     aspect: "4 / 3",
-    note: "Hero/cover shot of the project. Prefer finished finishing for commercial/villa projects; structural shell for عظم projects.",
+    note: "Real Shoghmoum site photo only (brand §10, OPEN): natural light, no colour filters, never under text. Set ready:true in content/projects.ts.",
   },
   {
     path: "/images/projects/{slug}-2.jpg … -N.jpg",
     location: "Project detail gallery",
     recommended: "1600×1200",
     aspect: "4 / 3",
-    note: "Gallery images per project. Mix finished interiors and a structural/detail shot that supports the 'ما لا يُرى' story where relevant.",
+    note: "Gallery images per project. Prefer finished finishing work — finishing quality is the marketing focus.",
+  },
+  {
+    path: "/images/services/{slug}.webp",
+    location: "Service page banner (optional `image` field in content/services.ts)",
+    recommended: "≥1600px wide, 3:1",
+    aspect: "3 / 1",
+    note: "Real Shoghmoum work only. The earlier stock craft images (aubergine duotone) and the Haraj ad banners (old maroon vignette, 700px) were removed in the 2026-10 rebrand.",
   },
 ];
