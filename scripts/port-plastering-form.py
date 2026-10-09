@@ -49,7 +49,7 @@ def fix_decls(body):
         body = re.sub(r"(animation(?:-name)?\s*:[^;}]*?)\b%s\b" % re.escape(k), r"\1plf-%s" % k, body)
     body = body.replace(
         "--font:'IBM Plex Sans Arabic','Noto Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif",
-        "--font:var(--font-plex-ar),var(--font-plex-latin),'IBM Plex Sans Arabic','Noto Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif",
+        "--font:var(--font-plex),'IBM Plex Sans Arabic','Noto Sans Arabic','Segoe UI',Tahoma,Arial,sans-serif",
     )
     return body
 

@@ -29,7 +29,7 @@
   --color-gold: #AA8302; /* الذهبي — the one highlight per view, always pure */
   /* Reserved, 0% on the site: periwinkle #A7B5DC, aqua #9CC7C9. Black #0E0E0E is not a site colour. */
 
-  --font-sans: var(--font-plex-ar), var(--font-plex-latin), "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: var(--font-plex), "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* PROPOSED: architectural, near-square corners */
   --radius-*: initial;

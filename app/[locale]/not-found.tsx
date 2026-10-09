@@ -9,7 +9,7 @@ export default function NotFound() {
     <>
       <Section ground="sand" wrap="narrow" className="min-h-[60vh]">
         <div className="flex flex-col items-start">
-          <p className="text-[64px] font-bold leading-none text-accent">{arDigits(404)}</p>
+          <p className="text-[64px] font-semibold leading-none text-accent">{arDigits(404)}</p>
           <h1 className="mt-6 text-h2">الصفحة غير موجودة</h1>
           <span aria-hidden="true" className="sh-rule mt-6" />
           <p className="sh-indent mt-6 text-body text-ink/80">

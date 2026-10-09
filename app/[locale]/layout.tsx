@@ -16,53 +16,24 @@ import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 /*
  * IBM Plex Sans Arabic (SIL OFL) — the one typeface, self-hosted from the brand
- * kit (04_typography/fonts). The kit splits each weight into an Arabic and a
- * Latin subset; each subset is its own face with its unicode-range, so the
- * browser fetches the Latin file only when Latin glyphs (digits, spaces) appear.
- * Arabic carries the first screen, so only the Arabic set is preloaded.
+ * kit (04_typography/fonts). The kit ships each weight as an Arabic and a Latin
+ * subset; scripts/merge-plex-subsets.py merges them into one file per weight so
+ * a single face carries Arabic text, digits, punctuation and Latin runs.
+ * Weights in use: 400 body · 500 labels · 600 headings & callouts. (700, for
+ * big numerals, is in the kit; add it here when an element needs it.)
  */
-const plexArabic = localFont({
+const plex = localFont({
   src: [
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-600-normal.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-arabic-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-400.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-600.woff2", weight: "600", style: "normal" },
   ],
-  variable: "--font-plex-ar",
+  variable: "--font-plex",
   display: "swap",
   preload: true,
-  // No generated fallback face here: it would match spaces and digits before
-  // the Latin subset below gets the chance (they live in the Latin range).
-  adjustFontFallback: false,
-  declarations: [
-    {
-      prop: "unicode-range",
-      value:
-        "U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC",
-    },
-  ],
 });
 
-const plexLatin = localFont({
-  src: [
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-latin-600-normal.woff2", weight: "600", style: "normal" },
-    { path: "../fonts/ibm-plex-sans-arabic/ibm-plex-sans-arabic-latin-700-normal.woff2", weight: "700", style: "normal" },
-  ],
-  variable: "--font-plex-latin",
-  display: "swap",
-  preload: false,
-  declarations: [
-    {
-      prop: "unicode-range",
-      value:
-        "U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD",
-    },
-  ],
-});
-
-const fontVars = `${plexArabic.variable} ${plexLatin.variable}`;
+const fontVars = plex.variable;
 
 export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
