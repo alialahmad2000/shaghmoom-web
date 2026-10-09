@@ -31,6 +31,9 @@ const plexArabic = localFont({
   variable: "--font-plex-ar",
   display: "swap",
   preload: true,
+  // No generated fallback face here: it would match spaces and digits before
+  // the Latin subset below gets the chance (they live in the Latin range).
+  adjustFontFallback: false,
   declarations: [
     {
       prop: "unicode-range",

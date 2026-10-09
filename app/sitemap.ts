@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", priority: 0.9, freq: "monthly" },
     { path: "/projects", priority: 0.8, freq: "monthly" },
     { path: "/methodology", priority: 0.7, freq: "yearly" },
+    { path: "/plastering-form", priority: 0.8, freq: "monthly" },
     { path: "/about", priority: 0.7, freq: "yearly" },
     { path: "/reviews", priority: 0.5, freq: "yearly" },
     { path: "/contact", priority: 0.6, freq: "yearly" },
