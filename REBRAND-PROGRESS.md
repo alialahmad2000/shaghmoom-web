@@ -12,15 +12,15 @@ If the session restarts: read this file + `git log --oneline origin/main..HEAD`,
 | 3 | Layout, sections, graphics per page | done |
 | 4 | Copy + metadata | done |
 | 5 | «استمارة اللياسة» page + links | done |
-| 6 | Verification fixes (build, lint, 375/768/1440, contrast, Lighthouse, print) | in progress |
-| 7 | `REBRAND-REPORT.md`, push, preview URL | pending |
+| 6 | Verification fixes (build, lint, 375/768/1440, contrast, Lighthouse, print) | done |
+| 7 | `REBRAND-REPORT.md`, push, preview URL | done |
 
 ## Decisions taken (carry into the report)
 - Footer is rendered per page (not in the layout) so its ground can be the opposite of the page's last section, and so the form page can omit it.
 - Header is maroon everywhere; it joins the maroon hero / page header as one block.
 - Measuring grid used only behind the "tenth" diagram on About/home (a drawn diagram, not texture).
 - Hero gold element = the eyebrow «عين على ما غاب عن الورق» set at 24px (gold on maroon passes only ≥24px).
-- Stock photos removed (old aubergine duotone baked in); owner's three real service photos kept.
+- All photos removed: stock (old aubergine duotone) and the Haraj banners (old maroon vignette, 700px).
 - Projects (placeholders) removed from the home page per brand §11 ("when photos exist"); routes kept.
 
 ## Baseline Lighthouse (live www.shaghmoom.com/ar, mobile)
