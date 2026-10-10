@@ -74,9 +74,9 @@ export default async function ServicesPage({
             />
             <div className="relative mt-14">
               {g.ground === "maroon" && (
-                <div aria-hidden="true" className="sh-star-field absolute -inset-y-20 inset-x-[calc(50%-50vw)]" />
+                <div aria-hidden="true" className="sh-star-field sh-star-field--fade absolute -inset-y-12 inset-x-[calc(50%-50vw)]" />
               )}
-              <ol className="relative grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ol className="relative grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-5">
                 {list.map((service, i) => (
                   <Reveal as="li" key={service.slug} index={i} step={0.05}>
                     <ServiceCard service={service} locale={loc} index={i} />

@@ -63,11 +63,7 @@ export default async function MethodologyPage({
             />
           </div>
           <Reveal index={1} className="lg:col-span-4 lg:col-start-9 lg:self-end">
-            <div className="relative p-6">
-              <span aria-hidden="true" className="sh-dash-box absolute inset-0 text-ink/40" />
-              <p className="relative text-[15px] text-ink/80">{inspectionReports.note}</p>
-            </div>
-            <div className="mt-6">
+            <div>
               <Button href={localePath(loc, "/plastering-form")} variant="ghost" icon={<ArrowEnd />}>
                 استمارة اللياسة
               </Button>

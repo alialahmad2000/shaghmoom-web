@@ -23,7 +23,7 @@ export function Meaning({ locale }: { locale: Locale }) {
           <Reveal>
             <Link
               href={localePath(locale, "/about")}
-              className="sh-indent mt-8 inline-flex items-center gap-2 font-semibold underline decoration-ink/30 decoration-2 underline-offset-8 transition-colors hover:decoration-ink"
+              className="mt-8 inline-flex items-center gap-2 font-semibold underline decoration-ink/30 decoration-2 underline-offset-8 transition-colors hover:decoration-ink"
             >
               {meaning.link}
               <ArrowEnd />

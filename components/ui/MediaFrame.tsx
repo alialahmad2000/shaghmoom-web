@@ -30,10 +30,7 @@ export function MediaFrame({
       ) : (
         <div className="absolute inset-0 grid place-items-center p-6 text-center">
           <span aria-hidden="true" className="sh-dash-box absolute inset-0 text-ink/40" />
-          <span className="relative text-sm text-ink/75">
-            {alt}
-            <span className="mt-1 block text-xs">الصورة قريبًا</span>
-          </span>
+          <span className="relative text-sm text-ink/75">{alt}</span>
         </div>
       )}
     </div>

@@ -83,7 +83,9 @@ export function Header({ locale }: { locale: Locale }) {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href={localePath(locale, "/contact")}>{ctaLabel}</Button>
+          <Button href={localePath(locale, "/contact")} variant="ghost">
+            {ctaLabel}
+          </Button>
         </div>
 
         <button

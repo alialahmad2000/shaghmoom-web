@@ -14,7 +14,8 @@ type Item = { label: string; path: string };
  * عظم · تشطيبات · إشراف — three cards on a locked grid (brand §9, §11):
  * headings start at the same height and size; only the end of each body
  * varies. Finishing quality is the marketing focus, so the تشطيبات card
- * carries this screen's one gold element (the callout bar on its inline start).
+ * carries a heavier rule on its inline start. No gold here: the screens above
+ * (the callout) and below (the method path) already carry one.
  * The star texture shows around the opaque cards, never under text.
  */
 export function ServicesTrio({
@@ -47,29 +48,22 @@ export function ServicesTrio({
 
   return (
     <Section ground={ground} labelledBy="trio-title">
-      <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-        <SectionHeading
-          id="trio-title"
-          as={headingAs}
-          eyebrow={servicesTrio.eyebrow}
-          title={servicesTrio.heading}
-          intro={<p>{servicesTrio.intro}</p>}
-        />
-        <Reveal className="shrink-0">
-          <Button href={localePath(locale, "/services")} variant="ghost" icon={<ArrowEnd />}>
-            {servicesTrio.more}
-          </Button>
-        </Reveal>
-      </div>
+      <SectionHeading
+        id="trio-title"
+        as={headingAs}
+        eyebrow={servicesTrio.eyebrow}
+        title={servicesTrio.heading}
+        intro={<p>{servicesTrio.intro}</p>}
+      />
 
       <div className="relative mt-16">
-        <div aria-hidden="true" className="sh-star-field absolute -inset-y-20 inset-x-[calc(50%-50vw)]" />
-        <ol className="relative grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div aria-hidden="true" className="sh-star-field sh-star-field--fade absolute -inset-y-12 inset-x-[calc(50%-50vw)]" />
+        <ol className="relative grid grid-cols-1 gap-5 lg:grid-cols-3">
           {cards.map((card, i) => (
             <Reveal as="li" key={card.title} index={i} step={0.07} className="flex">
               <article
                 className={`flex w-full flex-col border-[1.5px] border-ink/35 bg-ground p-7 sm:p-8 ${
-                  card.focus ? "border-s-[6px] border-s-gold" : ""
+                  card.focus ? "border-s-[6px] border-s-ink" : ""
                 }`}
               >
                 <div className="flex items-center gap-4">
@@ -94,6 +88,12 @@ export function ServicesTrio({
           ))}
         </ol>
       </div>
+
+      <Reveal className="mt-12">
+        <Button href={localePath(locale, "/services")} variant="ghost" icon={<ArrowEnd />}>
+          {servicesTrio.more}
+        </Button>
+      </Reveal>
     </Section>
   );
 }

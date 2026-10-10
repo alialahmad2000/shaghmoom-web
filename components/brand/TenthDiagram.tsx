@@ -12,7 +12,7 @@ import { meaning } from "@/content/site";
 export function TenthDiagram({ className = "" }: { className?: string }) {
   const cells = Array.from({ length: 10 }, (_, i) => i);
   return (
-    <figure className={`w-full ${className}`}>
+    <figure className={`mx-auto w-full max-w-[520px] ${className}`}>
       {/* dimension line over the nine drawn strips */}
       <div className="grid grid-cols-10 gap-1.5" aria-hidden="true">
         <div className="col-span-9 flex flex-col items-center">
@@ -42,6 +42,8 @@ export function TenthDiagram({ className = "" }: { className?: string }) {
             )
           )}
         </div>
+        {/* ground line the drawing stands on */}
+        <span className="sh-dash-x mt-3 block text-ink/70" />
       </div>
 
       {/* the missing tenth */}

@@ -196,6 +196,7 @@
   }
   .sh-measure {
     max-width: 62ch;
+    text-wrap: pretty;
   }
   /* the callout — «السكة»: back to the edge, an 8px-equivalent gold bar on its inline-start */
   .sh-callout {
@@ -237,7 +238,7 @@
   .sh-measure-grid::before {
     content: "";
     position: absolute;
-    inset: -14% -18%;
+    inset: -38% -26%;
     z-index: -1;
     pointer-events: none;
     color: var(--ink);
@@ -287,6 +288,10 @@
     pointer-events: none;
     opacity: 0.07;
     background: url("/brand/pattern-star-tile-sand.svg") center top / 124px auto repeat;
+  }
+  .sh-star-field--fade {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
   }
   .ground-sand .sh-star-field {
     background-image: url("/brand/pattern-star-tile-maroon.svg");

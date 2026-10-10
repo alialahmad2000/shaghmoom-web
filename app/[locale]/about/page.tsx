@@ -76,7 +76,7 @@ export default async function AboutPage({
       <Section ground="maroon" labelledBy="values-title">
         <SectionHeading id="values-title" eyebrow="قيمنا" title="طريقتنا في كل مشروع" />
         <div className="relative mt-14">
-          <div aria-hidden="true" className="sh-star-field absolute -inset-y-20 inset-x-[calc(50%-50vw)]" />
+          <div aria-hidden="true" className="sh-star-field sh-star-field--fade absolute -inset-y-12 inset-x-[calc(50%-50vw)]" />
           <ol className="relative grid grid-cols-1 gap-5 sm:grid-cols-2">
             {values.map((value, i) => (
               <Reveal as="li" key={value.title} index={i} step={0.05}>

@@ -19,14 +19,14 @@ export function PlasteringTeaser({
 }) {
   return (
     <Section ground={ground} labelledBy="plastering-title">
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col items-start gap-10">
         <SectionHeading
           id="plastering-title"
           eyebrow={plasteringTeaser.eyebrow}
           title={plasteringTeaser.heading}
           intro={<p>{plasteringTeaser.body}</p>}
         />
-        <Reveal className="shrink-0">
+        <Reveal>
           <Button
             href={localePath(locale, "/plastering-form")}
             size="lg"

@@ -26,9 +26,9 @@ export function CtaBand({
 }) {
   return (
     <Section ground={ground} labelledBy="cta-title">
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+      <div className="flex flex-col items-start gap-10">
         <SectionHeading id="cta-title" title={heading} intro={<p>{body}</p>} />
-        <Reveal className="flex shrink-0 flex-col gap-3 sm:flex-row">
+        <Reveal className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button href={localePath(locale, "/contact")} size="lg" icon={<ArrowEnd />}>
             {ctaLabel}
           </Button>

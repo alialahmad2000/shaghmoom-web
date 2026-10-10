@@ -21,9 +21,9 @@ export function ServiceCard({
   return (
     <Link
       href={localePath(locale, `/services/${service.slug}`)}
-      className="group flex h-full flex-col border-[1.5px] border-ink/30 bg-ground p-7 transition-colors duration-300 hover:border-ink"
+      className="group flex h-full flex-col border-[1.5px] border-ink/30 bg-ground p-6 transition-colors duration-300 hover:border-ink"
     >
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col items-start gap-4">
         <Ring n={index + 1} size="sm" />
         <h3 className="text-[21px] font-semibold leading-snug">{service.title}</h3>
       </div>
