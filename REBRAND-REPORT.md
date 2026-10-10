@@ -21,7 +21,8 @@ Branch `rebrand-2026-10` (not merged, not deployed to production). Brief: `shogh
 - Closing (every page except the form): «نبني الثقة قبل الجدران» · «شغموم **وقت اللزوم يجملك**» with the gold brush on the predicate · the lockup. No pattern.
 
 **Home** (maroon → sand → maroon → sand → maroon → sand → maroon)
-- Hero: icon watermark at 9% in the top corner; «عين على ما غاب عن الورق» (the one gold element, set at 24px so it passes contrast); two-line headline «نرى العُشر الذي / لم يُرسم في المخطط».
+- **Owner feedback 2026-10-10 — «الشبكة»:** the measuring grid («شبكة القياس») is back as a visible element: the icon stands on it on the first screen of every page (as on brand sheet p.6), and it sits under the method path and the "tenth" diagram. Brand strengths (11/24% on maroon, 7.5/17% on sand), radial fade, never under text.
+- Hero: the icon at 9% standing on the measuring grid; «عين على ما غاب عن الورق» (the one gold element, set at 24px so it passes contrast); two-line headline «نرى العُشر الذي / لم يُرسم في المخطط».
 - Meaning on sand: the founding story (brand-sheet wording), the positioning line as a callout, and a measured "tenth" diagram (nine hatched strips plus the undrawn tenth) on the measuring grid.
 - عظم · تشطيبات · إشراف as three cards on a locked grid, with the star texture around the cards and never under text. The 15 service pages sit under them.
 - Method as a drawn dashed path with five stations.

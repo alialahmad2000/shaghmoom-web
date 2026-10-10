@@ -35,6 +35,11 @@ export function MethodPath({
       )}
 
       <ol className={`relative grid grid-cols-1 gap-0 lg:grid-cols-5 lg:gap-6 ${heading ? "mt-16" : ""}`}>
+        {/* the measuring grid the path stands on (wide screens; kept above the text) */}
+        <span
+          aria-hidden="true"
+          className="sh-grid-field absolute inset-x-[-6%] -top-12 hidden h-36 lg:block"
+        />
         {/* the road: vertical on phones, horizontal on wide screens */}
         <span
           aria-hidden="true"

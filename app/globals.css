@@ -282,6 +282,33 @@
     background-image: url("/brand/pattern-star-tile-maroon.svg");
   }
 
+  /* The measuring grid as a standalone layer: strongest at its centre (under
+     the object standing on it), 70% at half radius, gone at the edge. Brand
+     strengths: on maroon minor 11% / major 24%; on sand 7.5% / 17%. */
+  .sh-grid-field {
+    pointer-events: none;
+    color: var(--ink);
+    --major: 24%;
+    --minor: 11%;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, currentColor var(--major), transparent) 1.5px, transparent 1.5px),
+      linear-gradient(to bottom, color-mix(in srgb, currentColor var(--major), transparent) 1.5px, transparent 1.5px),
+      linear-gradient(to right, color-mix(in srgb, currentColor var(--minor), transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, currentColor var(--minor), transparent) 1px, transparent 1px);
+    background-size:
+      var(--sh-grid-major) var(--sh-grid-major),
+      var(--sh-grid-major) var(--sh-grid-major),
+      var(--sh-grid-step) var(--sh-grid-step),
+      var(--sh-grid-step) var(--sh-grid-step);
+    background-position: center;
+    -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+  }
+  .ground-sand .sh-grid-field {
+    --major: 17%;
+    --minor: 7.5%;
+  }
+
   /* A star field behind a block of opaque cards: the texture shows around the
      cards, never under text. Placed as an absolutely-positioned layer. */
   .sh-star-field {

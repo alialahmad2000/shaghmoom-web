@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { localePath, type Locale } from "@/lib/i18n";
-import { IconWatermark } from "@/components/brand/IconWatermark";
+import { GridGround } from "@/components/brand/GridGround";
 
 type Crumb = { label: string; path?: string };
 
 /**
  * Inner-page first screen — maroon, joined to the maroon header as one block.
  * Breadcrumb, eyebrow, heading on the edge; rule and intro indented; the large
- * cropped icon watermark in the top corner away from the copy. Rendered
+ * icon on the measuring grid sits in the corner away from the copy. Rendered
  * without entrance animation so the heading (LCP) paints immediately.
  */
 export function PageHeader({
@@ -30,7 +30,7 @@ export function PageHeader({
       aria-labelledby="page-title"
       className="ground-maroon relative isolate overflow-hidden"
     >
-      <IconWatermark className="-top-16 -end-24 w-[46vw] max-w-[520px] sm:-top-24 lg:-top-28 lg:end-[-3%] lg:w-[36vw]" />
+      <GridGround className="-top-28 -end-28 w-[70vw] max-w-[340px] sm:max-w-[460px] lg:top-1/2 lg:end-[-3%] lg:w-[40vw] lg:max-w-[600px] lg:-translate-y-1/2" />
       <div className="sh-wrap relative pb-20 pt-12 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
         {crumbs.length > 0 && (
           <nav aria-label="مسار التنقل" className="mb-10">
