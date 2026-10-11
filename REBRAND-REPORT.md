@@ -1,6 +1,21 @@
 # REBRAND REPORT — Shoghmoum new identity + «استمارة اللياسة»
 
-Branch `rebrand-2026-10` (not merged, not deployed to production). Brief: `shoghmoum-rebrand-and-plastering-form.md`. Brand source of truth: `brand/shoghmoum-brand-kit/` (v 2026-10-09).
+**LIVE since 2026-10-11** on https://www.shaghmoom.com (branch `rebrand-2026-10` fast-forwarded into `main` on Ali's instruction; the old site is tagged `pre-rebrand-2026-10`). Brief: `shoghmoum-rebrand-and-plastering-form.md`. Brand source of truth: `brand/shoghmoum-brand-kit/` (v 2026-10-09).
+
+## 0. Live status (2026-10-11)
+
+- Published: `main` = the rebrand. Old site kept as git tag `pre-rebrand-2026-10` (`0bebe4c`) and as Vercel deployment `shaghmoom-ql8w8h028` (Instant Rollback target).
+- Checked on production: all 29 sitemap pages return 200 and render with no console or network errors; no horizontal overflow at 375 / 768 / 1440; canonical `https://www.shaghmoom.com/ar`; `index, follow`; robots.txt and sitemap (29 URLs, form included) correct; OG image served.
+- **Lighthouse on production, mobile:**
+
+| Page | Performance (runs) | A11y | Best Pr. | SEO |
+|---|---|---|---|---|
+| Home `/ar` | 93 · 93 · 94 (old site: 95–99) | **100** (was 96) | **100** (was 96) | **100** |
+| Plastering service | 100 · 94 · 94 | **100** | **100** | **100** |
+| Form `/ar/plastering-form` | 98 · 86 · 86 · 88 · 88 (median **88**) | **100** | **100** | **100** |
+
+- The form page misses the Performance ≥ 90 target (median 88). The earlier "~95 expected" was wrong. Cause is unchanged: the authored cover entrance fades the first screen in, which Lighthouse counts as late paint. Fixing it means dropping that entrance, which is the owner's call.
+- Still open for Khaled (defaults are live): grid extent (accent as now, or whole-background), «وقت» / «عند», district, legal numbers in the footer, the ten-year warranty line, second phone, domain.
 
 ## 1. Preview URL
 
@@ -131,4 +146,4 @@ Performance work done during verification:
 - Ground alternation: every page passes.
 - Old identity sweep of the build output: no old hex values, old fonts, «وطن يُبنى», «ما لا يُرى» or `@shoughmoum`.
 - Contrast: every text/ground pair is one the brand table allows (Lighthouse colour-contrast passes on all pages tested).
-- Production untouched: `main` is still `0bebe4c`, and www.shaghmoom.com still serves the old site.
+- At delivery (2026-10-10) production was untouched. Published on 2026-10-11, see section 0.

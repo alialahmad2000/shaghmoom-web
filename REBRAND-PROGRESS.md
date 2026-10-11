@@ -1,7 +1,7 @@
 # REBRAND PROGRESS — branch `rebrand-2026-10`
 
 Worktree: `~/projects/shaghmoom-web-rebrand` (isolated; `~/projects/shaghmoom-web` stays on `main`).
-Brief: `~/Downloads/shoghmoum-rebrand-and-plastering-form.md`. Finish line = pushed branch + Vercel **preview** + `REBRAND-REPORT.md`. No merge, no production deploy.
+Brief: `~/Downloads/shoghmoum-rebrand-and-plastering-form.md`. Original finish line = pushed branch + Vercel **preview** + `REBRAND-REPORT.md`. On 2026-10-11 Ali asked to go live: `main` now carries the rebrand (rollback: tag `pre-rebrand-2026-10`).
 
 If the session restarts: read this file + `git log --oneline origin/main..HEAD`, continue from "In progress".
 
@@ -14,6 +14,7 @@ If the session restarts: read this file + `git log --oneline origin/main..HEAD`,
 | 5 | «استمارة اللياسة» page + links | done |
 | 6 | Verification fixes (build, lint, 375/768/1440, contrast, Lighthouse, print) | done |
 | 7 | `REBRAND-REPORT.md`, push, preview URL | done |
+| 8 | Measuring grid back (owner feedback) · published to `main` 2026-10-11 on Ali's instruction · production verified | done |
 
 ## Decisions taken (carry into the report)
 - Footer is rendered per page (not in the layout) so its ground can be the opposite of the page's last section, and so the form page can omit it.

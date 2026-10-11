@@ -23,7 +23,7 @@ export function Hero({ locale }: { locale: Locale }) {
       <div className="sh-wrap relative pb-24 pt-44 sm:pb-28 sm:pt-56 lg:pb-36 lg:pt-36">
         <p className="text-[24px] font-semibold leading-snug text-gold">{hero.eyebrow}</p>
         <h1 id="hero-title" className="mt-5 text-h1">
-          <span className="block">{hero.titleLines[0]}</span>
+          <span className="block">{hero.titleLines[0]}</span>{" "}
           <span className="block">{hero.titleLines[1]}</span>
         </h1>
         <span aria-hidden="true" className="sh-rule mt-8" />
