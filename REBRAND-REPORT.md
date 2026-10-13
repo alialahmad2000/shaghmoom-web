@@ -17,6 +17,29 @@
 - The form page misses the Performance ≥ 90 target (median 88). The earlier "~95 expected" was wrong. Cause is unchanged: the authored cover entrance fades the first screen in, which Lighthouse counts as late paint. Fixing it means dropping that entrance, which is the owner's call.
 - Still open for Khaled (defaults are live): grid extent (accent as now, or whole-background), «وقت» / «عند», district, legal numbers in the footer, the ten-year warranty line, second phone, domain.
 
+## 0b. Owner notes of 2026-10-12 (23 items) — status
+
+Live on production since 2026-10-13 (commit `79bc69e`), checked in a real browser on all 22 sitemap pages (no errors, no overflow) and with Lighthouse (home 89–93 across runs, contact 93–94; accessibility, best practices and SEO 100).
+
+| # | Note | Status |
+|---|---|---|
+| 1 | Primary domain shoghmoum.com, old domain redirected | **Waiting on DNS.** Both hostnames are added to the Vercel project. GoDaddy blocks automated sign-in, so the A record (`@` → `76.76.21.21`) has to be set by hand. Then: set `NEXT_PUBLIC_SITE_URL=https://shoghmoum.com` (Production), redeploy, and set 308 redirects from www.shoghmoum.com, shaghmoom.com and www.shaghmoom.com. Canonicals, sitemap, share image and structured data all follow that one variable. |
+| 2–4 | New slogan; «العُشر» removed everywhere; hero eyebrow removed | Done. The diagram is redrawn: about a third undrawn, no number or fraction. |
+| 5 | Hero photograph | **Concept, not live.** An original generated image (no logo, no text), art-directed for wide and tall screens, behind `HERO_PHOTO` in `content/site.ts`. Preview branch `hero-photo-concept`. To publish: set the flag to `true`. |
+| 6–7 | Grid across the full width, strongest under the slogan; large icon reconsidered | Done. The icon is gone from the home hero and from inner pages on phones (kept beside the heading on wide screens). |
+| 8 | Browser icon | Done: mark only, no ground, dark-mode twin; home-screen icons with a larger mark (`scripts/make-brand-images.mjs`). |
+| 9 | Share image | Done: slogan, centre-safe, new file name `share-shoghmoum-2026-10.png` (`scripts/make-share-image.mjs`). |
+| 10–14 | حي المبعوث, social icons, «عند اللزوم», legal numbers, e-mail | Done (footer, contact page, maps link, structured data). The form's own footer said «حي البعوث»; corrected to «حي المبعوث» as well. |
+| 15 | Floating WhatsApp button on phones | Done (brand colours; not on the plastering form). |
+| 16 | Hide «أعمالنا» and «آراء العملاء» | Done: menu, footer, sitemap, plus `noindex`. One list: `HIDDEN_PATHS` in `content/site.ts`. |
+| 17 | Privacy policy | Done at `/ar/privacy`, linked under the form and in the footer. **PROPOSED wording**, to be confirmed by the owner. |
+| 18 | Header logo loads at once | Done. |
+| 19 | Scroll animation | Rewritten: 0.28s, 8px, and content is never hidden before the script runs. None on the form. |
+| 20 | Requests arrive, owner notified, visitor sees a confirmation | **Partly.** Finding: the form had never delivered a request (no database was ever connected; it answered 503). Now: a request is confirmed only when delivered; otherwise the visitor is handed to WhatsApp with everything typed already in the message. E-mail notification is built and needs one key: `RESEND_API_KEY` (+ the sending domain verified in Resend). |
+| 21 | Branded 404 | Done, inside the site layout, with «حتى هذه الصفحة لم تُرسَم في المخطط». |
+| 22 | Search Console + visitor statistics | Vercel Web Analytics is on (cookie-less). Search Console needs the owner's Google account; a verification slot exists (`GOOGLE_SITE_VERIFICATION`), or verify by DNS after the domain switch. |
+| 23 | «تشطيبات» card | Done: full-strength outline and a bar across the top instead of a side bar. |
+
 ## 1. Preview URL
 
 - **Stable branch preview:** https://shaghmoom-web-git-rebrand-2026-10-alialahmad2000s-projects.vercel.app/ar
