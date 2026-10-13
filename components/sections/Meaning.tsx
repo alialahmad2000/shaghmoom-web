@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowEnd } from "@/components/ui/Button";
-import { TenthDiagram } from "@/components/brand/TenthDiagram";
+import { PlanDiagram } from "@/components/brand/PlanDiagram";
 
 /** Home — the name's meaning and the founding story (sand). */
 export function Meaning({ locale }: { locale: Locale }) {
@@ -31,7 +31,7 @@ export function Meaning({ locale }: { locale: Locale }) {
           </Reveal>
         </div>
         <Reveal className="lg:col-span-5 lg:col-start-8">
-          <TenthDiagram />
+          <PlanDiagram />
         </Reveal>
       </div>
     </Section>

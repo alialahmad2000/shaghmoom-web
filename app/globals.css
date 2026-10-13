@@ -309,6 +309,76 @@
     --minor: 7.5%;
   }
 
+  /* The first-screen grid (owner, 2026-10-12): across the full width, strongest
+     under the headline, fading to nothing toward the edges. The centre follows
+     the headline: the start side of the page on wide screens. */
+  .sh-hero-grid {
+    pointer-events: none;
+    color: var(--sh-sand);
+    --major: 30%;
+    --minor: 14%;
+    --gx: 50%;
+    --gy: 40%;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, currentColor var(--major), transparent) 1.5px, transparent 1.5px),
+      linear-gradient(to bottom, color-mix(in srgb, currentColor var(--major), transparent) 1.5px, transparent 1.5px),
+      linear-gradient(to right, color-mix(in srgb, currentColor var(--minor), transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, currentColor var(--minor), transparent) 1px, transparent 1px);
+    background-size:
+      var(--sh-grid-major) var(--sh-grid-major),
+      var(--sh-grid-major) var(--sh-grid-major),
+      var(--sh-grid-step) var(--sh-grid-step),
+      var(--sh-grid-step) var(--sh-grid-step);
+    background-position: var(--gx) var(--gy);
+    -webkit-mask-image: radial-gradient(ellipse 110% 62% at var(--gx) var(--gy), #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
+    mask-image: radial-gradient(ellipse 110% 62% at var(--gx) var(--gy), #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
+  }
+  @media (min-width: 1024px) {
+    .sh-hero-grid {
+      --gx: 66%;
+      --gy: 44%;
+      -webkit-mask-image: radial-gradient(ellipse 72% 88% at var(--gx) var(--gy), #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
+      mask-image: radial-gradient(ellipse 72% 88% at var(--gx) var(--gy), #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
+    }
+    [dir="ltr"] .sh-hero-grid { --gx: 34%; }
+  }
+  /* The hero photograph: colour drained, under a maroon layer that is heavier
+     where the copy sits (the start side) so sand text stays ≥ 7:1 on it. */
+  .sh-hero-photo {
+    filter: grayscale(1) contrast(1.08);
+  }
+  .sh-hero-veil {
+    /* solid at the top so the hero joins the header as one block */
+    background: linear-gradient(
+      to bottom,
+      var(--sh-maroon) 0%,
+      color-mix(in srgb, var(--sh-maroon) 84%, transparent) 20%,
+      color-mix(in srgb, var(--sh-maroon) 80%, transparent) 62%,
+      color-mix(in srgb, var(--sh-maroon) 90%, transparent) 100%
+    );
+  }
+
+  /* quieter on inner pages */
+  .sh-hero-grid--soft {
+    --major: 22%;
+    --minor: 10%;
+  }
+
+  /* Scroll surfacing (see components/ui/Reveal.tsx): short and light. The
+     class is only added by script to blocks still below the viewport. */
+  .sh-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.28s var(--ease-out-soft), transform 0.28s var(--ease-out-soft);
+  }
+  .sh-reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sh-reveal { opacity: 1; transform: none; }
+  }
+
   /* A star field behind a block of opaque cards: the texture shows around the
      cards, never under text. Placed as an absolutely-positioned layer. */
   .sh-star-field {

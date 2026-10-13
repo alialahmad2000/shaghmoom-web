@@ -1,72 +1,61 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import { createElement, type ReactNode } from "react";
+import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 
 /**
- * The signature reveal (§5): details surface to the attentive.
- * A short, eased entrance — never bouncy. Honors prefers-reduced-motion.
- * Use `index` on siblings for a calm, staggered surfacing.
+ * A light surfacing as a block scrolls into view. The server always renders
+ * the content visible: a block is only held back (in CSS, see .sh-reveal) when
+ * the browser confirms, after hydration, that it is still below the viewport.
+ * So nothing can stay blank if the script is slow or fails, and whatever is on
+ * screen at load never flickers. Honors prefers-reduced-motion (in CSS).
  */
 type RevealProps = {
   children: ReactNode;
+  /** Sibling order, for a short stagger. */
   index?: number;
-  /** Stagger step in seconds. */
+  /** Stagger step in seconds (kept for callers; the total is capped). */
   step?: number;
-  /** Translate distance in px (from below). */
-  y?: number;
   className?: string;
   as?: "div" | "li" | "section" | "article" | "header";
-  once?: boolean;
-  /**
-   * Render visible immediately, with no opacity:0 entrance. Use for
-   * above-the-fold / LCP content so the largest paint isn't gated behind a
-   * client-side animation (a scroll-reveal on the LCP element delays LCP).
-   */
+  /** Render plainly, with no entrance at all (forms, first-screen content). */
   immediate?: boolean;
 };
 
 export function Reveal({
   children,
   index = 0,
-  step = 0.08,
-  y = 16,
+  step = 0.05,
   className,
   as = "div",
-  once = true,
   immediate = false,
 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
 
-  // Paint immediately (no opacity:0) — keeps LCP fast for hero content.
-  if (immediate) {
-    return createElement(as, className ? { className } : null, children);
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (immediate || !el || typeof IntersectionObserver === "undefined") return;
+    // Already on screen (or above it) when the script arrives: leave it alone.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
 
-  const MotionTag = motion[as];
-
-  const variants: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : y },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: reduce ? 0 : 0.5,
-        ease: [0.22, 1, 0.36, 1],
-        delay: reduce ? 0 : index * step,
+    el.style.transitionDelay = `${Math.min(index * step, 0.12)}s`;
+    el.classList.add("sh-reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          el.classList.add("is-in");
+          io.disconnect();
+        }
       },
-    },
-  };
+      { rootMargin: "0px 0px 8% 0px", threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [immediate, index, step]);
 
+  const Tag = as as ElementType;
   return (
-    <MotionTag
-      className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once, amount: 0.25, margin: "0px 0px -10% 0px" }}
-    >
+    <Tag ref={ref} className={className}>
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

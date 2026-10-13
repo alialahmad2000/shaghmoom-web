@@ -15,7 +15,8 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema";
 
-export const dynamicParams = false;
+// Unknown paths render on demand and raise notFound(), so the visitor gets the
+// branded 404 inside the site layout (header, logo, footer).
 
 export async function generateStaticParams() {
   return LOCALES.flatMap((locale) =>

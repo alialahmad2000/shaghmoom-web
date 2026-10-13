@@ -519,7 +519,7 @@ export function FormBody() {
   <div className="plf-wrap">
     <div className="plf-legal">
       <b>شركة خالد رافد صياف العمري للمقاولات العامة</b>
-      <span>حي البعوث، المدينة المنورة</span>
+      <span>حي المبعوث، المدينة المنورة</span>
     </div>
     <div className="plf-meta plf-num">
       <span>الرقم الوطني الموحد للمنشأة <b dir="ltr">7052752610</b></span>

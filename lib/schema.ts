@@ -26,10 +26,15 @@ export function organizationSchema() {
     url: SITE_URL,
     image: `${SITE_URL}/icon-512.png`,
     logo: `${SITE_URL}/icon-512.png`,
-    slogan: lines.tagline,
+    slogan: lines.slogan,
     description:
-      "شغموم للمقاولات العامة — عظم وتشطيبات وإشراف في المدينة المنورة. عين على ما غاب عن الورق.",
+      "شغموم للمقاولات العامة — عظم وتشطيبات وإشراف في المدينة المنورة. نرى ما لم يُرسَم.. ونُتقن ما لا يُرى.",
     telephone: PHONE_INTL,
+    email: contact.email,
+    identifier: [
+      { "@type": "PropertyValue", name: "الرقم الوطني الموحد", value: company.unifiedNumber },
+      { "@type": "PropertyValue", name: "عضوية منصة مقاول", value: company.contractorMembership },
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: company.district,

@@ -7,8 +7,9 @@ type Crumb = { label: string; path?: string };
 
 /**
  * Inner-page first screen — maroon, joined to the maroon header as one block.
- * Breadcrumb, eyebrow, heading on the edge; rule and intro indented; the large
- * icon on the measuring grid sits in the corner away from the copy. Rendered
+ * Breadcrumb, eyebrow, heading on the edge; rule and intro indented. On wide
+ * screens the large icon on the measuring grid sits beside the copy; on
+ * phones the grid alone runs under the heading. Rendered
  * without entrance animation so the heading (LCP) paints immediately.
  */
 export function PageHeader({
@@ -30,7 +31,8 @@ export function PageHeader({
       aria-labelledby="page-title"
       className="ground-maroon relative isolate overflow-hidden"
     >
-      <GridGround className="-top-28 -end-28 w-[70vw] max-w-[340px] sm:max-w-[460px] lg:top-1/2 lg:end-[-3%] lg:w-[40vw] lg:max-w-[600px] lg:-translate-y-1/2" />
+      <div aria-hidden="true" className="sh-hero-grid sh-hero-grid--soft absolute inset-0 -z-10 lg:hidden" />
+      <GridGround className="hidden lg:block lg:top-1/2 lg:end-[-3%] lg:w-[40vw] lg:max-w-[600px] lg:-translate-y-1/2" />
       <div className="sh-wrap relative pb-20 pt-12 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
         {crumbs.length > 0 && (
           <nav aria-label="مسار التنقل" className="mb-10">

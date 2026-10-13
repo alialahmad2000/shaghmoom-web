@@ -1,24 +1,43 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { Button, ArrowEnd } from "@/components/ui/Button";
+import { WhatsAppIcon } from "@/components/ui/icons";
+import { whatsappHref } from "@/content/site";
 
 const PROJECT_TYPES = ["فيلا", "عمارة", "تجاري", "تشطيب", "أخرى"] as const;
 
 type Errors = Partial<
   Record<"name" | "phone" | "project_type" | "message", string>
 >;
-type Status = "idle" | "submitting" | "success" | "error";
+/** "handoff": the site could not take the request, so it goes by WhatsApp. */
+type Status = "idle" | "submitting" | "success" | "handoff" | "error";
+
+/** The request as a WhatsApp message, so nothing has to be typed twice. */
+function leadMessage(d: Record<string, string>): string {
+  const rows: [string, string | undefined][] = [
+    ["الاسم", d.name],
+    ["الجوال", d.phone],
+    ["نوع المشروع", d.project_type],
+    ["المدينة", d.city],
+    ["تفاصيل المشروع", d.message],
+    ["الميزانية التقديرية", d.budget],
+  ];
+  return [
+    "السلام عليكم، أرغب في عرض سعر من شغموم.",
+    ...rows.filter(([, v]) => v && v.trim()).map(([k, v]) => `${k}: ${v!.trim()}`),
+  ].join("\n");
+}
 
 const fieldBase =
   "w-full rounded-brand border-[1.5px] bg-ground px-4 py-3 text-base text-ink placeholder:text-ink/60 transition-colors focus:border-ink focus:outline-none focus-visible:outline-3 focus-visible:outline-gold";
 
-export function ContactForm() {
+export function ContactForm({ privacyHref }: { privacyHref: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [serverError, setServerError] = useState("");
-  const reduce = useReducedMotion();
+  const [sent, setSent] = useState<Record<string, string>>({});
 
   function validate(data: Record<string, string>): Errors {
     const e: Errors = {};
@@ -47,6 +66,7 @@ export function ContactForm() {
 
     setStatus("submitting");
     setServerError("");
+    setSent(data);
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
@@ -59,26 +79,47 @@ export function ContactForm() {
         return;
       }
       const payload = await res.json().catch(() => ({}));
-      if (payload.fields) setErrors(payload.fields);
-      setServerError(
-        payload.error || "تعذّر إرسال الطلب. حاول مرة أخرى أو تواصل عبر واتساب."
-      );
-      setStatus("error");
+      if (payload.fields) {
+        setErrors(payload.fields);
+        setServerError(payload.error || "تحقق من الحقول.");
+        setStatus("error");
+        return;
+      }
+      // The site could not take it: keep what was typed and hand it to WhatsApp.
+      setStatus("handoff");
     } catch {
-      setServerError("تعذّر الاتصال بالخادم. تحقق من اتصالك وحاول مجددًا.");
-      setStatus("error");
+      setStatus("handoff");
     }
+  }
+
+  if (status === "handoff") {
+    return (
+      <div role="status" className="border-[1.5px] border-ink p-8 sm:p-10">
+        <h3 className="text-h3">بقيت خطوة واحدة</h3>
+        <p className="mt-3 text-ink/80">
+          تعذّر استقبال الطلب عبر الموقع الآن. جهّزنا لك تفاصيلك في رسالة واتساب: افتحها واضغط إرسال،
+          وتصلنا مباشرة.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Button
+            href={whatsappHref(leadMessage(sent))}
+            external
+            size="lg"
+            icon={<WhatsAppIcon className="h-5 w-5" />}
+          >
+            أرسل الطلب عبر واتساب
+          </Button>
+          <Button variant="ghost" size="lg" onClick={() => setStatus("idle")}>
+            رجوع إلى النموذج
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   if (status === "success") {
     return (
-      <motion.div
-        initial={{ opacity: 0, y: reduce ? 0 : 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduce ? 0 : 0.4, ease: [0.22, 1, 0.36, 1] }}
-        role="status"
-        className="border-[1.5px] border-ink p-10 text-center"
-      >
+      <div role="status" className="border-[1.5px] border-ink p-10 text-center">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border-2 border-ink">
           <svg
             viewBox="0 0 24 24"
@@ -95,14 +136,22 @@ export function ContactForm() {
         </div>
         <h3 className="mt-5 text-h3">وصلنا طلبك</h3>
         <p className="mt-3 text-ink/80">
-          شكرًا لتواصلك. نراجع تفاصيل مشروعك ونعود إليك في أقرب وقت.
+          شكرًا لتواصلك. نراجع تفاصيل مشروعك ونتصل بك على رقمك خلال أوقات العمل.
         </p>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button
+            href={whatsappHref(leadMessage(sent))}
+            external
+            variant="ghost"
+            icon={<WhatsAppIcon className="h-5 w-5" />}
+          >
+            أرسل نسخة عبر واتساب
+          </Button>
           <Button variant="ghost" onClick={() => setStatus("idle")}>
             إرسال طلبٍ آخر
           </Button>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
@@ -205,11 +254,16 @@ export function ContactForm() {
         </p>
       )}
 
-      <div className="mt-2 flex items-center gap-4">
+      <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button type="submit" size="lg" disabled={status === "submitting"} icon={<ArrowEnd />}>
           {status === "submitting" ? "جارٍ الإرسال…" : "إرسال الطلب"}
         </Button>
-        <p className="text-sm text-ink/75">لا نشارك بياناتك مع أي طرف آخر.</p>
+        <p className="text-sm text-ink/75">
+          نستخدم بياناتك للرد على طلبك فقط.{" "}
+          <Link href={privacyHref} className="font-semibold text-ink underline underline-offset-4">
+            سياسة الخصوصية
+          </Link>
+        </p>
       </div>
     </form>
   );

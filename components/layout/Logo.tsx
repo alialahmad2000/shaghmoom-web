@@ -45,6 +45,8 @@ export function LogoMark({
       height={Math.round(width / ratio)}
       unoptimized
       preload={preload}
+      loading="eager"
+      decoding="sync"
       className={`block h-auto max-w-none ${className}`}
       style={{ width }}
     />
@@ -69,7 +71,7 @@ export function Logo({
       className="inline-flex shrink-0 items-center"
     >
       <LogoMark mark="wordmark" ground={ground} width={112} className="lg:hidden" preload />
-      <LogoMark mark="lockup" ground={ground} width={148} className="hidden lg:block" />
+      <LogoMark mark="lockup" ground={ground} width={148} className="hidden lg:block" preload />
     </Link>
   );
 }

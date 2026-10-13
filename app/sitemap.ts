@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/seo";
 import { DEFAULT_LOCALE, LOCALES } from "@/lib/i18n";
 import { services } from "@/content/services";
 import { projects } from "@/content/projects";
+import { isHidden } from "@/content/site";
 
 /**
  * Sitemap (§10): all pages, all services, all projects, for every live locale.
@@ -21,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.7, freq: "yearly" },
     { path: "/reviews", priority: 0.5, freq: "yearly" },
     { path: "/contact", priority: 0.6, freq: "yearly" },
+    { path: "/privacy", priority: 0.2, freq: "yearly" },
   ];
 
   const servicePaths = services.map((s) => ({
@@ -35,7 +37,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     freq: "monthly" as const,
   }));
 
-  const all = [...staticPaths, ...servicePaths, ...projectPaths];
+  const all = [...staticPaths, ...servicePaths, ...projectPaths].filter(
+    ({ path }) => !isHidden(path)
+  );
 
   const url = (locale: string, path: string) => {
     const clean = path === "/" ? "" : path.replace(/^\//, "");

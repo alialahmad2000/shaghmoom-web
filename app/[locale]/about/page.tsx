@@ -8,7 +8,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ValueCard } from "@/components/ui/ValueCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { TenthDiagram } from "@/components/brand/TenthDiagram";
+import { PlanDiagram } from "@/components/brand/PlanDiagram";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -23,7 +23,7 @@ export async function generateMetadata({
     path: "/about",
     title: "من نحن — شركة مقاولات في المدينة المنورة",
     description:
-      "شغموم للمقاولات العامة في المدينة المنورة: معنى الاسم، وقصة العُشر الذي لا يحتويه أي مخطط، وطريقتنا في العمل. عظم وتشطيبات وإشراف تحت إدارة واحدة.",
+      "شغموم للمقاولات العامة في المدينة المنورة: معنى الاسم، وقصة ما لا يحتويه أي مخطط، وطريقتنا في العمل. عظم وتشطيبات وإشراف تحت إدارة واحدة.",
   });
 }
 
@@ -68,7 +68,7 @@ export default async function AboutPage({
             </div>
           </div>
           <Reveal className="self-center lg:col-span-5 lg:col-start-8">
-            <TenthDiagram />
+            <PlanDiagram />
           </Reveal>
         </div>
       </Section>

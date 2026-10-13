@@ -46,13 +46,17 @@ Set these in `.env.local` (dev) and in the Vercel project settings (prod). See `
 
 | Variable | Scope | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | public | Canonical origin (e.g. `https://shaghmoom.sa`). Drives canonicals, sitemap, JSON-LD, OG URLs. **Set before launch.** |
+| `NEXT_PUBLIC_SITE_URL` | public | Canonical origin (`https://shoghmoum.com`). Drives canonicals, sitemap, JSON-LD, OG URLs. **Set before launch.** |
 | `NEXT_PUBLIC_SUPABASE_URL` | public | Supabase project URL. |
 | `SUPABASE_SERVICE_ROLE_KEY` | **server-only** | Supabase service-role key. Used only in `app/api/lead/route.ts`. Never exposed to the client (`lib/supabase.ts` is `server-only`). |
 | `NEXT_PUBLIC_WHATSAPP` | public | WhatsApp number, international format, no `+` (e.g. `966553346250`). |
+| `RESEND_API_KEY` | **server-only** | Resend key. With it, every quote request is e-mailed to the owner (the notification). |
+| `LEAD_NOTIFY_TO` | server-only | Where requests are e-mailed (default: the public address in `content/site.ts`). Comma-separated for several. |
+| `LEAD_FROM` | server-only | Sender, on a domain verified in Resend (default `موقع شغموم <leads@shoghmoum.com>`). |
 
-Without the Supabase vars the site still builds and runs; the lead form returns a
-clear "تواصل عبر واتساب" fallback (HTTP 503) instead of silently dropping leads.
+A quote request counts as received only if e-mail or Supabase accepted it. With
+neither configured, `/api/lead` answers 503 and the form hands the visitor to
+WhatsApp with everything they typed already in the message — never a silent drop.
 
 ---
 

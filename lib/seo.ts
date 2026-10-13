@@ -1,23 +1,28 @@
 import type { Metadata } from "next";
 import { DEFAULT_LOCALE, type Locale } from "./i18n";
+import { isHidden } from "@/content/site";
 
 /**
- * Canonical site origin. Set NEXT_PUBLIC_SITE_URL in production (e.g.
- * https://shaghmoom.sa). Falls back to a sensible default for local builds.
+ * Canonical site origin. NEXT_PUBLIC_SITE_URL is set in production; local and
+ * preview builds fall back to the primary domain.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://shaghmoom.sa"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://shoghmoum.com"
 ).replace(/\/$/, "");
 
 export const SITE_NAME_AR = "شغموم للمقاولات العامة";
 export const SITE_NAME_LATIN = "SHOGHMOUM";
 
-/** Kit share image (06_web-assets/social/og-image-1200x630.png). */
+/**
+ * Share image: the slogan, with everything important inside the centre square
+ * (WhatsApp sometimes crops to a square). Built by scripts/make-brand-images.mjs.
+ * A new file name each time it changes, so chat apps drop their cached preview.
+ */
 export const OG_IMAGE = {
-  url: "/og-image.png",
+  url: "/share-shoghmoum-2026-10.png",
   width: 1200,
   height: 630,
-  alt: "شغموم — SHOGHMOUM",
+  alt: "شغموم — نرى ما لم يُرسَم.. ونُتقن ما لا يُرى",
 } as const;
 
 /** Build an absolute URL from a locale-relative path (e.g. "/about"). */
@@ -55,6 +60,7 @@ export function buildMetadata({
   return {
     title: fullTitle ? { absolute: title } : title,
     description,
+    ...(isHidden(path) ? { robots: { index: false, follow: true } } : {}),
     metadataBase: new URL(SITE_URL),
     alternates: {
       canonical,

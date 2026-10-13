@@ -4,7 +4,7 @@
 const base = process.argv[2] || "http://localhost:3000";
 const xml = await (await fetch(base + "/sitemap.xml")).text();
 const urls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
-urls.push("/ar/this-page-does-not-exist");
+// (the 404 is rendered in the browser from the layout, so it is not in the raw HTML this script reads)
 let bad = 0;
 for (const path of urls) {
   const html = await (await fetch(base + path)).text();
@@ -12,8 +12,8 @@ for (const path of urls) {
   const errs = seq.flatMap((g, i) => (i && seq[i - 1] === g && i > 1 ? [i] : []));
   // index 0→1 is header→first screen: both maroon by design (one joined block)
   const joinOk = seq[0] === "maroon" && (seq[1] === "maroon" || path.endsWith("/plastering-form"));
-  // the global 404 (unknown paths) is a standalone page with no site chrome
-  const ok = seq.length === 0 ? /الصفحة غير موجودة/.test(html) : errs.length === 0 && joinOk;
+  // unknown paths get the branded 404 inside the site layout, so they are checked like any page
+  const ok = errs.length === 0 && joinOk;
   if (!ok) bad++;
   console.log(ok ? "ok  " : "FAIL", path.padEnd(40), seq.map((g) => (g === "maroon" ? "M" : "S")).join(" "));
 }

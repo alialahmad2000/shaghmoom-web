@@ -14,7 +14,8 @@ type Item = { label: string; path: string };
  * عظم · تشطيبات · إشراف — three cards on a locked grid (brand §9, §11):
  * headings start at the same height and size; only the end of each body
  * varies. Finishing quality is the marketing focus, so the تشطيبات card
- * carries a heavier rule on its inline start. No gold here: the screens above
+ * has a full-strength outline and a bar across its top (not on a side, where
+ * in an RTL row it read as a rendering fault). No gold here: the screens above
  * (the callout) and below (the method path) already carry one.
  * The star texture shows around the opaque cards, never under text.
  */
@@ -62,10 +63,13 @@ export function ServicesTrio({
           {cards.map((card, i) => (
             <Reveal as="li" key={card.title} index={i} step={0.07} className="flex">
               <article
-                className={`flex w-full flex-col border-[1.5px] border-ink/35 bg-ground p-7 sm:p-8 ${
-                  card.focus ? "border-s-[6px] border-s-ink" : ""
+                className={`relative flex w-full flex-col border-[1.5px] bg-ground p-7 sm:p-8 ${
+                  card.focus ? "border-ink" : "border-ink/35"
                 }`}
               >
+                {card.focus && (
+                  <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1.5 bg-ink" />
+                )}
                 <div className="flex items-center gap-4">
                   <Ring n={i + 1} size="sm" />
                   <h3 className="text-h3">{card.title}</h3>

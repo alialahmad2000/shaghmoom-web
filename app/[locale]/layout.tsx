@@ -10,7 +10,10 @@ import {
   type Locale,
 } from "@/lib/i18n";
 import { SITE_URL, SITE_NAME_AR } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/layout/Header";
+import { WhatsAppFab } from "@/components/ui/WhatsAppFab";
+import { GOOGLE_SITE_VERIFICATION } from "@/content/site";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
@@ -39,8 +42,8 @@ export async function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-// Only `ar` is live; other locales 404 until populated (i18n-ready scaffold).
-export const dynamicParams = false;
+// Unknown paths render on demand and raise notFound(), so the visitor gets the
+// branded 404 inside the site layout (header, logo, footer).
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -49,21 +52,31 @@ export const metadata: Metadata = {
     template: `%s · ${SITE_NAME_AR}`,
   },
   description:
-    "شغموم للمقاولات العامة في المدينة المنورة: عظم وتشطيبات وإشراف. عين على ما غاب عن الورق. نبني الثقة قبل الجدران.",
+    "شغموم للمقاولات العامة في المدينة المنورة: عظم وتشطيبات وإشراف. نرى ما لم يُرسَم.. ونُتقن ما لا يُرى.",
   applicationName: SITE_NAME_AR,
   authors: [{ name: SITE_NAME_AR }],
   creator: SITE_NAME_AR,
   publisher: SITE_NAME_AR,
   formatDetection: { telephone: true },
+  /*
+   * Browser icon (owner note 8): the mark alone, no ground, tight crop. The
+   * SVG switches to sand in dark mode by itself; the PNGs do it through
+   * `media`. Home-screen icons keep the maroon ground (iOS fills transparency
+   * with black) with a larger mark. Built by scripts/make-brand-images.mjs.
+   */
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "48x48" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-mark.svg", type: "image/svg+xml" },
+      { url: "/icon-mark-96.png", sizes: "96x96", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-mark-dark-96.png", sizes: "96x96", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/icon-mark-32.png", sizes: "32x32", type: "image/png", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-mark-dark-32.png", sizes: "32x32", type: "image/png", media: "(prefers-color-scheme: dark)" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
     apple: [{ url: "/apple-touch-icon-180.png", sizes: "180x180" }],
   },
+  ...(GOOGLE_SITE_VERIFICATION ? { verification: { google: GOOGLE_SITE_VERIFICATION } } : {}),
   manifest: "/site.webmanifest",
   robots: {
     index: true,
@@ -109,6 +122,8 @@ export default async function LocaleLayout({
         <main id="main" className="flex flex-1 flex-col">
           {children}
         </main>
+        <WhatsAppFab locale={loc} />
+        <Analytics />
       </body>
     </html>
   );

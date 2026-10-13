@@ -4,6 +4,7 @@ import {
   company,
   contact,
   lines,
+  privacyLink,
   siteLinks,
   social,
   telHref,
@@ -13,11 +14,12 @@ import type { Ground } from "@/components/ui/Section";
 import { LogoMark } from "./Logo";
 import { ClosingLine } from "@/components/brand/ClosingLine";
 import { arDigits } from "@/lib/digits";
+import { InstagramIcon, TikTokIcon } from "@/components/ui/icons";
 
 /**
  * Closing + footer (brand §11). Its ground is the opposite of the page's last
  * section, so every page passes it. The closing carries exactly three
- * elements — «نبني الثقة قبل الجدران», «شغموم وقت اللزوم يجملك» with the gold
+ * elements — «نبني الثقة قبل الجدران», «شغموم عند اللزوم يجملك» with the gold
  * brush on the predicate, and the logo — and no pattern. The quiet utility
  * row below holds the links and contacts.
  */
@@ -71,6 +73,11 @@ export function SiteFooter({ locale, ground }: { locale: Locale; ground: Ground 
                 جوال إضافي <span className="tnum font-semibold text-ink">{contact.secondaryPhone}</span>
               </a>
             </li>
+            <li>
+              <a href={`mailto:${contact.email}`} className="text-ink/80 transition-colors hover:text-ink">
+                البريد <span className="ltr font-semibold text-ink">{contact.email}</span>
+              </a>
+            </li>
             <li className="text-ink/80">
               {company.city} — {company.district}
             </li>
@@ -85,8 +92,9 @@ export function SiteFooter({ locale, ground }: { locale: Locale; ground: Ground 
                 href={social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink/80 transition-colors hover:text-ink"
+                className="inline-flex items-center gap-2.5 text-ink/80 transition-colors hover:text-ink"
               >
+                <InstagramIcon className="h-5 w-5 shrink-0 text-ink" />
                 إنستقرام <span className="ltr font-semibold text-ink">{company.handle}</span>
               </a>
             </li>
@@ -95,17 +103,33 @@ export function SiteFooter({ locale, ground }: { locale: Locale; ground: Ground 
                 href={social.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-ink/80 transition-colors hover:text-ink"
+                className="inline-flex items-center gap-2.5 text-ink/80 transition-colors hover:text-ink"
               >
+                <TikTokIcon className="h-5 w-5 shrink-0 text-ink" />
                 تيك توك <span className="ltr font-semibold text-ink">{company.handle}</span>
               </a>
             </li>
           </ul>
         </div>
 
-        <p className="mt-12 text-sm text-ink/75">
-          © {arDigits(year)} {company.legalName}. جميع الحقوق محفوظة.
-        </p>
+        <div className="mt-12 flex flex-col gap-4 text-sm text-ink/75 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p>
+              © {arDigits(year)} {company.legalName}. جميع الحقوق محفوظة.
+            </p>
+            <p className="mt-1.5">
+              الرقم الموحد <span className="tnum font-semibold text-ink/90">{company.unifiedNumber}</span>
+              <span aria-hidden="true" className="mx-2.5">·</span>
+              عضوية مقاول <span className="tnum font-semibold text-ink/90">{company.contractorMembership}</span>
+            </p>
+          </div>
+          <Link
+            href={localePath(locale, privacyLink.path)}
+            className="underline underline-offset-4 transition-colors hover:text-ink"
+          >
+            {privacyLink.label}
+          </Link>
+        </div>
       </div>
     </footer>
   );
