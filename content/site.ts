@@ -115,7 +115,7 @@ export const whatsappLabel = "اسأل شغموم";
  * Hero photograph (owner note 5). Off on the live site until the owner
  * approves the concept; the images are in public/images/hero/.
  */
-export const HERO_PHOTO: boolean = false;
+export const HERO_PHOTO: boolean = true;
 
 /**
  * Home — hero. The slogan on two lines. No eyebrow: «عين على ما غاب عن الورق»
