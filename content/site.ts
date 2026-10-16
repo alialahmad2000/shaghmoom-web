@@ -112,10 +112,11 @@ export const ctaLabel = "اطلب عرض سعر";
 export const whatsappLabel = "اسأل شغموم";
 
 /**
- * Hero photograph (owner note 5). Off on the live site until the owner
- * approves the concept; the images are in public/images/hero/.
+ * Hero photograph (owner note 5). On since 2026-10-16 (Ali: publish it and let
+ * the owner see it live; switch back to false if he doesn't like it). The
+ * images are in public/images/hero/.
  */
-export const HERO_PHOTO: boolean = false;
+export const HERO_PHOTO: boolean = true;
 
 /**
  * Home — hero. The slogan on two lines. No eyebrow: «عين على ما غاب عن الورق»
